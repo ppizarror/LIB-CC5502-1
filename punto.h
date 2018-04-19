@@ -1,5 +1,5 @@
 /**
- * Clase Punto
+ * Clase Punto.
  * @author Pablo Pizarro
  * @date 18/04/2018
  */

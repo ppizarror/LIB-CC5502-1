@@ -67,7 +67,7 @@ void testFloatCreation() {
 }
 
 /**
- * Corre los test
+ * Corre los test.
  * @return
  */
 int main() {
