@@ -4,6 +4,7 @@
  * @date 18/04/2018
  */
 
+// Definición de constantes
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #ifndef T1_CC5502_1_PUNTO_H

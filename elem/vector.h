@@ -1,9 +1,11 @@
 /**
  * Clase Vector.
+ * Provee funciones para operaciones producto punto, cruz y normalización.
  * @author Pablo Pizarro
  * @date 19/04/2018
  */
 
+// Definición de constantes
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #ifndef T1_CC5502_1_VECTOR_H
