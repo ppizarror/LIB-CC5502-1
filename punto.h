@@ -72,14 +72,20 @@ public:
     // Resta unaria
     Punto<T> operator-() const;
 
-    // Divide por un valor
-    Punto<T> operator/(T v) const;
-
     // Suma un punto a sí mismo
     Punto<T> &operator-=(Punto<T> &p);
 
     // Asignación
     Punto<T> &operator=(const Punto<T> &p);
+
+    // Divide por un valor
+    Punto<T> operator/(T v) const;
+
+    // Divide por un valor y guarda el punto
+    Punto<T> &operator/=(T v);
+
+    // Comprobación igualdad
+    bool operator==(Punto<T> &p) const;
 
     // Retorna valor absoluto
     Punto<T> abs() const;
@@ -388,6 +394,42 @@ void Punto<T>::setCoordZ(T z) {
     this->coord[2] = z;
     if (this->dim == 2) {
         this->dim = 3;
+    }
+}
+
+template<class T>
+/**
+ * Divide y guarda en el mismo punto.
+ * @tparam T Template
+ * @param v Valor a dividir
+ */
+Punto<T> &Punto<T>::operator/=(T v) {
+    // Se suman primero componente x e y
+    this->coord[0] /= v;
+    this->coord[1] /= v;
+
+    // Comprobación dimensiones
+    if (this->dim == 3) {
+        this->coord[2] /= v;
+    }
+    return *this;
+}
+
+template<class T>
+/**
+ * Verifica igualdad con otro punto.
+ * @tparam T Template
+ * @param p Punto
+ * @return
+ */
+bool Punto<T>::operator==(Punto<T> &p) const {
+    if (this->dim == 2 && p.dim == 2) {
+        return this->getCoordX() == p.getCoordX() && this->getCoordY() == p.getCoordY();
+    } else if (this->dim == 3 && p.dim == 3) {
+        return this->getCoordX() == p.getCoordX() && this->getCoordY() == p.getCoordY() &&
+               this->getCoordZ() == p.getCoordZ();
+    } else {
+        throw std::logic_error("Las dimensiones no son correctas al comprobar igualdad");
     }
 }
 

@@ -44,8 +44,12 @@ void testIntCreation() {
     // Divide por un valor
     p2.setCoordX(5);
     p2.setCoordY(5);
-    p2 = p2 / 5;
+    p2 /= 5;
     assert(p2.getCoordX() == 1 && p2.getCoordY() == 1);
+
+    // Punto uno
+    Punto<int> pone = Punto<int>(1, 1);
+    assert(p2 == pone);
 }
 
 /**
