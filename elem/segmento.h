@@ -15,18 +15,23 @@
 
 // Importación de librerías
 #include "punto.h"
+#include "vector.h"
 
 template<class T>
 class Segmento {
 private:
-    Punto<T> *p1;
-    Punto<T> *p2;
+    Punto<T> *a;
+    Punto<T> *b;
+
 public:
     // Constructor, recibe dos puntos
     Segmento(Punto<T> &p1, Punto<T> &p2);
 
     // Retorna el tamaño del segmento
     T getLength() const;
+
+    // Calcula el área entre el segmento y un punto externo
+    T area2(Punto<T> &c);
 };
 
 template<class T>
@@ -37,8 +42,8 @@ template<class T>
  * @param p2 Punto 2
  */
 Segmento<T>::Segmento(Punto<T> &p1, Punto<T> &p2) {
-    this->p1 = &p1;
-    this->p2 = &p2;
+    this->a = &p1;
+    this->b = &p2;
 }
 
 template<class T>
@@ -48,7 +53,20 @@ template<class T>
  * @return
  */
 T Segmento<T>::getLength() const {
-    return this->p1->dist(*this->p2);
+    return this->a->dist(*this->b);
+}
+
+template<class T>
+/**
+ * Retorna el área con otro punto.
+ * @tparam T Template
+ * @param c Punto a calcular área
+ * @return
+ */
+T Segmento<T>::area2(Punto<T> &c) {
+    T area = (this->b->getCoordX() - this->a->getCoordX()) * (c.getCoordY() - this->a->getCoordY()) -
+             (this->b->getCoordY() - this->a->getCoordY()) * (c.getCoordX() - this->a->getCoordX());
+    return 0.5 * area;
 }
 
 #pragma clang diagnostic pop
