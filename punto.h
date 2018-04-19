@@ -105,9 +105,9 @@ template<class T>
  * @param y Coordenada y
  */
 Punto<T>::Punto(T x, T y) {
-    this->coord[0] = x;
-    this->coord[1] = y;
     this->dim = 2;
+    this->setCoordX(x);
+    this->setCoordY(y);
 }
 
 template<class T>
@@ -119,10 +119,10 @@ template<class T>
  * @param z Coordenada z
  */
 Punto<T>::Punto(T x, T y, T z) {
-    this->coord[0] = x;
-    this->coord[1] = y;
-    this->coord[2] = z;
     this->dim = 3;
+    this->setCoordX(x);
+    this->setCoordY(y);
+    this->setCoordZ(z);
 }
 
 template<class T>

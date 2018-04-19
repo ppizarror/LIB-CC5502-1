@@ -14,6 +14,7 @@
  */
 void testNormalize() {
     Vector<float> v = Vector<float>(1, 2);
+    v.normalize();
     v.print();
 }
 

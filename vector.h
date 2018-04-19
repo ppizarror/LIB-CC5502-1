@@ -11,6 +11,7 @@
 #endif //T1_CC5502_1_VECTOR_H
 
 // Importación de librerías
+#include <algorithm> // Para max
 #include <iostream>
 
 template<class T>
@@ -52,6 +53,9 @@ public:
 
     // Imprime el punto en la consola
     void print() const;
+
+    // Normaliza el vector
+    void normalize();
 };
 
 template<class T>
@@ -180,6 +184,25 @@ template<class T>
  */
 void Vector<T>::print() const {
     std::cout << this->toString() << std::endl;
+}
+
+template<class T>
+/**
+ * Normaliza el vector.
+ * @tparam T Template
+ */
+void Vector<T>::normalize() {
+    T m;
+    if (this->dim == 2) {
+        m = std::max(this->getI(), this->getJ());
+        this->setI(this->getI() / m);
+        this->setJ(this->getJ() / m);
+    } else {
+        m = std::max(std::max(this->getI(), this->getJ()), this->getK());
+        this->setI(this->getI() / m);
+        this->setJ(this->getJ() / m);
+        this->setK(this->getK() / m);
+    }
 }
 
 #pragma clang diagnostic pop
