@@ -16,6 +16,9 @@ void testIntCreation() {
     // Crea punto inicial
     Punto<int> p1 = Punto<int>(420, 69);
 
+    // Imprime punto
+    p1.print();
+
     // Comprueba que se hayan definido bien los objetos
     assert(p1.getCoordX() == 420);
     assert(p1.getCoordY() != 0);

@@ -28,6 +28,9 @@ private:
     int dim; // Dimensión del punto
 public:
 
+    // Punto vacío
+    Punto();
+
     // Constructor punto en 2D
     Punto(T x, T y);
 
@@ -461,6 +464,14 @@ template<class T>
 std::ostream &operator<<(std::ostream &out, const Punto<T> &p) {
     out << p.toString();
     return out;
+}
+
+template<class T>
+/**
+ * Punto vacío
+ * @tparam T
+ */
+Punto<T>::Punto() {
 }
 
 #pragma clang diagnostic pop

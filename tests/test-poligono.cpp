@@ -14,6 +14,12 @@
  */
 void testCreacion() {
     Poligono<double> poly = Poligono<double>();
+    poly.addPoint(Punto<double>(1, 2));
+    poly.addPoint(Punto<double>(3, 4));
+    poly.addPoint(Punto<double>(5, 6));
+
+    // Imprime el polígono
+    std::cout << poly.toString() << std::endl;
 }
 
 /**
