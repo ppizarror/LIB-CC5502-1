@@ -98,6 +98,10 @@ public:
 
     // Retorna la dimensión del punto
     int getDimension() const;
+
+    // Operación concatenación con string
+    template<class U>
+    friend std::ostream &operator<<(std::ostream &out, const Punto<U> &p);
 };
 
 template<class T>
@@ -444,6 +448,16 @@ template<class T>
  */
 int Punto<T>::getDimension() const {
     return this->dim;
+}
+
+template<class T>
+/**
+ * Operador concatenación con strings.
+ * @return
+ */
+std::ostream &operator<<(std::ostream &out, const Punto<T> &p) {
+    out << p.toString();
+    return out;
 }
 
 #pragma clang diagnostic pop

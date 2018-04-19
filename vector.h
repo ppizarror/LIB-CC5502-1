@@ -69,6 +69,10 @@ public:
     // Retorna la dimensión del vector
     int getDimension() const;
 
+    // Operación concatenación con string
+    template<class U>
+    friend std::ostream &operator<<(std::ostream &out, const Vector<U> &v);
+
 };
 
 template<class T>
@@ -282,6 +286,16 @@ template<class T>
  */
 int Vector<T>::getDimension() const {
     return this->dim;
+}
+
+template<class T>
+/**
+ * Operador concatenación con strings.
+ * @return
+ */
+std::ostream &operator<<(std::ostream &out, const Vector<T> &v) {
+    out << v.toString();
+    return out;
 }
 
 #pragma clang diagnostic pop
