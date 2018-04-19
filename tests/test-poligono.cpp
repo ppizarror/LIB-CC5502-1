@@ -60,9 +60,14 @@ void testArea() {
     // Cuadrado de lado 2
     Punto<float> plist[] = {Punto<float>(0, 0) * 2, Punto<float>(1, 0) * 2, Punto<float>(1, 1) * 2,
                             Punto<float>(0, 1) * 2};
-    Poligono<float> poly = Poligono<float>(plist, 3);
+    Poligono<float> poly = Poligono<float>(plist, 4);
+    assert(poly.area() == 4.0f);
 
-    std::cout << std::to_string(poly.area()) << std::endl;
+    // Triangulo
+    // https://1.bp.blogspot.com/-AGt5tqYpDhk/UK5hSxmwbZI/AAAAAAAAEo8/khEwS7riKlI/s640/%C3%A1rea.jpg
+    Punto<float> triangulo[] = {Punto<float>(-3, -1), Punto<float>(5, -4), Punto<float>(-2, 6)};
+    poly = Poligono<float>(triangulo, 3);
+    assert(poly.area() == 29.5f);
 }
 
 /**
@@ -72,5 +77,6 @@ void testArea() {
 int main() {
     testCreacion();
     testCCW();
+    testArea();
     return 0;
 }

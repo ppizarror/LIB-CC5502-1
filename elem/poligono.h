@@ -32,7 +32,7 @@ public:
     explicit Poligono();
 
     // Se crea con lista de puntos
-    Poligono(Punto<T> *plist, int totalp);
+    Poligono(Punto<T> *plist, int size);
 
     // Destructor
     ~Poligono();
@@ -73,15 +73,15 @@ template<class T>
 /**
  * Crea polígono usando lista de puntos.
  * @tparam T
- * @param totalp Largo de la lista de puntos
+ * @param size Largo de la lista de puntos
  * @param plist Lista de puntos
  */
-Poligono<T>::Poligono(Punto<T> *plist, int totalp) {
-    this->MAX_POINTS = std::max(this->MAX_POINTS, totalp);
+Poligono<T>::Poligono(Punto<T> *plist, int size) {
+    this->MAX_POINTS = std::max(this->MAX_POINTS, size);
     this->puntos = new Punto<T>[this->MAX_POINTS];
 
     // Recorre cada punto y lo añade
-    for (int i = 0; i < totalp; i++) {
+    for (int i = 0; i < size; i++) {
         this->addPoint(plist[i]);
     }
 }
