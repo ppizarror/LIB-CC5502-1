@@ -95,6 +95,9 @@ public:
 
     // Retorna distancia punto al origen
     T distOrigin() const;
+
+    // Retorna la dimensión del punto
+    int getDimension() const;
 };
 
 template<class T>
@@ -431,6 +434,16 @@ bool Punto<T>::operator==(Punto<T> &p) const {
     } else {
         throw std::logic_error("Las dimensiones no son correctas al comprobar igualdad");
     }
+}
+
+template<class T>
+/**
+ * Retorna la dimensión del punto.
+ * @tparam T Template
+ * @return Dimensión en N
+ */
+int Punto<T>::getDimension() const {
+    return this->dim;
 }
 
 #pragma clang diagnostic pop

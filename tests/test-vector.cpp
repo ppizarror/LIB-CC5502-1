@@ -13,9 +13,13 @@
  * Testea normalizado de vectores.
  */
 void testNormalize() {
-    Vector<float> v = Vector<float>(1, 2);
+    Vector<int> v = Vector<int>(1, 2);
     v.normalize();
-    v.print();
+    assert(v.getI() == 0 && v.getJ() == 1); // 0.5 -> 0 y 1.0 -> 1
+
+    Vector<double> v2 = Vector<double>(1, 2);
+    v2.normalize();
+    assert(v2.getI() == 0.50f && v2.getJ() == 1.0f); // 0.5->0.5 y 1.0->1.0
 }
 
 /**
