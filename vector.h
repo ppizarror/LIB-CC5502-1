@@ -12,6 +12,7 @@
 
 // Importación de librerías
 #include <algorithm> // Para max
+#include <cmath>
 #include <iostream>
 
 template<class T>
@@ -68,6 +69,9 @@ public:
 
     // Retorna la dimensión del vector
     int getDimension() const;
+
+    // Retorna la norma del vector
+    T norm() const;
 
     // Operación concatenación con string
     template<class U>
@@ -296,6 +300,22 @@ template<class T>
 std::ostream &operator<<(std::ostream &out, const Vector<T> &v) {
     out << v.toString();
     return out;
+}
+
+template<class T>
+/**
+ * Retorna la norma del vector.
+ * @tparam T Template
+ * @return
+ */
+T Vector<T>::norm() const {
+    T d;
+    if (this->dim == 2) {
+        d = sqrt(pow(this->getI(), 2) + pow(this->getJ(), 2));
+    } else {
+        d = sqrt(pow(this->getI(), 2) + pow(this->getJ(), 2) + pow(this->getK(), 2));
+    }
+    return d;
 }
 
 #pragma clang diagnostic pop
