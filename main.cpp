@@ -6,7 +6,7 @@
 
 // Importación de librerías
 #include <iostream>
-#include "punto.h"
+#include "elem/punto.h"
 
 int main() {
     Punto<float> p = Punto<float>(4.20, 3.60);

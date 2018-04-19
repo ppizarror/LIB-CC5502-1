@@ -7,7 +7,7 @@
 // Importación de librerías
 #include <iostream>
 #include <cassert>
-#include "../punto.h"
+#include "../elem/punto.h"
 
 /**
  * Testea la creación de un punto entero.
