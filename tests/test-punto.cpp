@@ -13,11 +13,21 @@
  * Testea la creación de un punto entero.
  */
 void testIntCreation() {
-    Punto<int> p = Punto<int>(420, 69);
+    // Crea punto inicial
+    Punto<int> p1 = Punto<int>(420, 69);
 
     // Comprueba que se hayan definido bien los objetos
-    assert(p.getCoordX() == 420);
-    assert(p.getCoordY() != 0);
+    assert(p1.getCoordX() == 420);
+    assert(p1.getCoordY() != 0);
+
+    // Comprueba sumas
+    Punto<int> p2 = Punto<int>(0, -69);
+    Punto<int> p3 = p1 + p2;
+    assert(p3.getCoordX() == 420 && p3.getCoordY() == 0);
+
+    // Comprueba suma a sí mismo. (0, -69) + (420, 0) = (420, -69)
+    p2 += p3;
+    assert(p2.getCoordX() == 420 && p2.getCoordY() == -69);
 }
 
 /**

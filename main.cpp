@@ -9,7 +9,7 @@
 #include "punto.h"
 
 int main() {
-    Punto<float> p = Punto<float>(1.5, 1);
+    Punto<float> p = Punto<float>(4.20, 3.60);
     std::cout << p.toString() << std::endl;
     return 0;
 }
