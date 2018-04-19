@@ -23,6 +23,9 @@ private:
     Punto<T> *a;
     Punto<T> *b;
 
+    // Calcula el área entre el segmento y un punto externo
+    T area2(Punto<T> &c);
+
 public:
     // Constructor, recibe dos puntos
     Segmento(Punto<T> &p1, Punto<T> &p2);
@@ -30,8 +33,20 @@ public:
     // Retorna el tamaño del segmento
     T getLength() const;
 
-    // Calcula el área entre el segmento y un punto externo
-    T area2(Punto<T> &c);
+    // Indica si un punto está estrictamente a la izquierda del segmento
+    bool left(Punto<T> &p);
+
+    // Indica si un punto está estrictamente a la derecha del segmento
+    bool right(Punto<T> &p);
+
+    // Indica que un punto está encima del segmento
+    bool on(Punto<T> &p);
+
+    // Indica si un punto está a la izquierda o sobre el segmento
+    bool leftOn(Punto<T> &p);
+
+    // Indica si un punto está a la izquierda o sobre el segmento
+    bool rightOn(Punto<T> &p);
 };
 
 template<class T>
@@ -67,6 +82,61 @@ T Segmento<T>::area2(Punto<T> &c) {
     T area = (this->b->getCoordX() - this->a->getCoordX()) * (c.getCoordY() - this->a->getCoordY()) -
              (this->b->getCoordY() - this->a->getCoordY()) * (c.getCoordX() - this->a->getCoordX());
     return 0.5 * area;
+}
+
+template<class T>
+/**
+ * Indica si un punto está estrictamente a la izquierda del segmento
+ * @tparam T Template
+ * @param p Punto
+ * @return
+ */
+bool Segmento<T>::left(Punto<T> &p) {
+    return this->area2(p) > 0.0f;
+}
+
+template<class T>
+/**
+ * Indica si un punto está estrictamente a la derecha del segmento
+ * @tparam T Template
+ * @param p Punto
+ * @return
+ */
+bool Segmento<T>::right(Punto<T> &p) {
+    return this->area2(p) < 0.0f;
+}
+
+template<class T>
+/**
+ * Indica si un punto está encima del segmento
+ * @tparam T Template
+ * @param p Punto
+ * @return
+ */
+bool Segmento<T>::on(Punto<T> &p) {
+    return this->area2(p) == 0.0f;
+}
+
+template<class T>
+/**
+ * Indica si un punto está encima o a la izquierda del segmento
+ * @tparam T Template
+ * @param p Punto
+ * @return
+ */
+bool Segmento<T>::leftOn(Punto<T> &p) {
+    return this->area2(p) >= 0.0f;
+}
+
+template<class T>
+/**
+ * Indica si un punto está encima o a la derecha del segmento
+ * @tparam T Template
+ * @param p Punto
+ * @return
+ */
+bool Segmento<T>::rightOn(Punto<T> &p) {
+    return this->area2(p) <= 0.0f;
 }
 
 #pragma clang diagnostic pop

@@ -14,14 +14,7 @@
  */
 void testLength() {
 
-    // (0,10)      (10,10)      Un triángulo
-    //   p5          p2             p1-p2   Segmento
-    //              / .             p3      A la derecha
-    //       (5,5) /  .             p4      Sobre el segmento
-    //            p4  .             p5      A la izquierda del segmento
-    //           /    .
-    //         p1  .. p3
-    //       (0,0)  (10,0)
+    // Triángulo 3,4 -> 5
     Punto<float> p1 = Punto<float>(0, 0);
     Punto<float> p2 = Punto<float>(3, 4);
 
@@ -36,17 +29,24 @@ void testLength() {
 void testIntersection() {
 
     // (0,10)      (10,10)      Un triángulo
-    //   p5          p2             p1-p2   Segmento
-    //              / .             p3      A la derecha
-    //       (5,5) /  .             p4      Sobre el segmento
-    //            p4  .             p5      A la izquierda del segmento
+    //   p5          p2         p1-p2   Segmento
+    //              / .         p3      A la derecha
+    //       (5,5) /  .         p4      Sobre el segmento
+    //            p4  .         p5      A la izquierda del segmento
     //           /    .
-    //         p1  .. p3
+    //         p1 ... p3
     //       (0,0)  (10,0)
     Punto<float> p1 = Punto<float>(0, 0);
     Punto<float> p2 = Punto<float>(10, 10);
+    Punto<float> p3 = Punto<float>(10, 0);
+    Punto<float> p4 = Punto<float>(5, 5);
+    Punto<float> p5 = Punto<float>(0, 10);
     Segmento<float> s = Segmento<float>(p1, p2);
 
+    assert(s.left(p5));
+    assert(!s.right(p5));
+    assert(s.on(p4));
+    assert(s.right(p3));
 }
 
 /**
