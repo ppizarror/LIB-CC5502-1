@@ -33,7 +33,16 @@ void testDot() {
  * Testea producto cruz vectores.
  */
 void testCross() {
+    Vector<float> v1 = Vector<float>(3, 2);
+    Vector<float> v2 = Vector<float>(2, -1);
+    Vector<float> v3 = v1.cross(v2);
+    assert(v3.getI() == 0.0f && v3.getJ() == 0.0f && v3.getK() == -7.0f); // (3,2,0)x(2,-1,0)=(0,0,-7)
 
+    // Prueba vectores en 3d
+    v1 = Vector<float>(2, 0, 1);
+    v2 = Vector<float>(1, -1, 3);
+    v3 = v1.cross(v2);
+    v3.print();
 }
 
 /**

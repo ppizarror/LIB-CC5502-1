@@ -299,11 +299,11 @@ Punto<T> &Punto<T>::operator=(const Punto<T> &p) {
     this->coord[1] = p.getCoordY();
 
     // Comprobación dimensiones
-    if (this->dim == 2 && p.dim == 2) {
-    } else if (this->dim == 3 && p.dim == 3) {
+    if (p.getDimension() == 3) {
+        this->dim = 3;
         this->coord[2] = p.getCoordZ();
     } else {
-        throw std::logic_error("Las dimensiones no son correctas para la operación =");
+        this->dim = 2;
     }
     return *this;
 }

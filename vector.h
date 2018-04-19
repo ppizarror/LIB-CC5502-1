@@ -56,6 +56,13 @@ public:
 
     // Normaliza el vector
     void normalize();
+
+    // Producto cruz entre dos vectores
+    Vector<T> cross(Vector<T> &v) const;
+
+    // Asignación
+    Vector<T> &operator=(const Vector<T> &v);
+
 };
 
 template<class T>
@@ -66,9 +73,10 @@ template<class T>
  * @param j Componente eje y
  */
 Vector<T>::Vector(T i, T j) {
-    this->c[0] = i;
-    this->c[1] = j;
     this->dim = 2;
+    this->setI(i);
+    this->setJ(j);
+    this->setK(T(0));
 }
 
 template<class T>
@@ -80,10 +88,10 @@ template<class T>
  * @param k Componente eje z
  */
 Vector<T>::Vector(T i, T j, T k) {
-    this->c[0] = i;
-    this->c[1] = j;
-    this->c[2] = k;
-    this->dim = 2;
+    this->dim = 3;
+    this->setI(i);
+    this->setJ(j);
+    this->setK(k);
 }
 
 template<class T>
@@ -203,6 +211,41 @@ void Vector<T>::normalize() {
         this->setJ(this->getJ() / m);
         this->setK(this->getK() / m);
     }
+}
+
+template<class T>
+/**
+ * Producto cruz entre vectores.
+ * @tparam T Template
+ * @param v Vector
+ * @return
+ */
+Vector<T> Vector<T>::cross(Vector<T> &v) const {
+    T i, j, k;
+    i = this->getJ() * v.c[2] - this->c[2] * v.getJ();
+    j = this->c[2] * v.getI() - this->getI() * v.c[2];
+    k = this->getI() * v.getJ() - this->getJ() * v.getI();
+    std::cout << k << std::endl;
+    return Vector<T>(i, j, k);
+}
+
+template<class T>
+/**
+ * Operador de asignación.
+ * @tparam T Template
+ * @param v
+ * @return
+ */
+Vector<T> &Vector<T>::operator=(const Vector<T> &v) {
+    this->setI(v.getI());
+    this->setJ(v.getJ());
+    if (v.dim == 3) {
+        this->dim = 3;
+        this->setK(v.getK());
+    } else {
+        this->dim = 2;
+    }
+    return *this;
 }
 
 #pragma clang diagnostic pop
