@@ -32,6 +32,10 @@ void testIntCreation() {
     // Restas
     p2 = -p2;
     assert(p2.getCoordX() == -420 && p2.getCoordY() == 69);
+
+    // Valor absoluto
+    p2 = p2.abs();
+    assert(p2.getCoordX() == 420 && p2.getCoordY() == 69);
 }
 
 /**

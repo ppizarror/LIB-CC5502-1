@@ -11,7 +11,9 @@
 #endif //T1_CC5502_1_PUNTO_H
 
 // Importación de librerías
+#include <cmath>
 #include <stdexcept>
+#include <math.h>
 
 template<class T>
 /**
@@ -65,6 +67,9 @@ public:
 
     // Asignación
     Punto<T> &operator=(const Punto<T> &p);
+
+    // Retorna valor absoluto
+    Punto<T> abs() const;
 };
 
 template<class T>
@@ -273,6 +278,20 @@ Punto<T> &Punto<T>::operator=(const Punto<T> &p) {
         throw std::logic_error("Las dimensiones no son correctas para la operación =");
     }
     return *this;
+}
+
+template<class T>
+/**
+ * Retorna el valor absoluto del punto.
+ * @tparam T Template
+ * @return
+ */
+Punto<T> Punto<T>::abs() const {
+    if (this->dim == 2) {
+        return Punto<T>(std::abs(this->getCoordX()), std::abs(this->getCoordY()));
+    } else {
+        return Punto<T>(std::abs(this->getCoordX()), std::abs(this->getCoordY()), std::abs(this->getCoordZ()));
+    }
 }
 
 #pragma clang diagnostic pop
