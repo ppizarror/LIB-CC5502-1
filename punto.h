@@ -51,11 +51,20 @@ public:
     // Suma dos puntos y retorna un tercero
     Punto<T> operator+(Punto<T> &p) const;
 
+    // Suma un punto a sí mismo
+    Punto<T> &operator+=(Punto<T> &p);
+
     // Suma dos puntos y retorna un tercero
     Punto<T> operator-(Punto<T> &p) const;
 
+    // Resta unaria
+    Punto<T> operator-() const;
+
     // Suma un punto a sí mismo
-    Punto<T> &operator+=(Punto<T> &p);
+    Punto<T> &operator-=(Punto<T> &p);
+
+    // Asignación
+    Punto<T> &operator=(const Punto<T> &p);
 };
 
 template<class T>
@@ -88,7 +97,7 @@ Punto<T>::Punto(T x, T y, T z) {
 
 template<class T>
 /**
- * Elimina el objeto de la memoria
+ * Elimina el objeto de la memoria.
  * @tparam T Template
  */
 Punto<T>::~Punto() {
@@ -97,7 +106,7 @@ Punto<T>::~Punto() {
 
 template<class T>
 /**
- * Retorna coordenada x
+ * Retorna coordenada x.
  * @tparam T Template
  * @return Coordenada
  */
@@ -107,7 +116,7 @@ T Punto<T>::getCoordX() const {
 
 template<class T>
 /**
- * Retorna coordenada y
+ * Retorna coordenada y.
  * @tparam T Template
  * @return Coordenada
  */
@@ -117,7 +126,7 @@ T Punto<T>::getCoordY() const {
 
 template<class T>
 /**
- * Retorna coordenada z. Sólo válido en un punto 3D
+ * Retorna coordenada z. Sólo válido en un punto 3D.
  * @tparam T Template
  * @return Coordenada
  */
@@ -130,7 +139,7 @@ T Punto<T>::getCoordZ() const {
 
 template<class T>
 /**
- * Retorna un string con el punto
+ * Retorna un string con el punto.
  * @tparam T Template
  * @return String en forma (x,y) o (x,y,z)
  */
@@ -146,7 +155,7 @@ std::string Punto<T>::toString() const {
 
 template<class T>
 /**
- * Imprime el punto en la consola
+ * Imprime el punto en la consola.
  * @tparam T Template
  */
 void Punto<T>::print() const {
@@ -173,7 +182,7 @@ Punto<T> Punto<T>::operator+(Punto<T> &p) const {
 
 template<class T>
 /**
- * Suma un punto al objeto
+ * Suma un punto al objeto.
  * @tparam T Template
  * @param p Punto a sumar
  */
@@ -193,9 +202,77 @@ Punto<T> &Punto<T>::operator+=(Punto<T> &p) {
 }
 
 template<class T>
+/**
+ * Resta el punto con otro y retorna uno nuevo.
+ * @tparam T Template
+ * @param p Puntp
+ * @return
+ */
 Punto<T> Punto<T>::operator-(Punto<T> &p) const {
-    return Punto<T>(T(), T());
+    if (this->dim == 2 && p.dim == 2) {
+        return Punto<T>(this->getCoordX() - p.getCoordX(), this->getCoordY() - p.getCoordY());
+    } else if (this->dim == 3 && p.dim == 3) {
+        return Punto<T>(this->getCoordX() - p.getCoordX(), this->getCoordY() - p.getCoordY(),
+                        this->getCoordZ() - p.getCoordZ());
+    } else {
+        throw std::logic_error("Las dimensiones no son correctas para la operación -");
+    }
 }
 
+template<class T>
+/**
+ * Resta un punto al objeto.
+ * @tparam T Template
+ * @param p Punto a sumar
+ */
+Punto<T> &Punto<T>::operator-=(Punto<T> &p) {
+    // Se suman primero componente x e y
+    this->coord[0] -= p.getCoordX();
+    this->coord[1] -= p.getCoordY();
+
+    // Comprobación dimensiones
+    if (this->dim == 2 && p.dim == 2) {
+    } else if (this->dim == 3 && p.dim == 3) {
+        this->coord[2] -= p.getCoordZ();
+    } else {
+        throw std::logic_error("Las dimensiones no son correctas para la operación -=");
+    }
+    return *this;
+}
+
+template<class T>
+/**
+ * Resta unaria.
+ * @tparam T Template
+ * @return
+ */
+Punto<T> Punto<T>::operator-() const {
+    if (this->dim == 2) {
+        return Punto<T>(-this->getCoordX(), -this->getCoordY());
+    } else {
+        return Punto<T>(-this->getCoordX(), -this->getCoordY(), -this->getCoordZ());
+    }
+}
+
+template<class T>
+/**
+ * Operación asignación.
+ * @tparam T Template
+ * @param p Punto
+ * @return
+ */
+Punto<T> &Punto<T>::operator=(const Punto<T> &p) {
+    this->coord[0] = p.getCoordX();
+    this->coord[1] = p.getCoordY();
+
+    // Comprobación dimensiones
+    if (this->dim == 2 && p.dim == 2) {
+    } else if (this->dim == 3 && p.dim == 3) {
+        this->coord[2] = p.getCoordZ();
+    } else {
+        throw std::logic_error("Las dimensiones no son correctas para la operación =");
+    }
+    return *this;
+}
 
 #pragma clang diagnostic pop

@@ -28,6 +28,10 @@ void testIntCreation() {
     // Comprueba suma a sí mismo. (0, -69) + (420, 0) = (420, -69)
     p2 += p3;
     assert(p2.getCoordX() == 420 && p2.getCoordY() == -69);
+
+    // Restas
+    p2 = -p2;
+    assert(p2.getCoordX() == -420 && p2.getCoordY() == 69);
 }
 
 /**
