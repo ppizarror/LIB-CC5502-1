@@ -13,7 +13,8 @@
  * Testea normalizado de vectores.
  */
 void testNormalize() {
-
+    Vector<float> v = Vector<float>(1, 2);
+    v.print();
 }
 
 /**
