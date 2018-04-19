@@ -333,11 +333,13 @@ template<class T>
  * @return
  */
 T Punto<T>::distOrigin() const {
+    T d;
     if (this->dim == 2) {
-        return sqrt(pow(this->getCoordX(), 2) + pow(this->getCoordY(), 2));
+        d = sqrt(pow(this->getCoordX(), 2) + pow(this->getCoordY(), 2));
     } else {
-        return sqrt(pow(this->getCoordX(), 2) + pow(this->getCoordY(), 2) + pow(this->getCoordZ(), 2));
+        d = sqrt(pow(this->getCoordX(), 2) + pow(this->getCoordY(), 2) + pow(this->getCoordZ(), 2));
     }
+    return d;
 }
 
 template<class T>
