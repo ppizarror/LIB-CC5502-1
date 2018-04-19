@@ -85,8 +85,14 @@ public:
     // Divide por un valor
     Punto<T> operator/(T v) const;
 
+    // Multiplica por un valor
+    Punto<T> operator*(T v) const;
+
     // Divide por un valor y guarda el punto
     Punto<T> &operator/=(T v);
+
+    // Multiplica por un valor y guarda el punto
+    Punto<T> &operator*=(T v);
 
     // Comprobación igualdad
     bool operator==(const Punto<T> &p) const;
@@ -379,6 +385,21 @@ Punto<T> Punto<T>::operator/(T v) const {
 
 template<class T>
 /**
+ * Multiplica el punto por un valor.
+ * @tparam T Template
+ * @param v valor
+ * @return
+ */
+Punto<T> Punto<T>::operator*(T v) const {
+    if (this->dim == 2) {
+        return Punto<T>(this->getCoordX() * v, this->getCoordY() * v);
+    } else {
+        return Punto<T>(this->getCoordX() * v, this->getCoordY() * v, this->getCoordZ() * v);
+    }
+}
+
+template<class T>
+/**
  * Define coordenada x.
  * @tparam T Template
  * @param x Valor de la coordenada
@@ -424,6 +445,24 @@ Punto<T> &Punto<T>::operator/=(T v) {
     // Comprobación dimensiones
     if (this->dim == 3) {
         this->coord[2] /= v;
+    }
+    return *this;
+}
+
+template<class T>
+/**
+ * Multiplica y guarda en el mismo punto.
+ * @tparam T Template
+ * @param v Valor a dividir
+ */
+Punto<T> &Punto<T>::operator*=(T v) {
+    // Se suman primero componente x e y
+    this->coord[0] *= v;
+    this->coord[1] *= v;
+
+    // Comprobación dimensiones
+    if (this->dim == 3) {
+        this->coord[2] *= v;
     }
     return *this;
 }

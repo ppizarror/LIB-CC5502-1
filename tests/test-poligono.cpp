@@ -58,8 +58,11 @@ void testCCW() {
  */
 void testArea() {
     // Cuadrado de lado 2
-    Punto<float> plist[] = {Punto<float>(0, 0) * 2, Punto<float>(1, 0), Punto<float>(1, 1), Punto<float>(0, 1)};
+    Punto<float> plist[] = {Punto<float>(0, 0) * 2, Punto<float>(1, 0) * 2, Punto<float>(1, 1) * 2,
+                            Punto<float>(0, 1) * 2};
     Poligono<float> poly = Poligono<float>(plist, 3);
+
+    std::cout << std::to_string(poly.area()) << std::endl;
 }
 
 /**
