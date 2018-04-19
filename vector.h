@@ -58,10 +58,16 @@ public:
     void normalize();
 
     // Producto cruz entre dos vectores
-    Vector<T> cross(Vector<T> &v) const;
+    Vector<T> cross(const Vector<T> &v) const;
+
+    // Producto punto entre dos vectores
+    Vector<T> dot(const Vector<T> &v) const;
 
     // Asignación
     Vector<T> &operator=(const Vector<T> &v);
+
+    // Retorna la dimensión del vector
+    int getDimension() const;
 
 };
 
@@ -73,10 +79,10 @@ template<class T>
  * @param j Componente eje y
  */
 Vector<T>::Vector(T i, T j) {
-    this->dim = 2;
     this->setI(i);
     this->setJ(j);
     this->setK(T(0));
+    this->dim = 2;
 }
 
 template<class T>
@@ -220,12 +226,11 @@ template<class T>
  * @param v Vector
  * @return
  */
-Vector<T> Vector<T>::cross(Vector<T> &v) const {
+Vector<T> Vector<T>::cross(const Vector<T> &v) const {
     T i, j, k;
     i = this->getJ() * v.c[2] - this->c[2] * v.getJ();
     j = this->c[2] * v.getI() - this->getI() * v.c[2];
     k = this->getI() * v.getJ() - this->getJ() * v.getI();
-    std::cout << k << std::endl;
     return Vector<T>(i, j, k);
 }
 
@@ -246,6 +251,37 @@ Vector<T> &Vector<T>::operator=(const Vector<T> &v) {
         this->dim = 2;
     }
     return *this;
+}
+
+template<class T>
+/**
+ * Producto punto entre dos vectores.
+ * @tparam T
+ * @param v
+ * @return
+ */
+Vector<T> Vector<T>::dot(const Vector<T> &v) const {
+    T i, j, k;
+    i = this->getI() * v.getI();
+    j = this->getJ() * v.getJ();
+    if (this->dim == 2 && v.dim == 2) {
+        return Vector<T>(i, j);
+    } else if (this->dim == 3 && v.dim == 3) {
+        k = this->getK() * v.getK();
+        return Vector<T>(i, j, k);
+    } else {
+        throw std::logic_error("No se puede realizar producto punto entre dos vectores con distinta dimensión");
+    }
+}
+
+template<class T>
+/**
+ * Retorna la dimensión del punto.
+ * @tparam T Template
+ * @return Dimensión en N
+ */
+int Vector<T>::getDimension() const {
+    return this->dim;
 }
 
 #pragma clang diagnostic pop

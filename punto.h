@@ -61,10 +61,10 @@ public:
     void print() const;
 
     // Suma dos puntos y retorna un tercero
-    Punto<T> operator+(Punto<T> &p) const;
+    Punto<T> operator+(const Punto<T> &p) const;
 
     // Suma un punto a sí mismo
-    Punto<T> &operator+=(Punto<T> &p);
+    Punto<T> &operator+=(const Punto<T> &p);
 
     // Suma dos puntos y retorna un tercero
     Punto<T> operator-(Punto<T> &p) const;
@@ -73,7 +73,7 @@ public:
     Punto<T> operator-() const;
 
     // Suma un punto a sí mismo
-    Punto<T> &operator-=(Punto<T> &p);
+    Punto<T> &operator-=(const Punto<T> &p);
 
     // Asignación
     Punto<T> &operator=(const Punto<T> &p);
@@ -85,7 +85,7 @@ public:
     Punto<T> &operator/=(T v);
 
     // Comprobación igualdad
-    bool operator==(Punto<T> &p) const;
+    bool operator==(const Punto<T> &p) const;
 
     // Retorna valor absoluto
     Punto<T> abs() const;
@@ -202,7 +202,7 @@ template<class T>
  * @param p Punto a sumar
  * @return Nuevo punto
  */
-Punto<T> Punto<T>::operator+(Punto<T> &p) const {
+Punto<T> Punto<T>::operator+(const Punto<T> &p) const {
     if (this->dim == 2 && p.dim == 2) {
         return Punto<T>(this->getCoordX() + p.getCoordX(), this->getCoordY() + p.getCoordY());
     } else if (this->dim == 3 && p.dim == 3) {
@@ -219,7 +219,7 @@ template<class T>
  * @tparam T Template
  * @param p Punto a sumar
  */
-Punto<T> &Punto<T>::operator+=(Punto<T> &p) {
+Punto<T> &Punto<T>::operator+=(const Punto<T> &p) {
     // Se suman primero componente x e y
     this->coord[0] += p.getCoordX();
     this->coord[1] += p.getCoordY();
@@ -258,7 +258,7 @@ template<class T>
  * @tparam T Template
  * @param p Punto a sumar
  */
-Punto<T> &Punto<T>::operator-=(Punto<T> &p) {
+Punto<T> &Punto<T>::operator-=(const Punto<T> &p) {
     // Se suman primero componente x e y
     this->coord[0] -= p.getCoordX();
     this->coord[1] -= p.getCoordY();
@@ -425,7 +425,7 @@ template<class T>
  * @param p Punto
  * @return
  */
-bool Punto<T>::operator==(Punto<T> &p) const {
+bool Punto<T>::operator==(const Punto<T> &p) const {
     if (this->dim == 2 && p.dim == 2) {
         return this->getCoordX() == p.getCoordX() && this->getCoordY() == p.getCoordY();
     } else if (this->dim == 3 && p.dim == 3) {

@@ -26,7 +26,16 @@ void testNormalize() {
  * Testea producto punto entre vectores.
  */
 void testDot() {
+    Vector<float> v1 = Vector<float>(3, 2);
+    Vector<float> v2 = Vector<float>(2, -1);
+    Vector<float> v3 = v1.dot(v2);
+    assert(v3.getI() == 6.0f && v3.getJ() == -2.0f); // (3,2).(2,-1)=(6,-2)
 
+    // Prueba cambiando a ceros
+    v3.setI(0);
+    v3.setJ(0);
+    v1 = v1.dot(v3);
+    assert(v1.getI() == 0.0f && v1.getJ() == 0.0f); // (3,2).(0,0)=(0,0)
 }
 
 /**
@@ -42,7 +51,7 @@ void testCross() {
     v1 = Vector<float>(2, 0, 1);
     v2 = Vector<float>(1, -1, 3);
     v3 = v1.cross(v2);
-    v3.print();
+    assert(v3.getI() == 1.0f && v3.getJ() == -5.0f && v3.getK() == -2.0f);
 }
 
 /**
