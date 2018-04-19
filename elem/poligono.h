@@ -22,7 +22,6 @@ private:
     Punto<T> *puntos;
     int totalp = 0;
     int MAX_POINTS = 100;
-    bool _isccw = false;
 
     // Calcula el área entre 3 puntos
     T area2(Punto<T> &a, Punto<T> &b, Punto<T> &c);
@@ -154,7 +153,6 @@ template<class T>
 bool Poligono<T>::checkCCW() {
     T sum, t;
 
-    this->_isccw = false;
     if (this->totalp >= 3) {
         for (int i = 0; i < this->totalp; i++) {
             if (i < this->totalp - 1) {
@@ -169,10 +167,10 @@ bool Poligono<T>::checkCCW() {
 
         // Es CCW si la suma es menor a cero
         if (sum < 0) {
-            this->_isccw = true;
+            return true;
         }
     }
-    return this->_isccw;
+    return false;
 }
 
 template<class T>
