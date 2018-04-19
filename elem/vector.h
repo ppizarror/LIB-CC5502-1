@@ -8,14 +8,17 @@
 // Definición de constantes
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
-#ifndef T1_CC5502_1_VECTOR_H
-#define T1_CC5502_1_VECTOR_H
-#endif //T1_CC5502_1_VECTOR_H
 
 // Importación de librerías
+#ifndef T1_CC5502_1_VECTOR_H
+#define T1_CC5502_1_VECTOR_H
+
 #include <algorithm> // Para max
 #include <cmath>
 #include <iostream>
+#include "punto.h"
+
+#endif //T1_CC5502_1_VECTOR_H
 
 template<class T>
 class Vector {
@@ -23,6 +26,9 @@ private:
     T *c = new T[3];
     int dim;
 public:
+
+    // Inicia un vector desde un punto
+    Vector(Punto<T> &p);
 
     // Inicia un vector con 2 componentes
     Vector(T i, T j);
@@ -283,7 +289,7 @@ Vector<T> Vector<T>::dot(const Vector<T> &v) const {
         k = this->getK() * v.getK();
         return Vector<T>(i, j, k);
     } else {
-        throw std::logic_error("No se puede realizar producto punto entre dos vectores con distinta dimensión");
+        throw std::logic_error("No se puede realizar producto punto entre dos vectores con distinta dimension");
     }
 }
 
@@ -325,7 +331,7 @@ T Vector<T>::norm() const {
 
 template<class T>
 /**
- * Retorna el valor absoluto del vector
+ * Retorna el valor absoluto del vector.
  * @tparam T Template
  * @return
  */
@@ -335,6 +341,11 @@ Vector<T> Vector<T>::abs() const {
     } else {
         return Vector<T>(std::abs(this->getI()), std::abs(this->getJ()), std::abs(this->getK()));
     }
+}
+
+template<class T>
+Vector<T>::Vector(Punto<T> &p) {
+
 }
 
 #pragma clang diagnostic pop

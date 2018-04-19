@@ -17,9 +17,6 @@ void testCreacion() {
     poly.addPoint(Punto<double>(1, 2));
     poly.addPoint(Punto<double>(3, 4));
     poly.addPoint(Punto<double>(5, 6));
-
-    // Imprime el polígono
-    std::cout << poly.toString() << std::endl;
 }
 
 /**
@@ -34,11 +31,8 @@ void testCCW() {
                             Punto<float>(1, 0)};
     Poligono<float> poly = Poligono<float>(plist, 5);
 
-    // Se imprime polígono
-    poly.print();
-
     // Chequea CCW
-    assert(poly.checkCCW());
+    assert(poly.inCCW());
 
     /**
      * Polígono no CCw
@@ -46,11 +40,8 @@ void testCCW() {
     Punto<float> plist2[] = {Punto<float>(0, 0), Punto<float>(0, 1), Punto<float>(1, 1)};
     poly = Poligono<float>(plist2, 3);
 
-    // Se imprime polígono
-    poly.print();
-
     // Chequea CCW
-    assert(!poly.checkCCW());
+    assert(!poly.inCCW());
 }
 
 /**
@@ -71,6 +62,66 @@ void testArea() {
 }
 
 /**
+ * Chequea contención de puntos.
+ */
+void testInPoly() {
+
+    /**
+     * Cuadrado de lado 1.
+     */
+    Punto<float> plist[] = {Punto<float>(0, 0), Punto<float>(1, 0), Punto<float>(1, 1),
+                            Punto<float>(0, 1)};
+    Poligono<float> poly = Poligono<float>(plist, 4);
+
+    // Creación de varios puntos
+    Punto<float> p;
+
+    // Deben estar dentro
+    p = Punto<float>(0.5, 0.5);
+    assert(poly.inPoly(p));
+    p = Punto<float>(0.2, 0.5);
+    assert(poly.inPoly(p));
+
+    // Deben estar fuera
+    p = Punto<float>(0, 1.1);
+    assert(!poly.inPoly(p));
+    p = Punto<float>(1.1, 0);
+    assert(!poly.inPoly(p));
+
+    /**
+     * Polígono más complicado.
+     */
+    //         (0.5,0.5)
+    //            p4
+    //           /  \
+    //          /    \           Poligono místico
+    //         /  p2  \             > BEPES, BOPIS, BEPPS, BEPIS
+    //        /  /  \  \         p2: (0.5,0.25)
+    //       / /      \ \
+    //      //          \\
+    //     p1            p3
+    // (0.0,0.0)      (1.0,0.0)
+    Punto<float> plist2[] = {Punto<float>(0.0, 0.0), Punto<float>(0.5, 0.25), Punto<float>(1.0, 0.0),
+                             Punto<float>(0.5, 0.5)};
+    poly = Poligono<float>(plist2, 4);
+
+    // Área
+    assert(poly.area() == 0.125f);
+
+    // Deben estar fuera
+    p = Punto<float>(0.5, 0.24);
+    assert(!poly.inPoly(p));
+    p = Punto<float>(0.4, 0.2);
+    assert(!poly.inPoly(p));
+
+    // Deben estar dentro
+    p = Punto<float>(0.5, 0.26);
+    assert(poly.inPoly(p));
+    p = Punto<float>(0.1, 0.1);
+    assert(poly.inPoly(p));
+}
+
+/**
  * Corre los test.
  * @return
  */
@@ -78,5 +129,6 @@ int main() {
     testCreacion();
     testCCW();
     testArea();
+    testInPoly();
     return 0;
 }

@@ -8,13 +8,15 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma ide diagnostic ignored "OCUnusedStructInspection"
-#ifndef T1_CC5502_1_POLIGONO_H
-#define T1_CC5502_1_POLIGONO_H
-#endif //T1_CC5502_1_POLIGONO_H
 
 // Importación de librerías
+#ifndef T1_CC5502_1_POLIGONO_H
+#define T1_CC5502_1_POLIGONO_H
+
 #include "segmento.h"
 #include <cmath>
+
+#endif //T1_CC5502_1_POLIGONO_H
 
 template<class T>
 class Poligono {
@@ -24,7 +26,7 @@ private:
     int MAX_POINTS = 100;
 
     // Calcula el área entre 3 puntos
-    T area2(Punto<T> &a, Punto<T> &b, Punto<T> &c);
+    T area2(Punto<T> &a, Punto<T> &b, Punto<T> &c) const;
 
 public:
     // Constructor, no toma parámetros
@@ -43,7 +45,7 @@ public:
     std::string toString() const;
 
     // Chequea que el polígono sea CCW
-    bool checkCCW();
+    bool inCCW() const;
 
     // Operación concatenación con string
     template<class U>
@@ -56,7 +58,10 @@ public:
     Poligono<T> &operator=(const Poligono<T> &poly);
 
     // Calcula el área del polígono
-    T area();
+    T area() const;
+
+    // Comprueba que un punto está dentro del polígono
+    bool inPoly(Punto<T> &p) const;
 };
 
 template<class T>
@@ -150,7 +155,7 @@ template<class T>
  * @tparam T
  * @return
  */
-bool Poligono<T>::checkCCW() {
+bool Poligono<T>::inCCW() const {
     T sum, t;
 
     if (this->totalp >= 3) {
@@ -219,41 +224,65 @@ template<class T>
  * @tparam T Template
  * @return El área del polígono
  */
-T Poligono<T>::area() {
-    if (this->checkCCW()) {
-        T area;
+T Poligono<T>::area() const {
+    if (this->inCCW() or true) {
+        T _sumarea = 0.0;
 
         // Se crea un punto cualquiera P en el origen para calcular el área
-        Punto<T> p0 = Punto<T>(0, 0);
+        Punto<T> p0 = Punto<T>(0.0, 0.0);
 
         // Se recorre cada punto para calcular el área
         for (int i = 0; i < this->totalp; i++) {
             if (i < this->totalp - 1) {
-                area += area2(p0, this->puntos[i], this->puntos[i + 1]);
+                _sumarea += area2(p0, this->puntos[i], this->puntos[i + 1]);
             } else { // Se está en el último punto
-                area += area2(p0, this->puntos[i], this->puntos[0]);
+                _sumarea += area2(p0, this->puntos[i], this->puntos[0]);
             }
         }
 
-        return area;
+        return _sumarea;
     } else {
-        throw std::logic_error("No se puede calcular el área a un polígono que no esté en CCW");
+        throw std::logic_error("No se puede calcular el area a un poligono que no este en CCW");
     }
 }
 
 template<class T>
 /**
- * Calcula el área entre tres puntos-
+ * Chequea si un punto está dentro de un polígono.
+ * @tparam T Template
+ * @param p Punto
+ * @return
+ */
+bool Poligono<T>::inPoly(Punto<T> &p) const {
+    int i, j;
+    bool c = false;
+    for (i = 0, j = this->totalp - 1; i < this->totalp; j = i++) {
+        if (((this->puntos[i].getCoordY() > p.getCoordY()) != (this->puntos[j].getCoordY() > p.getCoordY())) &&
+            (p.getCoordX() < (this->puntos[j].getCoordX() - this->puntos[i].getCoordX()) *
+                             (p.getCoordY() - this->puntos[i].getCoordY()) /
+                             (this->puntos[j].getCoordY() - this->puntos[i].getCoordY()) +
+                             this->puntos[i].getCoordX()))
+            c = !c;
+    }
+    return c;
+}
+
+template<class T>
+/**
+ * Calcula el área entre tres puntos.
  * @tparam T
  * @param a Punto A
  * @param b Punto B
  * @param c Punto C
  * @return
  */
-T Poligono<T>::area2(Punto<T> &a, Punto<T> &b, Punto<T> &c) {
-    T area = (b.getCoordX() - a.getCoordX()) * (c.getCoordY() - a.getCoordY()) -
-             (b.getCoordY() - a.getCoordY()) * (c.getCoordX() - a.getCoordX());
-    return 0.5 * area;
+T Poligono<T>::area2(Punto<T> &a, Punto<T> &b, Punto<T> &c) const {
+    T _area = (b.getCoordX() - a.getCoordX()) * (c.getCoordY() - a.getCoordY()) -
+              (b.getCoordY() - a.getCoordY()) * (c.getCoordX() - a.getCoordX());
+    std::cout << _area << std::endl;
+
+    // Ve con vectores
+    return 0.5 * _area;
 }
 
 #pragma clang diagnostic pop

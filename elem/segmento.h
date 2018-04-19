@@ -9,13 +9,14 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma ide diagnostic ignored "OCUnusedStructInspection"
-#ifndef T1_CC5502_1_SEGMENTO_H
-#define T1_CC5502_1_SEGMENTO_H
-#endif //T1_CC5502_1_SEGMENTO_H
 
 // Importación de librerías
-#include "punto.h"
+#ifndef T1_CC5502_1_SEGMENTO_H
+#define T1_CC5502_1_SEGMENTO_H
+
 #include "vector.h"
+
+#endif //T1_CC5502_1_SEGMENTO_H
 
 template<class T>
 class Segmento {

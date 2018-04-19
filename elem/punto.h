@@ -7,15 +7,17 @@
 // Definición de constantes
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
-#ifndef T1_CC5502_1_PUNTO_H
-#define T1_CC5502_1_PUNTO_H
-#endif //T1_CC5502_1_PUNTO_H
 
 // Importación de librerías
+#ifndef T1_CC5502_1_PUNTO_H
+#define T1_CC5502_1_PUNTO_H
+
 #include <cmath>
 #include <iostream>
 #include <ctgmath>
 #include <stdexcept>
+
+#endif //T1_CC5502_1_PUNTO_H
 
 template<class T>
 /**
@@ -223,7 +225,7 @@ Punto<T> Punto<T>::operator+(const Punto<T> &p) const {
         return Punto<T>(this->getCoordX() + p.getCoordX(), this->getCoordY() + p.getCoordY(),
                         this->getCoordZ() + p.getCoordZ());
     } else {
-        throw std::logic_error("Las dimensiones no son correctas para la operación +");
+        throw std::logic_error("Las dimensiones no son correctas para la operacion +");
     }
 }
 
@@ -243,7 +245,7 @@ Punto<T> &Punto<T>::operator+=(const Punto<T> &p) {
     } else if (this->dim == 3 && p.dim == 3) {
         this->coord[2] += p.getCoordZ();
     } else {
-        throw std::logic_error("Las dimensiones no son correctas para la operación +=");
+        throw std::logic_error("Las dimensiones no son correctas para la operacion +=");
     }
     return *this;
 }
@@ -262,7 +264,7 @@ Punto<T> Punto<T>::operator-(Punto<T> &p) const {
         return Punto<T>(this->getCoordX() - p.getCoordX(), this->getCoordY() - p.getCoordY(),
                         this->getCoordZ() - p.getCoordZ());
     } else {
-        throw std::logic_error("Las dimensiones no son correctas para la operación -");
+        throw std::logic_error("Las dimensiones no son correctas para la operacion -");
     }
 }
 
@@ -282,7 +284,7 @@ Punto<T> &Punto<T>::operator-=(const Punto<T> &p) {
     } else if (this->dim == 3 && p.dim == 3) {
         this->coord[2] -= p.getCoordZ();
     } else {
-        throw std::logic_error("Las dimensiones no son correctas para la operación -=");
+        throw std::logic_error("Las dimensiones no son correctas para la operacion -=");
     }
     return *this;
 }
