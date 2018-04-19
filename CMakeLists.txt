@@ -3,4 +3,5 @@ project(T1-CC5502-1)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(T1-CC5502-1 main.cpp)
+add_executable(MAIN main.cpp punto.h)
+add_executable(TEST-PUNTO tests/test-punto.cpp punto.h)
