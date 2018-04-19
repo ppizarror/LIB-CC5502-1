@@ -27,6 +27,39 @@ void testCreacion() {
  */
 void testCCW() {
 
+    /**
+     * Polígono CCW
+     */
+    Punto<float> plist[] = {Punto<float>(5, 0), Punto<float>(6, 4), Punto<float>(4, 5), Punto<float>(1, 5),
+                            Punto<float>(1, 0)};
+    Poligono<float> poly = Poligono<float>(plist, 5);
+
+    // Se imprime polígono
+    poly.print();
+
+    // Chequea CCW
+    assert(poly.checkCCW());
+
+    /**
+     * Polígono no CCw
+     */
+    Punto<float> plist2[] = {Punto<float>(0, 0), Punto<float>(0, 1), Punto<float>(1, 1)};
+    poly = Poligono<float>(plist2, 3);
+
+    // Se imprime polígono
+    poly.print();
+
+    // Chequea CCW
+    assert(!poly.checkCCW());
+}
+
+/**
+ * Testea el cálculo de áreas.
+ */
+void testArea() {
+    // Cuadrado de lado 2
+    Punto<float> plist[] = {Punto<float>(0, 0) * 2, Punto<float>(1, 0), Punto<float>(1, 1), Punto<float>(0, 1)};
+    Poligono<float> poly = Poligono<float>(plist, 3);
 }
 
 /**

@@ -468,7 +468,7 @@ std::ostream &operator<<(std::ostream &out, const Punto<T> &p) {
 
 template<class T>
 /**
- * Punto vacío
+ * Punto vacío.
  * @tparam T
  */
 Punto<T>::Punto() {

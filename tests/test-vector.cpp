@@ -46,6 +46,7 @@ void testCross() {
     Vector<float> v2 = Vector<float>(2, -1);
     Vector<float> v3 = v1.cross(v2);
     assert(v3.getI() == 0.0f && v3.getJ() == 0.0f && v3.getK() == -7.0f); // (3,2,0)x(2,-1,0)=(0,0,-7)
+    v3.print();
 
     // Prueba vectores en 3d
     v1 = Vector<float>(2, 0, 1);
