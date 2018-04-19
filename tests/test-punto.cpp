@@ -36,6 +36,13 @@ void testIntCreation() {
     // Valor absoluto
     p2 = p2.abs();
     assert(p2.getCoordX() == 420 && p2.getCoordY() == 69);
+
+    // Calcula distancia de un punto al eje
+    Punto<int> porigin = Punto<int>(0, 0);
+    assert(p2.dist(porigin) == 425);
+
+    // Divide por un valor
+
 }
 
 /**

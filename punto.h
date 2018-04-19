@@ -12,8 +12,9 @@
 
 // Importación de librerías
 #include <cmath>
+#include <iostream>
+#include <ctgmath>
 #include <stdexcept>
-#include <math.h>
 
 template<class T>
 /**
@@ -44,6 +45,15 @@ public:
     // Obtiene la coordenada z
     T getCoordZ() const;
 
+    // Establece la coordenada x
+    void setCoordX(T x);
+
+    // Establece la coordenada y
+    void setCoordY(T y);
+
+    // Establece una coordenada z
+    void setCoordZ(T z);
+
     // Retorna el punto en forma de String
     std::string toString() const;
 
@@ -62,6 +72,9 @@ public:
     // Resta unaria
     Punto<T> operator-() const;
 
+    // Divide por un valor
+    Punto<T> operator/(T v) const;
+
     // Suma un punto a sí mismo
     Punto<T> &operator-=(Punto<T> &p);
 
@@ -70,6 +83,12 @@ public:
 
     // Retorna valor absoluto
     Punto<T> abs() const;
+
+    // Calcula la distancia entre dos puntos
+    T dist(Punto<T> &p) const;
+
+    // Retorna distancia punto al origen
+    T distOrigin() const;
 };
 
 template<class T>
@@ -291,6 +310,51 @@ Punto<T> Punto<T>::abs() const {
         return Punto<T>(std::abs(this->getCoordX()), std::abs(this->getCoordY()));
     } else {
         return Punto<T>(std::abs(this->getCoordX()), std::abs(this->getCoordY()), std::abs(this->getCoordZ()));
+    }
+}
+
+template<class T>
+/**
+ * Retorna distancia al origen del punto.
+ * @tparam T Template
+ * @return
+ */
+T Punto<T>::distOrigin() const {
+    if (this->dim == 2) {
+        return sqrt(pow(this->getCoordX(), 2) + pow(this->getCoordY(), 2));
+    } else {
+        return sqrt(pow(this->getCoordX(), 2) + pow(this->getCoordY(), 2) + pow(this->getCoordZ(), 2));
+    }
+}
+
+template<class T>
+/**
+ * Calcula la distancia entre dos puntos.
+ * @tparam Template
+ * @param p Punto
+ * @return
+ */
+T Punto<T>::dist(Punto<T> &p) const {
+    if (this->dim == 2) {
+        return sqrt(pow(this->getCoordX() - p.getCoordX(), 2) + pow(this->getCoordY() - p.getCoordY(), 2));
+    } else {
+        return sqrt(pow(this->getCoordX() - p.getCoordX(), 2) + pow(this->getCoordY() - p.getCoordY(), 2) +
+                    pow(this->getCoordZ() - p.getCoordZ(), 2));
+    }
+}
+
+template<class T>
+/**
+ * Divide el punto por un valor.
+ * @tparam T Template
+ * @param v valor
+ * @return
+ */
+Punto<T> Punto<T>::operator/(T v) const {
+    if (this->dim == 2) {
+        return Punto<T>(this->getCoordX() / v, this->getCoordY() / v);
+    } else {
+        return Punto<T>(this->getCoordX() / v, this->getCoordY() / v, this->getCoordZ() / v);
     }
 }
 
