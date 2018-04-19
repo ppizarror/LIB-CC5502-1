@@ -358,4 +358,37 @@ Punto<T> Punto<T>::operator/(T v) const {
     }
 }
 
+template<class T>
+/**
+ * Define coordenada x.
+ * @tparam T Template
+ * @param x Valor de la coordenada
+ */
+void Punto<T>::setCoordX(T x) {
+    this->coord[0] = x;
+}
+
+template<class T>
+/**
+ * Define coordenada y.
+ * @tparam T Template
+ * @param y Valor de la coordenada
+ */
+void Punto<T>::setCoordY(T y) {
+    this->coord[1] = y;
+}
+
+template<class T>
+/**
+ * Define coordenada z, aumenta dimensión.
+ * @tparam T Template
+ * @param z Valor de la coordenada
+ */
+void Punto<T>::setCoordZ(T z) {
+    this->coord[2] = z;
+    if (this->dim == 2) {
+        this->dim = 3;
+    }
+}
+
 #pragma clang diagnostic pop
