@@ -73,6 +73,9 @@ public:
     // Retorna la norma del vector
     T norm() const;
 
+    // Retorna el valor absoluto del vector
+    Vector<T> abs() const;
+
     // Operación concatenación con string
     template<class U>
     friend std::ostream &operator<<(std::ostream &out, const Vector<U> &v);
@@ -316,6 +319,20 @@ T Vector<T>::norm() const {
         d = sqrt(pow(this->getI(), 2) + pow(this->getJ(), 2) + pow(this->getK(), 2));
     }
     return d;
+}
+
+template<class T>
+/**
+ * Retorna el valor absoluto del vector
+ * @tparam T Template
+ * @return
+ */
+Vector<T> Vector<T>::abs() const {
+    if (this->dim == 2) {
+        return Vector<T>(std::abs(this->getI()), std::abs(this->getJ()));
+    } else {
+        return Vector<T>(std::abs(this->getI()), std::abs(this->getJ()), std::abs(this->getK()));
+    }
 }
 
 #pragma clang diagnostic pop
