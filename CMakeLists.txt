@@ -8,4 +8,5 @@ add_executable(MAIN main.cpp elem/punto.h elem/vector.h elem/segmento.h)
 
 # Testing
 add_executable(TEST-PUNTO tests/test-punto.cpp elem/punto.h tests/test-segmento.cpp)
+add_executable(TEST-SEGMENTO tests/test-segmento.cpp elem/segmento.h)
 add_executable(TEST-VECTOR tests/test-vector.cpp elem/vector.h)
