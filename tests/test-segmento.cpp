@@ -13,7 +13,6 @@
  * Testea el largo de un segmento.
  */
 void testLargo() {
-
     // Triángulo 3,4 -> 5
     Punto<float> p1 = Punto<float>(0, 0);
     Punto<float> p2 = Punto<float>(3, 4);
@@ -27,7 +26,6 @@ void testLargo() {
  * Testea las ubicaciones punto/segmento.
  */
 void testInterseccion() {
-
     // (0,10)      (10,10)      Un triángulo
     //   p5          p2         p1-p2   Segmento
     //              / .         p3      A la derecha

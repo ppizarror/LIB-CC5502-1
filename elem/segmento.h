@@ -19,6 +19,10 @@
 #endif //T1_CC5502_1_SEGMENTO_H
 
 template<class T>
+/**
+ * Clase Segmento, conformado por dos puntos.
+ * @tparam T Template
+ */
 class Segmento {
 private:
     Punto<T> *a;

@@ -23,24 +23,15 @@ void testCreacion() {
  * Testea la implementación de CCW.
  */
 void testCCW() {
-
-    /**
-     * Polígono CCW
-     */
+    // CCW
     Punto<float> plist[] = {Punto<float>(5, 0), Punto<float>(6, 4), Punto<float>(4, 5), Punto<float>(1, 5),
                             Punto<float>(1, 0)};
     Poligono<float> poly = Poligono<float>(plist, 5);
-
-    // Chequea CCW
     assert(poly.inCCW());
 
-    /**
-     * Polígono no CCw
-     */
+    // No CCW
     Punto<float> plist2[] = {Punto<float>(0, 0), Punto<float>(0, 1), Punto<float>(1, 1)};
     poly = Poligono<float>(plist2, 3);
-
-    // Chequea CCW
     assert(!poly.inCCW());
 }
 
@@ -65,7 +56,6 @@ void testArea() {
  * Chequea contención de puntos.
  */
 void testInPoly() {
-
     /**
      * Cuadrado de lado 1.
      */
@@ -125,7 +115,6 @@ void testInPoly() {
  * Testea el perímetro.
  */
 void testPerimetro() {
-
     // Cuadrado 1x1
     Punto<float> plist[] = {Punto<float>(0, 0), Punto<float>(1, 0), Punto<float>(1, 1),
                             Punto<float>(0, 1)};

@@ -21,7 +21,7 @@
 
 template<class T>
 /**
- * Clase Punto en 2D o 3D
+ * Clase Punto en 2D o 3D.
  * @tparam T Template
  */
 class Punto {

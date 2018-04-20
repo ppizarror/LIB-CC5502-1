@@ -76,7 +76,6 @@ void testCross() {
  * Testea vector desde punto.
  */
 void testVectorDesdePunto() {
-
     // Crea los puntos
     Punto<double> p1 = Punto<double>(3, -4, 7);
     Punto<double> p2 = Punto<double>(2, 6, -1);

@@ -21,6 +21,11 @@
 #endif //T1_CC5502_1_VECTOR_H
 
 template<class T>
+/**
+ * Vector, se puede hacer a partir de punto o coordenadas.
+ * Provee funciones para producto cruz, punto, norma.
+ * @tparam T Template
+ */
 class Vector {
 private:
     T *c = new T[3];
@@ -289,7 +294,6 @@ Vector<T> Vector<T>::dot(const Vector<T> &v) const {
         k = this->getK() * v.getK();
         return Vector<T>(i, j, k);
     } else {
-        assert(false);
         throw std::logic_error("No se puede realizar producto punto entre dos vectores con distinta dimension");
     }
 }
@@ -351,7 +355,6 @@ template<class T>
  * @param p Punto
  */
 Vector<T>::Vector(Punto<T> &p) {
-
     this->dim = p.getDimension();
     if (this->dim == 2) { // Inicia vector en 2D
         this->setI(p.getCoordX());
@@ -363,7 +366,6 @@ Vector<T>::Vector(Punto<T> &p) {
         this->setJ(p.getCoordY());
         this->setK(p.getCoordZ());
     }
-
 }
 
 #pragma clang diagnostic pop

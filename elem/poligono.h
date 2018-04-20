@@ -21,6 +21,10 @@
 #endif //T1_CC5502_1_POLIGONO_H
 
 template<class T>
+/**
+ * Clase Polígono, conformada por Puntos.
+ * @tparam T Template
+ */
 class Poligono {
 private:
     Punto<T> *puntos;
@@ -111,7 +115,6 @@ template<class T>
  * @param p Punto
  */
 void Poligono<T>::addPoint(const Punto<T> &p) {
-
     // Si se pasa del límite se aumenta límite de la lista
     if (this->totalp >= this->MAX_POINTS) {
         std::cout << "duplicando" << std::endl;
