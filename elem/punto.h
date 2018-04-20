@@ -118,6 +118,15 @@ public:
 
 template<class T>
 /**
+ * Punto vacío.
+ * @tparam T
+ */
+Punto<T>::Punto() {
+    this->dim = 0;
+}
+
+template<class T>
+/**
  * Crea punto en 2D.
  * @tparam T Template
  * @param x Coordenada x
@@ -505,15 +514,6 @@ template<class T>
 std::ostream &operator<<(std::ostream &out, const Punto<T> &p) {
     out << p.toString();
     return out;
-}
-
-template<class T>
-/**
- * Punto vacío.
- * @tparam T
- */
-Punto<T>::Punto() {
-    this->dim = 0;
 }
 
 #pragma clang diagnostic pop

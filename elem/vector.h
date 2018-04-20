@@ -71,6 +71,9 @@ public:
     // Normaliza el vector
     void normalize();
 
+    // Retorna vector normalizado
+    Vector<T> getNormalized() const;
+
     // Producto cruz entre dos vectores
     Vector<T> cross(const Vector<T> &v) const;
 
@@ -310,16 +313,6 @@ int Vector<T>::getDimension() const {
 
 template<class T>
 /**
- * Operador concatenación con strings.
- * @return
- */
-std::ostream &operator<<(std::ostream &out, const Vector<T> &v) {
-    out << v.toString();
-    return out;
-}
-
-template<class T>
-/**
  * Retorna la norma del vector.
  * @tparam T Template
  * @return
@@ -366,6 +359,33 @@ Vector<T>::Vector(Punto<T> &p) {
         this->setJ(p.getCoordY());
         this->setK(p.getCoordZ());
     }
+}
+
+template<class T>
+/**
+ * Genera un vector normalizado del mismo.
+ * @tparam T Template
+ * @return
+ */
+Vector<T> Vector<T>::getNormalized() const {
+    Vector<T> *n;
+    if (this->dim == 2) {
+        n = new Vector<T>(this->getI(), this->getJ());
+    } else {
+        n = new Vector<T>(this->getI(), this->getJ(), this->getK());
+    }
+    n->normalize();
+    return *n;
+}
+
+template<class T>
+/**
+ * Operador concatenación con strings.
+ * @return
+ */
+std::ostream &operator<<(std::ostream &out, const Vector<T> &v) {
+    out << v.toString();
+    return out;
 }
 
 #pragma clang diagnostic pop

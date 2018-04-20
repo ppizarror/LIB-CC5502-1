@@ -90,6 +90,36 @@ void testVectorDesdePunto() {
 }
 
 /**
+ * Tests de precisión.
+ */
+void testPrecision() {
+    std::cout << "\nTest de precision:" << std::endl;
+
+    // Se crea vector en entero y doble-precisión
+    Vector<int> v_i = Vector<int>(-1109, 420, 360);
+    Vector<int> v_i2 = Vector<int>(1, -1, 1);
+
+    Vector<double> v_d = Vector<double>(-1109, 420, 360);
+    Vector<double> v_d2 = Vector<double>(1, -1, 1);
+
+    // Productos punto y cruz
+    Vector<int> vc_i = v_i.cross(v_i2);
+    Vector<double> vc_d = v_d.cross(v_d2);
+
+    // Retorna la norma
+    std::cout << "\tNorma [Integer]: " << v_i.norm() << std::endl;
+    std::cout << "\tNorma [Double] : " << v_d.norm() << std::endl;
+
+    // Se normalizan
+    std::cout << "\tVector [Integer] Normalizado: " << v_i.getNormalized() << std::endl;
+    std::cout << "\tVector [Double]  Normalizado: " << v_d.getNormalized() << std::endl;
+
+    // Productos cruz
+    std::cout << "\tProducto cruz [Integer]: " << vc_i << std::endl;
+    std::cout << "\tProducto cruz [Double] : " << vc_d << std::endl;
+}
+
+/**
  * Corre los test.
  * @return
  */
@@ -101,6 +131,7 @@ int main() {
     testDot();
     testNormalize();
     testVectorDesdePunto();
+    testPrecision();
 
     // Retorna
     return 0;
