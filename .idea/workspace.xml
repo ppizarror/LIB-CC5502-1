@@ -30,17 +30,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="43" column="10" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -88,7 +78,7 @@
     <packageJsonPaths />
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="250" />
     <option name="y" value="70" />
     <option name="width" value="1465" />
@@ -108,16 +98,6 @@
             <path>
               <item name="T1-CC5502-1" type="b2602c69:ProjectViewProjectNode" />
               <item name="T1-CC5502-1" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="T1-CC5502-1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="T1-CC5502-1" type="462c0819:PsiDirectoryNode" />
-              <item name="elem" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="T1-CC5502-1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="T1-CC5502-1" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="T1-CC5502-1" type="b2602c69:ProjectViewProjectNode" />
@@ -184,12 +164,12 @@
       <workItem from="1524068853369" duration="49000" />
       <workItem from="1524098596839" duration="11431000" />
       <workItem from="1524110076388" duration="7101000" />
-      <workItem from="1524138567757" duration="32576000" />
+      <workItem from="1524138567757" duration="32697000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51508000" />
+    <option name="totallyTimeSpent" value="51629000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -201,16 +181,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
-    <editor active="true" />
+    <frame x="200" y="56" width="1172" height="740" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18968935" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25286344" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286517" />
       <window_info anchor="bottom" id="Messages" order="7" weight="0.3286517" />
       <window_info anchor="bottom" id="CMake" order="7" weight="0.3286517" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3286517" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.36797753" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.43377483" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3286517" />
       <window_info id="Favorites" order="2" side_tool="true" />
