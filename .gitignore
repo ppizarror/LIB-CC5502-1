@@ -31,8 +31,7 @@
 *.out
 *.app
 
-# CLion files
-.idea/*
+# Debug
 cmake-build-debug/
 
 # Accesos directos
