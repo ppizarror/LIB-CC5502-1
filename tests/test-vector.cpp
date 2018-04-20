@@ -46,13 +46,48 @@ void testCross() {
     Vector<float> v2 = Vector<float>(2, -1);
     Vector<float> v3 = v1.cross(v2);
     assert(v3.getI() == 0.0f && v3.getJ() == 0.0f && v3.getK() == -7.0f); // (3,2,0)x(2,-1,0)=(0,0,-7)
-    v3.print();
 
-    // Prueba vectores en 3d
+    // Prueba vectores en 3D
     v1 = Vector<float>(2, 0, 1);
     v2 = Vector<float>(1, -1, 3);
     v3 = v1.cross(v2);
     assert(v3.getI() == 1.0f && v3.getJ() == -5.0f && v3.getK() == -2.0f);
+
+    // Vector 3D con componente 0
+    v1 = Vector<float>(4, 1, 0);
+    v2 = Vector<float>(3, 7, 0);
+    v3 = v1.cross(v2);
+    assert(v3.getI() == 0.0f && v3.getJ() == 0.0f && v3.getK() == 25.0f);
+
+    // Vector 2D
+    v1 = Vector<float>(3, -4);
+    v2 = Vector<float>(2, 6);
+    v3 = v1.cross(v2);
+    std::cout << v1 << " x" << v2 << " = " << v3 << std::endl;
+
+    // Prueba vectores en 3D
+    v1 = Vector<float>(3, -4, 7);
+    v2 = Vector<float>(2, 6, -1);
+    v3 = v1.cross(v2);
+    std::cout << v1 << "x" << v2 << " = " << v3 << std::endl;
+}
+
+/**
+ * Testea vector desde punto.
+ */
+void testVectorDesdePunto() {
+
+    // Crea los puntos
+    Punto<double> p1 = Punto<double>(3, -4, 7);
+    Punto<double> p2 = Punto<double>(2, 6, -1);
+
+    // Crea los vectores
+    Vector<double> v1 = Vector<double>(p1);
+    Vector<double> v2 = Vector<double>(p2);
+    Vector<double> v3 = v1.cross(v2);
+
+    // Imprime en consola
+    assert(v3.getI() == -38.0f && v3.getJ() == 17.0f && v3.getK() == 26.0f);
 }
 
 /**
@@ -60,8 +95,14 @@ void testCross() {
  * @return
  */
 int main() {
+    std::cout << "Testeando vector" << std::endl;
+
+    // Carga los tests
     testCross();
     testDot();
     testNormalize();
+    testVectorDesdePunto();
+
+    // Retorna
     return 0;
 }

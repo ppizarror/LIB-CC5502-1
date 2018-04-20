@@ -12,7 +12,7 @@
 /**
  * Testea el largo de un segmento.
  */
-void testLength() {
+void testLargo() {
 
     // Triángulo 3,4 -> 5
     Punto<float> p1 = Punto<float>(0, 0);
@@ -26,7 +26,7 @@ void testLength() {
 /**
  * Testea las ubicaciones punto/segmento.
  */
-void testIntersection() {
+void testInterseccion() {
 
     // (0,10)      (10,10)      Un triángulo
     //   p5          p2         p1-p2   Segmento
@@ -54,7 +54,12 @@ void testIntersection() {
  * @return
  */
 int main() {
-    testLength();
-    testIntersection();
+    std::cout << "Testeando segmento" << std::endl;
+
+    // Carga los tests
+    testLargo();
+    testInterseccion();
+
+    // Retorna
     return 0;
 }

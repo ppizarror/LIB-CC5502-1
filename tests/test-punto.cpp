@@ -74,7 +74,12 @@ void testFloatCreation() {
  * @return
  */
 int main() {
+    std::cout << "Testeando punto" << std::endl;
+
+    // Carga los tests
     testIntCreation();
     testFloatCreation();
+
+    // Retorna
     return 0;
 }

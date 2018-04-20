@@ -279,9 +279,6 @@ template<class T>
 T Poligono<T>::area2(Punto<T> &a, Punto<T> &b, Punto<T> &c) const {
     T _area = (b.getCoordX() - a.getCoordX()) * (c.getCoordY() - a.getCoordY()) -
               (b.getCoordY() - a.getCoordY()) * (c.getCoordX() - a.getCoordX());
-    std::cout << _area << std::endl;
-
-    // Ve con vectores
     return 0.5 * _area;
 }
 

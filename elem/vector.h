@@ -28,7 +28,7 @@ private:
 public:
 
     // Inicia un vector desde un punto
-    Vector(Punto<T> &p);
+    explicit Vector(Punto<T> &p);
 
     // Inicia un vector con 2 componentes
     Vector(T i, T j);
@@ -100,7 +100,7 @@ template<class T>
 Vector<T>::Vector(T i, T j) {
     this->setI(i);
     this->setJ(j);
-    this->setK(T(0));
+    this->c[2] = 0.0;
     this->dim = 2;
 }
 
@@ -135,11 +135,11 @@ template<class T>
  * @return
  */
 std::string Vector<T>::toString() const {
-    std::string s = "<" + std::to_string(this->getI()) + "," + std::to_string(this->getJ());
+    std::string s = "[" + std::to_string(this->getI()) + "," + std::to_string(this->getJ());
     if (this->dim == 2) {
-        s += ">";
+        s += "]";
     } else {
-        s += "," + std::to_string(this->getK()) + ">";
+        s += "," + std::to_string(this->getK()) + "]";
     }
     return s;
 }
@@ -289,6 +289,7 @@ Vector<T> Vector<T>::dot(const Vector<T> &v) const {
         k = this->getK() * v.getK();
         return Vector<T>(i, j, k);
     } else {
+        assert(false);
         throw std::logic_error("No se puede realizar producto punto entre dos vectores con distinta dimension");
     }
 }
@@ -344,7 +345,24 @@ Vector<T> Vector<T>::abs() const {
 }
 
 template<class T>
+/**
+ * Crea un vector a partir de un punto.
+ * @tparam T Template
+ * @param p Punto
+ */
 Vector<T>::Vector(Punto<T> &p) {
+
+    this->dim = p.getDimension();
+    if (this->dim == 2) { // Inicia vector en 2D
+        this->setI(p.getCoordX());
+        this->setJ(p.getCoordY());
+        this->c[2] = 0.0;
+
+    } else {  // Inicia vector en 3D
+        this->setI(p.getCoordX());
+        this->setJ(p.getCoordY());
+        this->setK(p.getCoordZ());
+    }
 
 }
 

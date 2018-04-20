@@ -126,9 +126,14 @@ void testInPoly() {
  * @return
  */
 int main() {
+    std::cout << "Testeando poligono" << std::endl;
+
+    // Carga los tests
     testCreacion();
     testCCW();
     testArea();
     testInPoly();
+
+    // Retorna
     return 0;
 }

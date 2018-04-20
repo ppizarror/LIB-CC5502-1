@@ -4,7 +4,7 @@ project(T1-CC5502-1)
 set(CMAKE_CXX_STANDARD 11)
 
 # Archivo principal
-add_executable(MAIN main.cpp elem/punto.h elem/vector.h elem/segmento.h)
+add_executable(MAIN main.cpp)
 
 # Testing
 add_executable(TEST-POLIGONO tests/test-poligono.cpp elem/poligono.h)
