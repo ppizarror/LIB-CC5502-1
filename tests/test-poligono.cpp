@@ -1,5 +1,5 @@
 /**
- * Testea puntos
+ * Testea polígonos.
  * @author Pablo Pizarro
  * @date 18/04/2018
  */
@@ -91,12 +91,12 @@ void testInPoly() {
     /**
      * Polígono más complicado.
      */
-    //         (0.5,0.5)
-    //            p4
-    //           /  \
+    // y      (0.5,0.5)
+    // ^          p4
+    // \->x      /  \
     //          /    \           Poligono místico
     //         /  p2  \             > DRINCC PEPSI OR BEPBIS?
-    //        /  /  \  \            > BEPES,BOPIS,BEPPS,BEPIS
+    //        /  /  \  \            > BEPES,BOPIS,BEPPS,BEPIS,BEPSIS
     //       / /      \ \        p2: (0.5,0.25)
     //      //          \\
     //     p1            p3
@@ -114,11 +114,39 @@ void testInPoly() {
     p = Punto<float>(0.4, 0.2);
     assert(!poly.inPoly(p));
 
-    // Deben estar dentro
+    // Deben estar dentro, SAD REACC ONLY
     p = Punto<float>(0.5, 0.26);
     assert(poly.inPoly(p));
     p = Punto<float>(0.1, 0.1);
     assert(poly.inPoly(p));
+}
+
+/**
+ * Testea el perímetro.
+ */
+void testPerimetro() {
+
+    // Cuadrado 1x1
+    Punto<float> plist[] = {Punto<float>(0, 0), Punto<float>(1, 0), Punto<float>(1, 1),
+                            Punto<float>(0, 1)};
+    Poligono<float> poly = Poligono<float>(plist, 4);
+
+    assert(poly.perimetro() == 4.0f);
+
+    // Aumenta cada lado del cuadrado al doble, cuadrado 2x2, perimetro 8
+    for (auto &i : plist) {
+        i *= 2;
+    }
+    poly = Poligono<float>(plist, 4);
+    assert(poly.perimetro() == 8.0f);
+
+    // Vuelve a aumentar el lado al cuadruple, 8x8 perimetro 8x4=32 y área 64
+    for (auto &i : plist) {
+        i *= 4;
+    }
+    poly = Poligono<float>(plist, 4);
+    assert(poly.perimetro() == 32.0f);
+    assert(poly.area() == 64.0f);
 }
 
 /**
@@ -133,6 +161,7 @@ int main() {
     testCCW();
     testArea();
     testInPoly();
+    testPerimetro();
 
     // Retorna
     return 0;

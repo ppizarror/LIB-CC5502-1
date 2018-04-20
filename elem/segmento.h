@@ -28,11 +28,18 @@ private:
     T area2(Punto<T> &c);
 
 public:
+
+    // Constructor vacío
+    Segmento();
+
     // Constructor, recibe dos puntos
     Segmento(Punto<T> &p1, Punto<T> &p2);
 
     // Retorna el tamaño del segmento
     T getLength() const;
+
+    // Retorna el tamaño del segmento
+    T norm() const;
 
     // Indica si un punto está estrictamente a la izquierda del segmento
     bool left(Punto<T> &p);
@@ -70,6 +77,16 @@ template<class T>
  */
 T Segmento<T>::getLength() const {
     return this->a->dist(*this->b);
+}
+
+template<class T>
+/**
+ * Norma = getLength.
+ * @tparam T
+ * @return
+ */
+T Segmento<T>::norm() const {
+    return this->getLength();
 }
 
 template<class T>
@@ -138,6 +155,14 @@ template<class T>
  */
 bool Segmento<T>::rightOn(Punto<T> &p) {
     return this->area2(p) <= 0.0f;
+}
+
+template<class T>
+/**
+ * Constructor vacío
+ * @tparam T Template
+ */
+Segmento<T>::Segmento() {
 }
 
 #pragma clang diagnostic pop

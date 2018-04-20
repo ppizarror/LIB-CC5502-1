@@ -1,5 +1,7 @@
 /**
  * Clase Polígono.
+ * Tiene funciones para calcular el área.
+ *
  * @author Pablo Pizarro
  * @date 19/04/2018
  */
@@ -59,6 +61,9 @@ public:
 
     // Calcula el área del polígono
     T area() const;
+
+    // Calcula el perímetro
+    T perimetro() const;
 
     // Comprueba que un punto está dentro del polígono
     bool inPoly(Punto<T> &p) const;
@@ -156,18 +161,12 @@ template<class T>
  * @return
  */
 bool Poligono<T>::inCCW() const {
-    T sum, t;
+    T sum = 0;
 
     if (this->totalp >= 3) {
         for (int i = 0; i < this->totalp; i++) {
-            if (i < this->totalp - 1) {
-                t = (this->puntos[i + 1].getCoordX() - this->puntos[i].getCoordX()) *
-                    (this->puntos[i].getCoordY() + this->puntos[i + 1].getCoordY());
-            } else {
-                t = (this->puntos[0].getCoordX() - this->puntos[i].getCoordX()) *
-                    (this->puntos[i].getCoordY() + this->puntos[0].getCoordY());
-            }
-            sum += t;
+            sum += (this->puntos[(i + 1) % (this->totalp)].getCoordX() - this->puntos[i].getCoordX()) *
+                   (this->puntos[i].getCoordY() + this->puntos[(i + 1) % (this->totalp)].getCoordY());
         }
 
         // Es CCW si la suma es menor a cero
@@ -233,13 +232,8 @@ T Poligono<T>::area() const {
 
         // Se recorre cada punto para calcular el área
         for (int i = 0; i < this->totalp; i++) {
-            if (i < this->totalp - 1) {
-                _sumarea += area2(p0, this->puntos[i], this->puntos[i + 1]);
-            } else { // Se está en el último punto
-                _sumarea += area2(p0, this->puntos[i], this->puntos[0]);
-            }
+            _sumarea += area2(p0, this->puntos[i], this->puntos[(i + 1) % (this->totalp)]);
         }
-
         return _sumarea;
     } else {
         throw std::logic_error("No se puede calcular el area a un poligono que no este en CCW");
@@ -280,6 +274,24 @@ T Poligono<T>::area2(Punto<T> &a, Punto<T> &b, Punto<T> &c) const {
     T _area = (b.getCoordX() - a.getCoordX()) * (c.getCoordY() - a.getCoordY()) -
               (b.getCoordY() - a.getCoordY()) * (c.getCoordX() - a.getCoordX());
     return 0.5 * _area;
+}
+
+template<class T>
+/**
+ * Calcula el perímetro de un polígono.
+ * @tparam T Template
+ * @return
+ */
+T Poligono<T>::perimetro() const {
+    Segmento<T> s;
+    T sum = 0;
+
+    // Se recorren cada par de puntos creando segmentos
+    for (int i = 0; i < this->totalp; i++) {
+        s = Segmento<T>(this->puntos[i], this->puntos[(i + 1) % (this->totalp)]);
+        sum += s.norm();
+    }
+    return sum;
 }
 
 #pragma clang diagnostic pop

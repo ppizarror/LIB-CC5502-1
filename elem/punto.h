@@ -513,6 +513,7 @@ template<class T>
  * @tparam T
  */
 Punto<T>::Punto() {
+    this->dim = 0;
 }
 
 #pragma clang diagnostic pop

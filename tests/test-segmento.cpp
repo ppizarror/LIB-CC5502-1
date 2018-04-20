@@ -1,5 +1,5 @@
 /**
- * Testea vectores.
+ * Testea segmentos.
  * @author Pablo Pizarro
  * @date 19/04/2018
  */
