@@ -95,9 +95,9 @@ void testInPoly() {
     //            p4
     //           /  \
     //          /    \           Poligono místico
-    //         /  p2  \             > BEPES, BOPIS, BEPPS, BEPIS
-    //        /  /  \  \         p2: (0.5,0.25)
-    //       / /      \ \
+    //         /  p2  \             > DRINCC PEPSI OR BEPBIS?
+    //        /  /  \  \            > BEPES,BOPIS,BEPPS,BEPIS
+    //       / /      \ \        p2: (0.5,0.25)
     //      //          \\
     //     p1            p3
     // (0.0,0.0)      (1.0,0.0)
