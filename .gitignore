@@ -39,3 +39,6 @@ cmake-build-debug/
 
 # Ignora informe
 *informe.*
+
+# Entregas
+entregas/*

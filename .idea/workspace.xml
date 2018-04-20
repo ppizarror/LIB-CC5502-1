@@ -17,6 +17,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1167c18a-b373-49c4-8453-44ee0b23e1c0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -30,47 +31,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="punto.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/elem/punto.h">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="109">
-              <caret line="508" column="17" selection-start-line="508" selection-start-column="17" selection-end-line="508" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test-segmento.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/test-segmento.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1249">
-              <caret line="100" column="114" selection-start-line="100" selection-start-column="45" selection-end-line="100" selection-end-column="114" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="segmento.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/elem/segmento.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1253">
-              <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test-poligono.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/test-poligono.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
-              <caret line="138" column="1" selection-start-line="138" selection-start-column="1" selection-end-line="138" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="poligono.h" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/elem/poligono.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4449">
-              <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+            <state relative-caret-position="182">
+              <caret line="43" column="10" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -95,7 +60,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/punto.cpp" />
         <option value="$PROJECT_DIR$/tests/test_point.cpp" />
         <option value="$PROJECT_DIR$/punto.h" />
@@ -110,6 +74,7 @@
         <option value="$PROJECT_DIR$/tests/test-vector.cpp" />
         <option value="$PROJECT_DIR$/tests/test-segmento.cpp" />
         <option value="$PROJECT_DIR$/tests/test-poligono.cpp" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -219,12 +184,12 @@
       <workItem from="1524068853369" duration="49000" />
       <workItem from="1524098596839" duration="11431000" />
       <workItem from="1524110076388" duration="7101000" />
-      <workItem from="1524138567757" duration="32366000" />
+      <workItem from="1524138567757" duration="32576000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51298000" />
+    <option name="totallyTimeSpent" value="51508000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -364,13 +329,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/punto.cpp" />
     <entry file="file://$PROJECT_DIR$/tests/test_point.cpp" />
     <entry file="file://C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cmath">
@@ -466,7 +424,14 @@
     <entry file="file://$PROJECT_DIR$/elem/poligono.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4449">
-          <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="43" column="10" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
         </state>
       </provider>
     </entry>
