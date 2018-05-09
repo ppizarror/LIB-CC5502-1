@@ -117,7 +117,6 @@ template<class T>
 void Poligono<T>::addPoint(const Punto<T> &p) {
     // Si se pasa del límite se aumenta límite de la lista
     if (this->totalp >= this->MAX_POINTS) {
-        std::cout << "duplicando" << std::endl;
         this->MAX_POINTS *= 10;
 
         // Se crea una nueva lista

@@ -2,11 +2,11 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
-      <config projectName="T1-CC5502-1" targetName="MAIN" />
-      <config projectName="T1-CC5502-1" targetName="TEST-SEGMENTO" />
-      <config projectName="T1-CC5502-1" targetName="TEST-POLIGONO" />
-      <config projectName="T1-CC5502-1" targetName="TEST-PUNTO" />
-      <config projectName="T1-CC5502-1" targetName="TEST-VECTOR" />
+      <config projectName="LIB-CC5502-1" targetName="TEST-POLIGONO" />
+      <config projectName="LIB-CC5502-1" targetName="MAIN" />
+      <config projectName="LIB-CC5502-1" targetName="TEST-PUNTO" />
+      <config projectName="LIB-CC5502-1" targetName="TEST-VECTOR" />
+      <config projectName="LIB-CC5502-1" targetName="TEST-SEGMENTO" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -16,7 +16,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1167c18a-b373-49c4-8453-44ee0b23e1c0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,13 +26,14 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
+            <state relative-caret-position="80">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -85,9 +86,9 @@
     <packageJsonPaths />
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="250" />
-    <option name="y" value="70" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="221" />
+    <option name="y" value="37" />
     <option name="width" value="1465" />
     <option name="height" value="925" />
   </component>
@@ -138,7 +139,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.3) Test segmento">
+  <component name="RunManager" selected="Application.1) Test punto">
     <configuration name="1) Test punto" type="CMakeRunConfiguration" factoryName="Application" folderName="Tests" singleton="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LIB-CC5502-1" TARGET_NAME="TEST-PUNTO" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LIB-CC5502-1" RUN_TARGET_NAME="TEST-PUNTO" />
     <configuration name="2) Test vector" type="CMakeRunConfiguration" factoryName="Application" folderName="Tests" singleton="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LIB-CC5502-1" TARGET_NAME="TEST-VECTOR" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LIB-CC5502-1" RUN_TARGET_NAME="TEST-VECTOR" />
     <configuration name="3) Test segmento" type="CMakeRunConfiguration" factoryName="Application" folderName="Tests" singleton="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LIB-CC5502-1" TARGET_NAME="TEST-SEGMENTO" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LIB-CC5502-1" RUN_TARGET_NAME="TEST-SEGMENTO" />
@@ -168,12 +169,13 @@
       <workItem from="1524098596839" duration="11431000" />
       <workItem from="1524110076388" duration="7101000" />
       <workItem from="1524138567757" duration="32697000" />
-      <workItem from="1524226000078" duration="11000" />
+      <workItem from="1524226000078" duration="116000" />
+      <workItem from="1524668305905" duration="39000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51640000" />
+    <option name="totallyTimeSpent" value="51784000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -185,46 +187,46 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
+    <frame x="177" y="30" width="1172" height="740" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18968935" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25286344" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286517" />
       <window_info anchor="bottom" id="CMake" order="7" weight="0.3286517" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.43377483" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3286517" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.50993377" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3286517" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.3286517" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.3286517" />
     </layout>
     <layout-to-restore>
-      <window_info anchor="bottom" id="CMake" order="11" weight="0.3286517" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24983476" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286517" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.3286517" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.38764045" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.3286517" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.3286517" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.3286517" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.3286517" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="CMake" order="11" weight="0.3286517" />
       <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
   </component>
@@ -240,6 +242,13 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/elem/punto.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5920">
@@ -408,8 +417,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
+        <state relative-caret-position="80">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
