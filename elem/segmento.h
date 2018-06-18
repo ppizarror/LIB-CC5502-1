@@ -26,7 +26,7 @@ private:
     Punto<T> *a;
     Punto<T> *b;
 
-    // Calcula el área entre el segmento y un punto externo
+    // Calcula el doble del área entre el segmento y un punto externo
     T area2(Punto<T> &c);
 
 public:
@@ -57,6 +57,9 @@ public:
 
     // Indica si un punto está a la izquierda o sobre el segmento
     bool rightOn(Punto<T> &p);
+
+    // Imprime el segmento en consola
+    void print() const;
 };
 
 template<class T>
@@ -101,7 +104,7 @@ template<class T>
 T Segmento<T>::area2(Punto<T> &c) {
     T area = (this->b->getCoordX() - this->a->getCoordX()) * (c.getCoordY() - this->a->getCoordY()) -
              (this->b->getCoordY() - this->a->getCoordY()) * (c.getCoordX() - this->a->getCoordX());
-    return 0.5 * area;
+    return area;
 }
 
 template<class T>
@@ -164,7 +167,15 @@ template<class T>
  * Constructor vacío
  * @tparam T Template
  */
-Segmento<T>::Segmento() {
+Segmento<T>::Segmento() {}
+
+template<class T>
+/**
+ * Imprime el segmento en la consola
+ * @tparam T
+ */
+void Segmento<T>::print() const {
+    std::cout << this->a->toString() << "->" << this->b->toString() << std::endl;
 }
 
 #pragma clang diagnostic pop

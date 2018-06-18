@@ -70,6 +70,21 @@ void testFloatCreation() {
 }
 
 /**
+ * Testea igualdad y desigualdad.
+ */
+void testEqNot() {
+    Punto<int> p1 = Punto<int>(1, 1);
+    Punto<int> p2 = Punto<int>(2, 4);
+    Punto<int> p3 = Punto<int>(1, 1);
+
+    // p1 == p3
+    assert(p1 == p3);
+
+    // p1 != p2
+    assert(p1 != p2);
+}
+
+/**
  * Corre los test.
  */
 int main() {
@@ -78,6 +93,7 @@ int main() {
     // Carga los tests
     testIntCreation();
     testFloatCreation();
+    testEqNot();
 
     // Retorna
     return 0;

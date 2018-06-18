@@ -97,6 +97,9 @@ public:
     // Comprobación igualdad
     bool operator==(const Punto<T> &p) const;
 
+    // Comprobación desigualdad
+    bool operator!=(const Punto<T> &p) const;
+
     // Retorna valor absoluto
     Punto<T> abs() const;
 
@@ -512,6 +515,17 @@ template<class T>
 std::ostream &operator<<(std::ostream &out, const Punto<T> &p) {
     out << p.toString();
     return out;
+}
+
+template<class T>
+/**
+ * Operador desigualdad
+ * @tparam T Template
+ * @param p Punto
+ * @return
+ */
+bool Punto<T>::operator!=(const Punto<T> &p) const {
+    return !(*this == p);
 }
 
 #pragma clang diagnostic pop

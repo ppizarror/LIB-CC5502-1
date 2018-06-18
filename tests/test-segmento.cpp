@@ -117,6 +117,34 @@ void testPrecision() {
 }
 
 /**
+ * Test punto izquierda
+ */
+void testIzquierda() {
+    /**
+     * Crea un triangulo
+     *
+     *
+     *           p2
+     *         / |
+     *       /   |
+     *     /     |
+     *   /       |
+     * p1 ------ p3
+     */
+    Punto<int> p1 = Punto<int>(0, 0);
+    Punto<int> p2 = Punto<int>(1, 1);
+    Punto<int> p3 = Punto<int>(1, 0);
+    Segmento<int> s1 = Segmento<int>(p1, p2);
+    Segmento<int> s2 = Segmento<int>(p2, p1);
+
+    // Si se va de s1->s2 p3 está a la derecha
+    assert(s1.right(p3));
+
+    // Si se va de s2->s1 p3 está a la izquierda
+    assert(s2.left(p3));
+}
+
+/**
  * Corre los test.
  */
 int main() {
@@ -126,6 +154,7 @@ int main() {
     testLargo();
     testInterseccion();
     testPrecision();
+    testIzquierda();
 
     // Retorna
     return 0;
