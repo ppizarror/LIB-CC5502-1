@@ -18,8 +18,6 @@
 #include <iostream>
 #include "punto.h"
 
-#endif //T1_CC5502_1_VECTOR_H
-
 template<class T>
 /**
  * Vector, se puede hacer a partir de punto o coordenadas.
@@ -389,3 +387,4 @@ std::ostream &operator<<(std::ostream &out, const Vector<T> &v) {
 }
 
 #pragma clang diagnostic pop
+#endif //T1_CC5502_1_VECTOR_H

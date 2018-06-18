@@ -16,8 +16,6 @@
 
 #include "vector.h"
 
-#endif //T1_CC5502_1_SEGMENTO_H
-
 template<class T>
 /**
  * Clase Segmento, conformado por dos puntos.
@@ -170,3 +168,4 @@ Segmento<T>::Segmento() {
 }
 
 #pragma clang diagnostic pop
+#endif //T1_CC5502_1_SEGMENTO_H

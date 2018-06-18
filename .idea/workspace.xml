@@ -4,6 +4,7 @@
     <generated>
       <config projectName="LIB-CC5502-1" targetName="TEST-POLIGONO" />
       <config projectName="LIB-CC5502-1" targetName="MAIN" />
+      <config projectName="LIB-CC5502-1" targetName="TEST-CERRADURA-CONVEXA" />
       <config projectName="LIB-CC5502-1" targetName="TEST-PUNTO" />
       <config projectName="LIB-CC5502-1" targetName="TEST-VECTOR" />
       <config projectName="LIB-CC5502-1" targetName="TEST-SEGMENTO" />
@@ -17,6 +18,15 @@
   <component name="ChangeListManager">
     <list default="true" id="1167c18a-b373-49c4-8453-44ee0b23e1c0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elem/poligono.h" beforeDir="false" afterPath="$PROJECT_DIR$/elem/poligono.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elem/punto.h" beforeDir="false" afterPath="$PROJECT_DIR$/elem/punto.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elem/segmento.h" beforeDir="false" afterPath="$PROJECT_DIR$/elem/segmento.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elem/vector.h" beforeDir="false" afterPath="$PROJECT_DIR$/elem/vector.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test-poligono.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test-poligono.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test-punto.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test-punto.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test-segmento.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test-segmento.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test-vector.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test-vector.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,11 +39,74 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="60">
+              <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="20">
+              <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test-cerradura-convexa.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test-cerradura-convexa.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cerradura-convexa.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/cerradura-convexa.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="19" column="66" selection-start-line="19" selection-start-column="66" selection-end-line="19" selection-end-column="66" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vector.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/elem/vector.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="261">
+              <caret line="389" column="29" selection-start-line="389" selection-start-column="29" selection-end-line="389" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="segmento.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/elem/segmento.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3260">
+              <caret line="169" column="28" selection-start-line="169" selection-start-column="28" selection-end-line="169" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="punto.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/elem/punto.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="517" column="28" selection-start-line="517" selection-start-column="28" selection-end-line="517" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="poligono.h" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/elem/poligono.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="297" column="31" selection-start-line="297" selection-start-column="31" selection-end-line="297" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -63,16 +136,22 @@
         <option value="$PROJECT_DIR$/punto.h" />
         <option value="$PROJECT_DIR$/vector.h" />
         <option value="$PROJECT_DIR$/main.cpp" />
-        <option value="$PROJECT_DIR$/elem/poligono.h" />
-        <option value="$PROJECT_DIR$/elem/segmento.h" />
-        <option value="$PROJECT_DIR$/tests/test-punto.cpp" />
-        <option value="$PROJECT_DIR$/elem/punto.h" />
-        <option value="$PROJECT_DIR$/elem/vector.h" />
-        <option value="$PROJECT_DIR$/tests/test-vector.cpp" />
-        <option value="$PROJECT_DIR$/tests/test-segmento.cpp" />
-        <option value="$PROJECT_DIR$/tests/test-poligono.cpp" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/utils/convex-hull.h" />
+        <option value="$PROJECT_DIR$/utils/convex-hull.cpp" />
+        <option value="$PROJECT_DIR$/tests/test-convex-hull.cpp" />
+        <option value="$PROJECT_DIR$/tests/test-cerradura-convexa.cpp" />
+        <option value="$PROJECT_DIR$/tests/test-poligono.cpp" />
+        <option value="$PROJECT_DIR$/tests/test-punto.cpp" />
+        <option value="$PROJECT_DIR$/tests/test-segmento.cpp" />
+        <option value="$PROJECT_DIR$/tests/test-vector.cpp" />
+        <option value="$PROJECT_DIR$/utils/cerradura-convexa.cpp" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/utils/cerradura-convexa.h" />
+        <option value="$PROJECT_DIR$/elem/vector.h" />
+        <option value="$PROJECT_DIR$/elem/segmento.h" />
+        <option value="$PROJECT_DIR$/elem/punto.h" />
+        <option value="$PROJECT_DIR$/elem/poligono.h" />
       </list>
     </option>
   </component>
@@ -86,9 +165,9 @@
     <packageJsonPaths />
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
-  <component name="ProjectFrameBounds">
-    <option name="x" value="221" />
-    <option name="y" value="37" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="220" />
+    <option name="y" value="36" />
     <option name="width" value="1465" />
     <option name="height" value="925" />
   </component>
@@ -100,7 +179,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -108,10 +186,26 @@
               <item name="LIB-CC5502-1" type="b2602c69:ProjectViewProjectNode" />
               <item name="LIB-CC5502-1" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="LIB-CC5502-1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LIB-CC5502-1" type="462c0819:PsiDirectoryNode" />
+              <item name="elem" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LIB-CC5502-1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LIB-CC5502-1" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LIB-CC5502-1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LIB-CC5502-1" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -139,18 +233,18 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.1) Test punto">
+  <component name="RunManager" selected="Application.5) Test cerradura convexa">
     <configuration name="1) Test punto" type="CMakeRunConfiguration" factoryName="Application" folderName="Tests" singleton="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LIB-CC5502-1" TARGET_NAME="TEST-PUNTO" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LIB-CC5502-1" RUN_TARGET_NAME="TEST-PUNTO" />
     <configuration name="2) Test vector" type="CMakeRunConfiguration" factoryName="Application" folderName="Tests" singleton="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LIB-CC5502-1" TARGET_NAME="TEST-VECTOR" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LIB-CC5502-1" RUN_TARGET_NAME="TEST-VECTOR" />
     <configuration name="3) Test segmento" type="CMakeRunConfiguration" factoryName="Application" folderName="Tests" singleton="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LIB-CC5502-1" TARGET_NAME="TEST-SEGMENTO" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LIB-CC5502-1" RUN_TARGET_NAME="TEST-SEGMENTO" />
     <configuration name="4) Test polígono" type="CMakeRunConfiguration" factoryName="Application" folderName="Tests" singleton="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LIB-CC5502-1" TARGET_NAME="TEST-POLIGONO" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LIB-CC5502-1" RUN_TARGET_NAME="TEST-POLIGONO" />
-    <configuration name="Main" type="CMakeRunConfiguration" factoryName="Application" singleton="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LIB-CC5502-1" TARGET_NAME="MAIN" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LIB-CC5502-1" RUN_TARGET_NAME="MAIN" />
+    <configuration name="5) Test cerradura convexa" type="CMakeRunConfiguration" factoryName="Application" folderName="Tests" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LIB-CC5502-1" TARGET_NAME="TEST-CERRADURA-CONVEXA" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LIB-CC5502-1" RUN_TARGET_NAME="TEST-CERRADURA-CONVEXA" />
     <list>
       <item itemvalue="Application.1) Test punto" />
       <item itemvalue="Application.2) Test vector" />
       <item itemvalue="Application.3) Test segmento" />
       <item itemvalue="Application.4) Test polígono" />
-      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.5) Test cerradura convexa" />
     </list>
   </component>
   <component name="SvnConfiguration">
@@ -171,11 +265,12 @@
       <workItem from="1524138567757" duration="32697000" />
       <workItem from="1524226000078" duration="116000" />
       <workItem from="1524668305905" duration="39000" />
+      <workItem from="1529290319443" duration="3133000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51784000" />
+    <option name="totallyTimeSpent" value="54917000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -187,15 +282,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="177" y="30" width="1172" height="740" extended-state="0" />
+    <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25286344" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18968935" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286517" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.3286517" />
       <window_info anchor="bottom" id="CMake" order="7" weight="0.3286517" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3286517" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.50993377" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2752809" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3286517" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -207,26 +303,25 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.3286517" />
     </layout>
     <layout-to-restore>
+      <window_info anchor="bottom" id="CMake" order="11" weight="0.3286517" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24983476" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286517" />
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.3286517" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.38764045" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.3286517" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.3286517" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="CMake" order="11" weight="0.3286517" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.3286517" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.3286517" />
       <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
   </component>
@@ -242,6 +337,13 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
@@ -345,69 +447,6 @@
         <state relative-caret-position="-5964" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test-vector.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="95" column="53" selection-start-line="95" selection-start-column="4" selection-end-line="95" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/elem/vector.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="364" column="3" lean-forward="true" selection-start-line="364" selection-start-column="3" selection-end-line="364" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test-punto.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="39" column="18" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/elem/punto.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="508" column="17" selection-start-line="508" selection-start-column="17" selection-end-line="508" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test-segmento.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1249">
-          <caret line="100" column="114" selection-start-line="100" selection-start-column="45" selection-end-line="100" selection-end-column="114" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/elem/segmento.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1253">
-          <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test-poligono.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="138" column="1" selection-start-line="138" selection-start-column="1" selection-end-line="138" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/elem/poligono.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4449">
-          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
@@ -415,10 +454,94 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test-segmento.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="119" column="18" selection-start-line="119" selection-start-column="18" selection-end-line="119" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test-punto.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="72" column="18" selection-start-line="72" selection-start-column="18" selection-end-line="72" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/cerradura-convexa.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" selection-start-line="10" selection-end-line="13" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="60">
+          <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test-vector.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="122" column="18" selection-start-line="122" selection-start-column="18" selection-end-line="122" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test-poligono.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="141" column="18" selection-start-line="141" selection-start-column="18" selection-end-line="141" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test-cerradura-convexa.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/cerradura-convexa.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="19" column="66" selection-start-line="19" selection-start-column="66" selection-end-line="19" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/elem/vector.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="389" column="29" selection-start-line="389" selection-start-column="29" selection-end-line="389" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/elem/segmento.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3260">
+          <caret line="169" column="28" selection-start-line="169" selection-start-column="28" selection-end-line="169" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/elem/punto.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="517" column="28" selection-start-line="517" selection-start-column="28" selection-end-line="517" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/elem/poligono.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="297" column="31" selection-start-line="297" selection-start-column="31" selection-end-line="297" selection-end-column="31" />
         </state>
       </provider>
     </entry>

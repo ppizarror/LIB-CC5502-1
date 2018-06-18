@@ -71,7 +71,6 @@ void testFloatCreation() {
 
 /**
  * Corre los test.
- * @return
  */
 int main() {
     std::cout << "Testeando punto" << std::endl;

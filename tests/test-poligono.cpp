@@ -140,7 +140,6 @@ void testPerimetro() {
 
 /**
  * Corre los test.
- * @return
  */
 int main() {
     std::cout << "Testeando poligono" << std::endl;

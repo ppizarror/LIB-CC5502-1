@@ -118,7 +118,6 @@ void testPrecision() {
 
 /**
  * Corre los test.
- * @return
  */
 int main() {
     std::cout << "Testeando segmento" << std::endl;

@@ -121,7 +121,6 @@ void testPrecision() {
 
 /**
  * Corre los test.
- * @return
  */
 int main() {
     std::cout << "Testeando vector" << std::endl;

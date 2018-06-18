@@ -17,8 +17,6 @@
 #include <ctgmath>
 #include <stdexcept>
 
-#endif //T1_CC5502_1_PUNTO_H
-
 template<class T>
 /**
  * Clase Punto en 2D o 3D.
@@ -517,3 +515,4 @@ std::ostream &operator<<(std::ostream &out, const Punto<T> &p) {
 }
 
 #pragma clang diagnostic pop
+#endif //T1_CC5502_1_PUNTO_H

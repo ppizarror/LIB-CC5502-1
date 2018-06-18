@@ -18,8 +18,6 @@
 #include "segmento.h"
 #include <cmath>
 
-#endif //T1_CC5502_1_POLIGONO_H
-
 template<class T>
 /**
  * Clase Polígono, conformada por Puntos.
@@ -297,3 +295,4 @@ T Poligono<T>::perimetro() const {
 }
 
 #pragma clang diagnostic pop
+#endif //T1_CC5502_1_POLIGONO_H
