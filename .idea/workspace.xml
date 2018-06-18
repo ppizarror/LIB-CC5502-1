@@ -17,13 +17,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1167c18a-b373-49c4-8453-44ee0b23e1c0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elem/punto.h" beforeDir="false" afterPath="$PROJECT_DIR$/elem/punto.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elem/segmento.h" beforeDir="false" afterPath="$PROJECT_DIR$/elem/segmento.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test-cerradura-convexa.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test-cerradura-convexa.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test-punto.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test-punto.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test-segmento.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test-segmento.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/cerradura-convexa.h" beforeDir="false" afterPath="$PROJECT_DIR$/utils/cerradura-convexa.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -40,26 +34,26 @@
       <file leaf-file-name="test-cerradura-convexa.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/test-cerradura-convexa.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="704">
-              <caret line="62" column="7" selection-start-line="62" selection-start-column="7" selection-end-line="62" selection-end-column="7" />
+            <state relative-caret-position="-1296">
+              <caret line="25" column="1" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cerradura-convexa.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/cerradura-convexa.h">
+      <file leaf-file-name="test-segmento.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test-segmento.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="53" column="73" selection-start-line="53" selection-start-column="73" selection-end-line="53" selection-end-column="73" />
+            <state relative-caret-position="946">
+              <caret line="143" column="24" selection-start-line="143" selection-start-column="24" selection-end-line="143" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="segmento.h" pinned="false" current-in-tab="true">
+      <file leaf-file-name="segmento.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/elem/segmento.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-2420">
-              <caret line="29" column="9" lean-forward="true" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
+              <caret line="29" column="9" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -78,6 +72,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="156">
               <caret line="145" column="25" selection-start-line="145" selection-start-column="25" selection-end-line="145" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cerradura-convexa.h" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/utils/cerradura-convexa.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="720">
+              <caret line="62" column="21" selection-start-line="62" selection-start-column="21" selection-end-line="62" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -119,10 +122,10 @@
         <option value="$PROJECT_DIR$/tests/test-punto.cpp" />
         <option value="$PROJECT_DIR$/elem/punto.h" />
         <option value="$PROJECT_DIR$/elem/poligono.h" />
-        <option value="$PROJECT_DIR$/utils/cerradura-convexa.h" />
-        <option value="$PROJECT_DIR$/tests/test-cerradura-convexa.cpp" />
         <option value="$PROJECT_DIR$/elem/segmento.h" />
         <option value="$PROJECT_DIR$/tests/test-segmento.cpp" />
+        <option value="$PROJECT_DIR$/utils/cerradura-convexa.h" />
+        <option value="$PROJECT_DIR$/tests/test-cerradura-convexa.cpp" />
       </list>
     </option>
   </component>
@@ -204,7 +207,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.3) Test segmento">
+  <component name="RunManager" selected="Application.5) Test cerradura convexa">
     <configuration name="1) Test punto" type="CMakeRunConfiguration" factoryName="Application" folderName="Tests" singleton="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LIB-CC5502-1" TARGET_NAME="TEST-PUNTO" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LIB-CC5502-1" RUN_TARGET_NAME="TEST-PUNTO" />
     <configuration name="2) Test vector" type="CMakeRunConfiguration" factoryName="Application" folderName="Tests" singleton="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LIB-CC5502-1" TARGET_NAME="TEST-VECTOR" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LIB-CC5502-1" RUN_TARGET_NAME="TEST-VECTOR" />
     <configuration name="3) Test segmento" type="CMakeRunConfiguration" factoryName="Application" folderName="Tests" singleton="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LIB-CC5502-1" TARGET_NAME="TEST-SEGMENTO" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LIB-CC5502-1" RUN_TARGET_NAME="TEST-SEGMENTO" />
@@ -236,12 +239,12 @@
       <workItem from="1524138567757" duration="32697000" />
       <workItem from="1524226000078" duration="116000" />
       <workItem from="1524668305905" duration="39000" />
-      <workItem from="1529290319443" duration="12323000" />
+      <workItem from="1529290319443" duration="13521000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64107000" />
+    <option name="totallyTimeSpent" value="65305000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -481,13 +484,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test-cerradura-convexa.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="704">
-          <caret line="62" column="7" selection-start-line="62" selection-start-column="7" selection-end-line="62" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/elem/punto.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-124">
@@ -495,24 +491,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/cerradura-convexa.h">
+    <entry file="file://$PROJECT_DIR$/elem/segmento.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="53" column="73" selection-start-line="53" selection-start-column="73" selection-end-line="53" selection-end-column="73" />
+        <state relative-caret-position="-2420">
+          <caret line="29" column="9" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/test-segmento.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
+        <state relative-caret-position="946">
           <caret line="143" column="24" selection-start-line="143" selection-start-column="24" selection-end-line="143" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/elem/segmento.h">
+    <entry file="file://$PROJECT_DIR$/tests/test-cerradura-convexa.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2420">
-          <caret line="29" column="9" lean-forward="true" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
+        <state relative-caret-position="-1296">
+          <caret line="25" column="1" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/cerradura-convexa.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="62" column="21" selection-start-line="62" selection-start-column="21" selection-end-line="62" selection-end-column="21" />
         </state>
       </provider>
     </entry>

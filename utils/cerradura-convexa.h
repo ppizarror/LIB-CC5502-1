@@ -51,19 +51,16 @@ std::pair<Poligono<T>, int> giftWrapping(Punto<T> *cloud, int cloud_size) {
     int i = 0;
     Punto<T> endpoint; // Punto final del segmento que nace en P[i]
     do {
-        std::cout << "Agregando " << pointOnHull.toString() << std::endl;
         P[i] = pointOnHull; // Añade el punto que se sabe que pertenece a CH
         endpoint = cloud[0];
+        Segmento<T> arco = Segmento<T>(P[i], endpoint);
         for (j = 1; j < cloud_size; j++) {
-            Segmento<T> arco = Segmento<T>(P[i], endpoint);
-            arco.print();
-            cloud[j].print();
             if (endpoint == pointOnHull or arco.left(cloud[j])) {
-                std::cout << cloud[j].toString() << "left" << std::endl;
+                arco = Segmento<T>(P[i], endpoint);
                 endpoint = cloud[j];
             }
-            delete &arco;
         }
+        delete &arco;
         i++;
         pointOnHull = endpoint;
     } while (endpoint != P[0]);
