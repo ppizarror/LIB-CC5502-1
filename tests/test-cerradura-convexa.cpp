@@ -38,9 +38,8 @@ void testBasico() {
 
     // [Graham scan]
     std::pair<Poligono<float>, int> cerraduraGS = grahamScan(plist, 5);
-    cerraduraGS.first.print();
     std::cout << cerraduraGS.second << std::endl;
-    // assert(cerraduraGS.second == 5);
+    assert(cerraduraGS.second == 5);
 }
 
 /**
@@ -57,9 +56,9 @@ void testTriangulo() {
 
     // [Graham scan]
     std::pair<Poligono<int>, int> cerraduraGS = grahamScan(triangulo, 8);
-    // cerraduraGS.first.print();
+    cerraduraGS.first.print();
     std::cout << cerraduraGS.second << std::endl;
-    // assert(cerraduraGS.second == 5);
+    assert(cerraduraGS.second == 3);
 }
 
 /**
@@ -71,12 +70,13 @@ void testDuplicados() {
 
     // [GiftWrapping]
     std::pair<Poligono<int>, int> cerraduraGW = giftWrapping(plist, 6);
+    cerraduraGW.first.print();
     assert(cerraduraGW.second == 3);
 
     // [Graham scan]
     std::pair<Poligono<int>, int> cerraduraGS = grahamScan(plist, 6);
     cerraduraGS.first.print();
-    // assert(cerraduraGS.second == 3);
+    assert(cerraduraGS.second == 3);
 }
 
 /**
@@ -163,9 +163,9 @@ int main() {
 
     // Carga los tests
     // testBasico();
-    // testDuplicados();
-    testTriangulo();
-    // testCuadradoChico();
+    testDuplicados();
+    // testTriangulo();
+    testCuadradoChico();
     // testCuadradoMediano();
     // testRectangulo();
 

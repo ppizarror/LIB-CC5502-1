@@ -34,8 +34,8 @@
       <file leaf-file-name="test-cerradura-convexa.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/test-cerradura-convexa.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="59" column="7" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
+            <state relative-caret-position="-17">
+              <caret line="152" column="23" selection-start-line="152" selection-start-column="23" selection-end-line="152" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -43,8 +43,8 @@
       <file leaf-file-name="cerradura-convexa.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/utils/cerradura-convexa.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="209" column="48" lean-forward="true" selection-start-line="209" selection-start-column="48" selection-end-line="209" selection-end-column="48" />
+            <state relative-caret-position="281">
+              <caret line="398" lean-forward="true" selection-start-line="385" selection-start-column="4" selection-end-line="398" />
             </state>
           </provider>
         </entry>
@@ -70,7 +70,7 @@
       <file leaf-file-name="punto.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/elem/punto.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6497">
+            <state relative-caret-position="3077">
               <caret line="385" column="17" selection-start-line="385" selection-start-column="17" selection-end-line="385" selection-end-column="17" />
             </state>
           </provider>
@@ -231,12 +231,12 @@
       <workItem from="1524138567757" duration="32697000" />
       <workItem from="1524226000078" duration="116000" />
       <workItem from="1524668305905" duration="39000" />
-      <workItem from="1529290319443" duration="50156000" />
+      <workItem from="1529290319443" duration="51355000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101940000" />
+    <option name="totallyTimeSpent" value="103139000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -261,7 +261,7 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3286517" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.5758427" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.36516854" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -490,13 +490,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/elem/punto.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6497">
-          <caret line="385" column="17" selection-start-line="385" selection-start-column="17" selection-end-line="385" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/elem/poligono.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
@@ -504,17 +497,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/elem/punto.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3077">
+          <caret line="385" column="17" selection-start-line="385" selection-start-column="17" selection-end-line="385" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test-cerradura-convexa.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="59" column="7" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
+        <state relative-caret-position="-17">
+          <caret line="152" column="23" selection-start-line="152" selection-start-column="23" selection-end-line="152" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/cerradura-convexa.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="209" column="48" lean-forward="true" selection-start-line="209" selection-start-column="48" selection-end-line="209" selection-end-column="48" />
+        <state relative-caret-position="281">
+          <caret line="398" lean-forward="true" selection-start-line="385" selection-start-column="4" selection-end-line="398" />
         </state>
       </provider>
     </entry>

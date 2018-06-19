@@ -355,26 +355,33 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
     double lang = 0;
     double mxdist = 0;
     int maxpos = -1;
+    Punto<T> *final_cloud = new Punto<T>[cloud_size];
+    final_cloud[0] = new_cloud[0];
     for (int i = 1; i < cloud_size; i++) {
-        if (lang != new_cloud[0].cos(new_cloud[i])) { // Si el ángulo cambia se actualiza la distancia
+        if (fabs(lang - new_cloud[0].cos(new_cloud[i])) > 1e-10) { // Si el ángulo cambia se actualiza la distancia
             if (maxpos != -1) {
+                final_cloud[vp] = new_cloud[maxpos];
                 vp++;
             }
             mxdist = new_cloud[0].dist(new_cloud[i]);
             lang = new_cloud[0].cos(new_cloud[i]);
-            std::cout << "angulo cambia " << lang << std::endl;
             maxpos = i;
             if (i == cloud_size - 1) {
+                final_cloud[vp] = new_cloud[i];
                 vp++;
             }
         } else {
             if (new_cloud[0].dist(new_cloud[i]) > mxdist) {
                 maxpos = i;
-                std::cout << "bigg" << std::endl;
+            }
+            if (i == cloud_size - 1 && maxpos != -1) {
+                final_cloud[vp] = new_cloud[i];
+                vp++;
             }
         }
-        std::cout << vp << std::endl;
     }
+    _imprimeListaPuntos(final_cloud, vp);
+    std::cout << vp << std::endl;
 
     /**
      * Se imprime lista de angulos
@@ -394,24 +401,24 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
      * Genera la cerradura
      */
     std::stack<Punto<T>> hull;
-    hull.push(new_cloud[0]);
-    hull.push(new_cloud[1]);
-    hull.push(new_cloud[2]);
-    for (int i = 3; i < cloud_size; i++) {
-        while (nextToTop(hull).ccw(hull.top(), new_cloud[i]) <= 0) {
-            std::cout << "vale kk" << hull.top() << std::endl;
+    hull.push(final_cloud[0]);
+    hull.push(final_cloud[1]);
+    hull.push(final_cloud[2]);
+    for (int i = 3; i < vp; i++) {
+        while (nextToTop(hull).ccw(hull.top(), final_cloud[i]) <= 0) {
             hull.pop();
         }
-        hull.push(new_cloud[i]);
+        hull.push(final_cloud[i]);
     }
 
     /**
      * Crea la lista de la cerradura
      */
     int total_cerradura = hull.size();
+    Punto<T> lrest = Punto<T>(lx, ly);
     Punto<T> *P = new Punto<T>[total_cerradura];
     for (int i = total_cerradura - 1; i >= 0; i--) {
-        P[i] = hull.top();
+        P[i] = hull.top() + lrest;
         hull.pop();
     }
 
@@ -423,6 +430,7 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
     /**
      * Elimina variables
      */
+    delete[] final_cloud;
     delete[] new_cloud;
 
     /**
