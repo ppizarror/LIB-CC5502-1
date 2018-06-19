@@ -580,7 +580,7 @@ template<class T>
 double Punto<T>::cos(Punto<T> &a) {
     if (this->dist(a) == 0)
         return 0;
-    return acos((a.getCoordX() - this->getCoordX()) / (this->dist(a)));
+    return acos(((double) (a.getCoordX() - this->getCoordX())) / (this->dist(a)));
 }
 
 #pragma clang diagnostic pop

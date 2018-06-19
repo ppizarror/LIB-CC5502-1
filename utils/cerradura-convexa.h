@@ -17,6 +17,33 @@
 
 template<class T>
 /**
+ * Función utilitaria que imprime la lista de puntos
+ * @tparam T - Template
+ * @param P - Lista de puntos
+ * @param n - Largo de la lista
+ */
+static void _imprimeListaPuntos(Punto<T> *P, int n) {
+    Poligono<T> poly = Poligono<T>(P, n);
+    poly.print();
+}
+
+template<class T>
+/**
+ * Intercambia dos elementos en una lista de puntos
+ * @tparam T Template
+ * @param arr Arreglo
+ * @param i
+ * @param j
+ */
+void swap(Punto<T> *arr, int i, int j) {
+    if (i == j) return;
+    Punto<T> t = arr[i].clonar();
+    arr[i] = arr[j];
+    arr[j] = t;
+}
+
+template<class T>
+/**
  * Algoritmo de Gift Wrapping
  * @tparam T - Tipo de datos
  * @param cloud - Nube de puntos a realizar la cerradura convexa
@@ -34,18 +61,33 @@ std::pair<Poligono<T>, int> giftWrapping(Punto<T> *cloud, int cloud_size) {
     }
 
     /**
-     * Busca el punto de más a la izquierda
+     * Busca el punto de más a la izquierda y más abajo
      */
     Punto<T> pointOnHull;
     int j = 0; // Almacena el índice del punto más hacia la izquierda
     T min_x = cloud[0].getCoordX();
+    T min_y = cloud[0].getCoordY();
     for (int i = 1; i < cloud_size; i++) {
-        if (cloud[i].getCoordX() < min_x) { // Se encontró un punto más hacia la izquierda
+        // Se encontró un punto más hacia la izquierda y abajo
+        if ((cloud[i].getCoordX() < min_x) or (min_x == cloud[i].getCoordX() && cloud[i].getCoordY() < min_y)) {
             j = i; // Actualiza el índice
             min_x = cloud[i].getCoordX();
+            min_y = cloud[i].getCoordY();
         }
     }
     pointOnHull = cloud[j]; // Define el punto de más hacia la izquierda
+
+    /**
+     * Se crea un nuevo arreglo de puntos todos centrados en el plano +X+Y
+     */
+    T lx = pointOnHull.getCoordX();
+    T ly = pointOnHull.getCoordY();
+    Punto<T> *new_cloud = new Punto<T>[cloud_size];
+    for (int i = 0; i < cloud_size; i++) {
+        new_cloud[i] = Punto<T>(cloud[i].getCoordX() - lx, cloud[i].getCoordY() - ly);
+    }
+    swap(new_cloud, j, 0);
+    pointOnHull = new_cloud[0];
 
     /**
      * Crea el arreglo de puntos en la cerradura convexa P, ya que en un principio
@@ -62,18 +104,35 @@ std::pair<Poligono<T>, int> giftWrapping(Punto<T> *cloud, int cloud_size) {
     Punto<T> endpoint; // Punto final del segmento que nace en P[i]
     do {
         P[i] = pointOnHull; // Añade el punto que se sabe que pertenece a CH
-        endpoint = cloud[0];
+        endpoint = new_cloud[0];
         Segmento<T> arco = Segmento<T>(P[i], endpoint);
+        double lastdist = -1, newdist;
         for (j = 1; j < cloud_size; j++) {
-            if (endpoint == pointOnHull or arco.left(cloud[j])) {
+            if (endpoint == pointOnHull or arco.left(new_cloud[j])) {
                 arco = Segmento<T>(P[i], endpoint);
-                endpoint = cloud[j];
+                endpoint = new_cloud[j];
+                lastdist = P[i].dist(new_cloud[j]);
+            } else if (arco.on(new_cloud[j]) && lastdist != -1) { // Punto colineal
+                newdist = P[i].dist(new_cloud[j]);
+                if (newdist > lastdist) {
+                    arco = Segmento<T>(P[i], endpoint);
+                    endpoint = new_cloud[j];
+                    lastdist = P[i].dist(new_cloud[j]);
+                }
             }
         }
         delete &arco;
         i++;
         pointOnHull = endpoint;
     } while (endpoint != P[0]);
+
+    /**
+     * Suma el punto inicial restado a P
+     */
+    Punto<T> lrest = Punto<T>(lx, ly);
+    for (j = 0; j < i; j++) {
+        P[j] += lrest;
+    }
 
     /**
      * Crea el polígono
@@ -83,7 +142,8 @@ std::pair<Poligono<T>, int> giftWrapping(Punto<T> *cloud, int cloud_size) {
     /**
      * Borra variables
      */
-    delete &P;
+    delete[] P;
+    delete[] new_cloud;
 
     /**
      * Retorna el polígono de la cerradura y el total de puntos
@@ -91,6 +151,41 @@ std::pair<Poligono<T>, int> giftWrapping(Punto<T> *cloud, int cloud_size) {
     return std::make_pair(*cerradura, i);
 
 }
+
+/**
+ * Puntero al pivote
+ */
+const void *pv;
+
+template<class T>
+class QuickSort {
+public:
+    bool comp(Punto<T> &a, Punto<T> &b) {
+        Punto<T> *p = (Punto<T> *) pv;
+        return p->cos(a) > p->cos(b);
+    }
+
+    int partition(Punto<T> *arr, int low, int high) {
+        Punto<T> pivot = arr[high];
+        int i = (low - 1);
+        for (int j = low; j <= high - 1; j++) {
+            if (comp(arr[j], pivot)) {
+                i++;
+                swap(arr, i, j);
+            }
+        }
+        swap(arr, i + 1, high);
+        return (i + 1);
+    }
+
+    void quicksort(Punto<T> *arr, int low, int high) {
+        if (low < high) {
+            int pi = partition(arr, low, high);
+            quicksort(arr, low, pi - 1);
+            quicksort(arr, pi + 1, high);
+        }
+    }
+};
 
 template<class T>
 /**
@@ -100,102 +195,12 @@ template<class T>
  * @return
  */
 Punto<T> nextToTop(std::stack<Punto<T>> &S) {
-    if (S.size() == 1) {
-        return S.top();
-    }
     Punto<T> p = S.top();
     S.pop();
     Punto<T> res = S.top();
     S.push(p);
     return res;
 }
-
-/**
- * Puntero al pivote
- */
-const void *pv;
-
-template<class T>
-/**
- * Ordena dos puntos de acuerdo a su ángulo con el pivote
- * @param a Punto
- * @param b Punto
- * @return
- */
-bool ordenarAngulo(Punto<T> &a, Punto<T> &b) {
-    Punto<T> *p = (Punto<T> *) pv;
-    a.print();
-    b.print();
-    std::cout << p->cos(a) << std::endl;
-    std::cout << p->cos(b) << std::endl;
-    std::cout << (p->cos(a) < p->cos(b)) << std::endl;
-    std::cout << "....." << std::endl;
-    return p->cos(a) < p->cos(b);
-}
-
-template<class T>
-void _imprimeListaPuntos(Punto<T> *P, int n) {
-    Poligono<T> poly = Poligono<T>(P, n);
-    poly.print();
-}
-
-template<class T>
-class QuickSort {
-public:
-    // Función que compara dos puntos con el pivote
-    bool comparar(Punto<T> &a, Punto<T> &b) {
-        Punto<T> *p = (Punto<T> *) pv;
-        return p->cos(a) < p->cos(b);
-    }
-
-    // Función para dividir el array y hacer los intercambios
-    int dividir(Punto<T> *array, int start, int end) {
-        int left;
-        int right;
-        Punto<T> pivot;
-        Punto<T> temp;
-
-        pivot = array[start];
-        left = start;
-        right = end;
-
-        // Mientras no se cruzen los índices
-        while (left < right) {
-            while (comparar(array[right], pivot)) {
-                right--;
-            }
-
-            while ((left < right) && (!comparar(array[right], pivot))) {
-                left++;
-            }
-
-            // Si todavía no se cruzan los indices seguimos intercambiando
-            if (left < right) {
-                temp = array[left];
-                array[left] = array[right];
-                array[right] = temp;
-            }
-        }
-
-        // Los índices ya se han cruzado, ponemos el pivot en el lugar que le corresponde
-        temp = array[right];
-        array[right] = array[start];
-        array[start] = temp;
-
-        // La nueva posición del pivot
-        return right;
-    }
-
-    // Función recursiva para hacer el ordenamiento
-    void quicksort(Punto<T> *array, int start, int end) {
-        int pivot;
-        if (start < end) {
-            pivot = dividir(array, start, end);
-            quicksort(array, start, pivot - 1);
-            quicksort(array, pivot + 1, end);
-        }
-    }
-};
 
 template<class T>
 /**
@@ -229,23 +234,22 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
             min = i;
         }
     }
+    Punto<T> p = cloud[min];
+    T lx = p.getCoordX();
+    T ly = p.getCoordY();
 
     /**
-     * Se crea una nueva lista de puntos para evitar modificar la original
+     * Se crea una nueva lista de puntos para evitar modificar la original, se pasa al plano +X+Y
      */
     Punto<T> *new_cloud = new Punto<T>[cloud_size];
     for (int i = 0; i < cloud_size; i++) {
-        new_cloud[i] = Punto<T>(cloud[i].getCoordX(), cloud[i].getCoordY());
+        new_cloud[i] = Punto<T>(cloud[i].getCoordX() - lx, cloud[i].getCoordY() - ly);
     }
 
     /**
      * Intercambio el menor con el primero en la lista
      */
-    if (min != 0) {
-        Punto<T> temp = new_cloud[0].clonar();
-        new_cloud[0] = new_cloud[min];
-        new_cloud[min] = temp;
-    }
+    swap(new_cloud, 0, min);
 
     /**
      * Se genera el pivote
@@ -262,19 +266,75 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
     QuickSort<T> qsort = QuickSort<T>();
     _imprimeListaPuntos(new_cloud, cloud_size);
     qsort.quicksort(new_cloud, 1, cloud_size - 1);
-    // std::sort(new_cloud + 1, new_cloud + cloud_size, ordenarAngulo<T>);
+    std::cout << "orden" << std::endl;
     _imprimeListaPuntos(new_cloud, cloud_size);
 
     /**
-     * Crea una nueva lista con la cerradura
+     * Si hay dos puntos con igual ángulo se deja aquel con mayor distancia
      */
-     Punto<T> *hull
+    int vp = 1; // Indica cuántos puntos válidos existen
+    double lang = 0;
+    double mxdist = 0;
+    int maxpos = -1;
+    for (int i = 1; i < cloud_size; i++) {
+        if (lang != new_cloud[0].cos(new_cloud[i])) { // Si el ángulo cambia se actualiza la distancia
+            if (maxpos != -1) {
+                vp++;
+            }
+            mxdist = new_cloud[0].dist(new_cloud[i]);
+            lang = new_cloud[0].cos(new_cloud[i]);
+            std::cout << "angulo cambia " << lang << std::endl;
+            maxpos = i;
+            if (i == cloud_size - 1) {
+                vp++;
+            }
+        } else {
+            if (new_cloud[0].dist(new_cloud[i]) > mxdist) {
+                maxpos = i;
+                std::cout << "bigg" << std::endl;
+            }
+        }
+        std::cout << vp << std::endl;
+    }
 
     /**
-     * Crea el polígono cerradura convexa
+     * Se imprime lista de angulos
      */
-    int total_cerradura = 0;
+    std::cout << "Angulos: ";
+    for (int i = 1; i < cloud_size; i++) {
+        std::cout << new_cloud[0].cos(new_cloud[i]) << " -> ";
+    }
+    std::cout << "" << std::endl;
+    std::cout << "Distancias: ";
+    for (int i = 1; i < cloud_size; i++) {
+        std::cout << new_cloud[0].dist(new_cloud[i]) << " -> ";
+    }
+    std::cout << "" << std::endl;
+
+    /**
+     * Genera la cerradura
+     */
+    std::stack<Punto<T>> hull;
+    hull.push(new_cloud[0]);
+    hull.push(new_cloud[1]);
+    hull.push(new_cloud[2]);
+    for (int i = 3; i < cloud_size; i++) {
+        while (nextToTop(hull).ccw(hull.top(), new_cloud[i]) <= 0) {
+            std::cout << "vale kk" << hull.top() << std::endl;
+            hull.pop();
+        }
+        hull.push(new_cloud[i]);
+    }
+
+    /**
+     * Crea la lista de la cerradura
+     */
+    int total_cerradura = hull.size();
     Punto<T> *P = new Punto<T>[total_cerradura];
+    for (int i = total_cerradura - 1; i >= 0; i--) {
+        P[i] = hull.top();
+        hull.pop();
+    }
 
     /**
      * Crea el polígono
@@ -285,7 +345,6 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
      * Elimina variables
      */
     delete[] new_cloud;
-    delete[] P;
 
     /**
      * Retorna el par

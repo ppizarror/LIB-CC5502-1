@@ -38,10 +38,10 @@ public:
     Segmento(Punto<T> &p1, Punto<T> &p2);
 
     // Retorna el tamaño del segmento
-    T getLength() const;
+    double getLength() const;
 
     // Retorna el tamaño del segmento
-    T norm() const;
+    double norm() const;
 
     // Indica si un punto está estrictamente a la izquierda del segmento
     bool left(Punto<T> &p);
@@ -80,7 +80,7 @@ template<class T>
  * @tparam T Template
  * @return
  */
-T Segmento<T>::getLength() const {
+double Segmento<T>::getLength() const {
     return this->a->dist(*this->b);
 }
 
@@ -90,7 +90,7 @@ template<class T>
  * @tparam T
  * @return
  */
-T Segmento<T>::norm() const {
+double Segmento<T>::norm() const {
     return this->getLength();
 }
 
