@@ -19,7 +19,7 @@ template<class T>
  * @tparam T - Tipo de datos
  * @param cloud - Nube de puntos a realizar la cerradura convexa
  * @param cloud_size - Número de puntos
- * @return [Poligono - Polínono con puntos que representa la cerradura convexa
+ * @return Poligono - Polínono con puntos que representa la cerradura convexa
  */
 std::pair<Poligono<T>, int> giftWrapping(Punto<T> *cloud, int cloud_size) {
 
@@ -81,5 +81,16 @@ std::pair<Poligono<T>, int> giftWrapping(Punto<T> *cloud, int cloud_size) {
     return std::make_pair(*cerradura, i);
 
 }
+
+template<class T>
+/**
+ * Algoritmo de Graham Scan
+ * @tparam T - Tipo de datos
+ * @param cloud - Nube de puntos a realizar la cerradura convexa
+ * @param cloud_size - Número de puntos
+ * @return Poligono - Polínono con puntos que representa la cerradura convexa
+ */
+std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
+};
 
 #endif //LIB_CC5502_1_CERRADURA_CONVEXA_H
