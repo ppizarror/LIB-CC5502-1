@@ -15,6 +15,9 @@
 #ifndef LIB_CC5502_1_CERRADURA_CONVEXA_H
 #define LIB_CC5502_1_CERRADURA_CONVEXA_H
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+
 template<class T>
 /**
  * Función utilitaria que imprime la lista de puntos
@@ -29,6 +32,8 @@ static void _imprimeListaPuntos(Punto<T> *P, int n) {
     std::cout << "" << std::endl;
 }
 
+#pragma clang diagnostic pop
+
 template<class T>
 /**
  * Intercambia dos elementos en una lista de puntos
@@ -39,7 +44,6 @@ template<class T>
  */
 void swap(Punto<T> arr[], int i, int j) {
     if (i == j) return;
-    std::cout << i << "," << j << std::endl;
     Punto<T> *t = new Punto<T>(arr[i].getCoordX(), arr[i].getCoordY());
     arr[i] = arr[j];
     arr[j] = *t;
@@ -161,48 +165,10 @@ std::pair<Poligono<T>, int> giftWrapping(Punto<T> *cloud, int cloud_size) {
 const void *pv;
 
 template<class T>
-class QuickSort {
-public:
-    bool comp(Punto<T> &a, Punto<T> &b) {
-        Punto<T> *p = (Punto<T> *) pv;
-        if (fabs(p->cos(a) - p->cos(b)) < 1e-10)
-            return p->dist(a) < p->dist(b);
-        else
-            return p->cos(a) > p->cos(b);
-    }
-
-    int partition(Punto<T> *arr, const int left, const int right, const int sz) {
-        const int mid = left + (right - left) / 2;
-        Punto<T> pivot = arr[mid];
-        swap(arr, mid, left);
-        int i = left + 1;
-        int j = right;
-        while (i <= j) {
-            while (i <= j && comp(arr[i], pivot)) {
-                i++;
-            }
-            while (i <= j && !comp(arr[j], pivot)) {
-                j--;
-            }
-            if (i < j) {
-                swap(arr, i, j);
-            }
-        }
-        swap(arr, i - 1, left);
-        return i - 1;
-    }
-
-    void quicksort(Punto<T> *arr, const int left, const int right, const int sz) {
-        if (left >= right) {
-            return;
-        }
-        int part = partition(arr, left, right, sz);
-        quicksort(arr, left, part - 1, sz);
-        quicksort(arr, part + 1, right, sz);
-    }
-};
-
-template<class T>
+/**
+ * Clase mergesort - Ordena la lista de puntos aplicando MergeSort orden nlogn peor caso
+ * @tparam T
+ */
 class MergeSort {
 public:
     static bool comp(Punto<T> &a, Punto<T> &b) {
@@ -221,7 +187,7 @@ public:
         // Listas temporales
         Punto<T> L[n1], R[n2];
 
-        /* Copy data to temp arrays L[] and R[] */
+        // Copia los datos
         for (i = 0; i < n1; i++)
             L[i] = arr[l + i];
         for (j = 0; j < n2; j++)
@@ -240,13 +206,11 @@ public:
             }
             k++;
         }
-
         while (i < n1) {
             arr[k] = L[i];
             i++;
             k++;
         }
-
         while (j < n2) {
             arr[k] = R[j];
             j++;
@@ -340,13 +304,8 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
     /**
      * Se ordenan los puntos por su ángulo con el pivote
      */
-    // QuickSort<T> qsort = QuickSort<T>();
     MergeSort<T> msort = MergeSort<T>();
-    _imprimeListaPuntos(new_cloud, cloud_size);
-    std::cout << "orden" << std::endl;
-    // qsort.quicksort(new_cloud, 1, cloud_size - 1, cloud_size);
     msort.mergeSort(new_cloud, 1, cloud_size - 1);
-    _imprimeListaPuntos(new_cloud, cloud_size);
 
     /**
      * Si hay dos puntos con igual ángulo se deja aquel con mayor distancia
@@ -380,22 +339,6 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
             }
         }
     }
-    _imprimeListaPuntos(final_cloud, vp);
-    std::cout << vp << std::endl;
-
-    /**
-     * Se imprime lista de angulos
-     */
-    std::cout << "Angulos: ";
-    for (int i = 1; i < cloud_size; i++) {
-        std::cout << new_cloud[0].cos(new_cloud[i]) << " -> ";
-    }
-    std::cout << "" << std::endl;
-    std::cout << "Distancias: ";
-    for (int i = 1; i < cloud_size; i++) {
-        std::cout << new_cloud[0].dist(new_cloud[i]) << " -> ";
-    }
-    std::cout << "" << std::endl;
 
     /**
      * Genera la cerradura

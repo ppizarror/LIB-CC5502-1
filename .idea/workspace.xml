@@ -34,8 +34,8 @@
       <file leaf-file-name="test-cerradura-convexa.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/test-cerradura-convexa.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-17">
-              <caret line="152" column="23" selection-start-line="152" selection-start-column="23" selection-end-line="152" selection-end-column="23" />
+            <state relative-caret-position="201">
+              <caret line="72" column="69" selection-start-line="72" selection-start-column="69" selection-end-line="72" selection-end-column="69" />
             </state>
           </provider>
         </entry>
@@ -43,8 +43,8 @@
       <file leaf-file-name="cerradura-convexa.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/utils/cerradura-convexa.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="398" lean-forward="true" selection-start-line="385" selection-start-column="4" selection-end-line="398" />
+            <state relative-caret-position="160">
+              <caret line="166" column="78" selection-start-line="166" selection-start-column="78" selection-end-line="166" selection-end-column="78" />
             </state>
           </provider>
         </entry>
@@ -231,12 +231,12 @@
       <workItem from="1524138567757" duration="32697000" />
       <workItem from="1524226000078" duration="116000" />
       <workItem from="1524668305905" duration="39000" />
-      <workItem from="1529290319443" duration="51355000" />
+      <workItem from="1529290319443" duration="51680000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103139000" />
+    <option name="totallyTimeSpent" value="103464000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -506,15 +506,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/test-cerradura-convexa.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17">
-          <caret line="152" column="23" selection-start-line="152" selection-start-column="23" selection-end-line="152" selection-end-column="23" />
+        <state relative-caret-position="201">
+          <caret line="72" column="69" selection-start-line="72" selection-start-column="69" selection-end-line="72" selection-end-column="69" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/cerradura-convexa.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="398" lean-forward="true" selection-start-line="385" selection-start-column="4" selection-end-line="398" />
+        <state relative-caret-position="160">
+          <caret line="166" column="78" selection-start-line="166" selection-start-column="78" selection-end-line="166" selection-end-column="78" />
         </state>
       </provider>
     </entry>

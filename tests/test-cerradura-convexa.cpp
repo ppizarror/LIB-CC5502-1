@@ -38,7 +38,6 @@ void testBasico() {
 
     // [Graham scan]
     std::pair<Poligono<float>, int> cerraduraGS = grahamScan(plist, 5);
-    std::cout << cerraduraGS.second << std::endl;
     assert(cerraduraGS.second == 5);
 }
 
@@ -51,13 +50,10 @@ void testTriangulo() {
 
     // [GiftWrapping]
     std::pair<Poligono<int>, int> cerraduraGW = giftWrapping(triangulo, 8);
-    cerraduraGW.first.print();
     assert(cerraduraGW.second == 3);
 
     // [Graham scan]
     std::pair<Poligono<int>, int> cerraduraGS = grahamScan(triangulo, 8);
-    cerraduraGS.first.print();
-    std::cout << cerraduraGS.second << std::endl;
     assert(cerraduraGS.second == 3);
 }
 
@@ -70,12 +66,10 @@ void testDuplicados() {
 
     // [GiftWrapping]
     std::pair<Poligono<int>, int> cerraduraGW = giftWrapping(plist, 6);
-    cerraduraGW.first.print();
     assert(cerraduraGW.second == 3);
 
     // [Graham scan]
     std::pair<Poligono<int>, int> cerraduraGS = grahamScan(plist, 6);
-    cerraduraGS.first.print();
     assert(cerraduraGS.second == 3);
 }
 
@@ -153,6 +147,12 @@ void testRectangulo() {
     std::pair<Poligono<float>, int> cerraduraGW = giftWrapping(rectangulo, 10000);
     cerraduraGW.first.print();
     assert(cerraduraGW.second == 4);
+
+    // Calcula la cerradura
+    std::cout << "\n[Graham Scan] Cerradura rectangulo 10x1 con 10000 puntos" << std::endl;
+    std::pair<Poligono<float>, int> cerraduraGS = giftWrapping(rectangulo, 10000);
+    cerraduraGS.first.print();
+    assert(cerraduraGS.second == 4);
 }
 
 /**
@@ -162,12 +162,12 @@ int main() {
     std::cout << "Testeando cerradura convexa" << std::endl;
 
     // Carga los tests
-    // testBasico();
+    testBasico();
     testDuplicados();
-    // testTriangulo();
+    testTriangulo();
     testCuadradoChico();
-    // testCuadradoMediano();
-    // testRectangulo();
+    testCuadradoMediano();
+    testRectangulo();
 
     // Retorna
     return 0;
