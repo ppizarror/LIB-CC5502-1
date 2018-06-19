@@ -23,8 +23,10 @@ template<class T>
  * @param n - Largo de la lista
  */
 static void _imprimeListaPuntos(Punto<T> *P, int n) {
-    Poligono<T> poly = Poligono<T>(P, n);
-    poly.print();
+    for (int i = 0; i < n; i++) {
+        std::cout << P[i] << "->";
+    }
+    std::cout << "" << std::endl;
 }
 
 template<class T>
@@ -35,11 +37,12 @@ template<class T>
  * @param i
  * @param j
  */
-void swap(Punto<T> *arr, int i, int j) {
+void swap(Punto<T> arr[], int i, int j) {
     if (i == j) return;
-    Punto<T> t = arr[i].clonar();
+    std::cout << i << "," << j << std::endl;
+    Punto<T> *t = new Punto<T>(arr[i].getCoordX(), arr[i].getCoordY());
     arr[i] = arr[j];
-    arr[j] = t;
+    arr[j] = *t;
 }
 
 template<class T>
@@ -162,27 +165,101 @@ class QuickSort {
 public:
     bool comp(Punto<T> &a, Punto<T> &b) {
         Punto<T> *p = (Punto<T> *) pv;
-        return p->cos(a) > p->cos(b);
+        if (fabs(p->cos(a) - p->cos(b)) < 1e-10)
+            return p->dist(a) < p->dist(b);
+        else
+            return p->cos(a) > p->cos(b);
     }
 
-    int partition(Punto<T> *arr, int low, int high) {
-        Punto<T> pivot = arr[high];
-        int i = (low - 1);
-        for (int j = low; j <= high - 1; j++) {
-            if (comp(arr[j], pivot)) {
+    int partition(Punto<T> *arr, const int left, const int right, const int sz) {
+        const int mid = left + (right - left) / 2;
+        Punto<T> pivot = arr[mid];
+        swap(arr, mid, left);
+        int i = left + 1;
+        int j = right;
+        while (i <= j) {
+            while (i <= j && comp(arr[i], pivot)) {
                 i++;
+            }
+            while (i <= j && !comp(arr[j], pivot)) {
+                j--;
+            }
+            if (i < j) {
                 swap(arr, i, j);
             }
         }
-        swap(arr, i + 1, high);
-        return (i + 1);
+        swap(arr, i - 1, left);
+        return i - 1;
     }
 
-    void quicksort(Punto<T> *arr, int low, int high) {
-        if (low < high) {
-            int pi = partition(arr, low, high);
-            quicksort(arr, low, pi - 1);
-            quicksort(arr, pi + 1, high);
+    void quicksort(Punto<T> *arr, const int left, const int right, const int sz) {
+        if (left >= right) {
+            return;
+        }
+        int part = partition(arr, left, right, sz);
+        quicksort(arr, left, part - 1, sz);
+        quicksort(arr, part + 1, right, sz);
+    }
+};
+
+template<class T>
+class MergeSort {
+public:
+    static bool comp(Punto<T> &a, Punto<T> &b) {
+        Punto<T> *p = (Punto<T> *) pv;
+        if (fabs(p->cos(a) - p->cos(b)) < 1e-10)
+            return p->dist(a) >= p->dist(b);
+        else
+            return p->cos(a) >= p->cos(b);
+    }
+
+    static void merge(Punto<T> arr[], int l, int m, int r) {
+        int i, j, k;
+        int n1 = m - l + 1;
+        int n2 = r - m;
+
+        // Listas temporales
+        Punto<T> L[n1], R[n2];
+
+        /* Copy data to temp arrays L[] and R[] */
+        for (i = 0; i < n1; i++)
+            L[i] = arr[l + i];
+        for (j = 0; j < n2; j++)
+            R[j] = arr[m + 1 + j];
+
+        i = 0;
+        j = 0;
+        k = l;
+        while (i < n1 && j < n2) {
+            if (comp(L[i], R[j])) {
+                arr[k] = L[i];
+                i++;
+            } else {
+                arr[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+
+        while (i < n1) {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+
+        while (j < n2) {
+            arr[k] = R[j];
+            j++;
+            k++;
+        }
+    }
+
+    void mergeSort(Punto<T> arr[], int l, int r) {
+        if (l < r) {
+            int m = l + (r - l) / 2;
+            mergeSort(arr, l, m);
+            mergeSort(arr, m + 1, r);
+            merge(arr, l, m, r);
         }
     }
 };
@@ -263,10 +340,12 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
     /**
      * Se ordenan los puntos por su ángulo con el pivote
      */
-    QuickSort<T> qsort = QuickSort<T>();
+    // QuickSort<T> qsort = QuickSort<T>();
+    MergeSort<T> msort = MergeSort<T>();
     _imprimeListaPuntos(new_cloud, cloud_size);
-    qsort.quicksort(new_cloud, 1, cloud_size - 1);
     std::cout << "orden" << std::endl;
+    // qsort.quicksort(new_cloud, 1, cloud_size - 1, cloud_size);
+    msort.mergeSort(new_cloud, 1, cloud_size - 1);
     _imprimeListaPuntos(new_cloud, cloud_size);
 
     /**

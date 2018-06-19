@@ -57,7 +57,7 @@ void testTriangulo() {
 
     // [Graham scan]
     std::pair<Poligono<int>, int> cerraduraGS = grahamScan(triangulo, 8);
-    cerraduraGS.first.print();
+    // cerraduraGS.first.print();
     std::cout << cerraduraGS.second << std::endl;
     // assert(cerraduraGS.second == 5);
 }
