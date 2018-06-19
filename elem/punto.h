@@ -548,9 +548,9 @@ template<class T>
 int Punto<T>::ccw(Punto<T> &a, Punto<T> &b) {
     T area = (a.getCoordX() - this->getCoordX()) * (b.getCoordY() - this->getCoordY()) -
              (a.getCoordY() - this->getCoordY()) * (b.getCoordX() - this->getCoordX());
-    if (area > 0)
+    if (area > 0.0f)
         return -1; // No son ccw
-    else if (area < 0)
+    else if (area < 0.0f)
         return 1; // ccw
     else
         return 0; // Colineales

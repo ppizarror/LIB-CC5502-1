@@ -37,8 +37,8 @@ void testBasico() {
     assert(cerraduraGW.second == 5);
 
     // [Graham scan]
-    std::pair<Poligono<float>, int> cerraduraGS = grahamScan(plist, 5);
-    assert(cerraduraGS.second == 5);
+    //std::pair<Poligono<float>, int> cerraduraGS = grahamScan(plist, 5);
+    //assert(cerraduraGS.second == 5);
 }
 
 /**
@@ -53,8 +53,8 @@ void testDuplicados() {
     assert(cerraduraGW.second == 3);
 
     // [Graham scan]
-    std::pair<Poligono<int>, int> cerraduraGS = grahamScan(plist, 6);
-    assert(cerraduraGS.second == 3);
+    // std::pair<Poligono<int>, int> cerraduraGS = grahamScan(plist, 6);
+    // assert(cerraduraGS.second == 3);
 }
 
 /**
@@ -64,22 +64,28 @@ void testDuplicados() {
 void testCuadrado() {
     Punto<float> *cuadrado = new Punto<float>[1000]; // NOLINT
 
-    // Añade las aristas
-    cuadrado[0] = Punto<float>(0, 0);
-    cuadrado[1] = Punto<float>(0, 1);
-    cuadrado[2] = Punto<float>(1, 1);
-    cuadrado[3] = Punto<float>(1, 0);
-
-    // Añade 996 puntos aleatorios
-    for (int i = 4; i < 1000; i++) {
+    // Añade puntos aleatorios
+    for (int i = 0; i < 1000; i++) {
         cuadrado[i] = Punto<float>(randomFloat(0, 1), randomFloat(0, 1));
     }
+
+    // Añade las aristas
+    cuadrado[100] = Punto<float>(0, 0);
+    cuadrado[200] = Punto<float>(0, 1);
+    cuadrado[300] = Punto<float>(1, 1);
+    cuadrado[400] = Punto<float>(1, 0);
 
     // Calcula la cerradura
     std::pair<Poligono<float>, int> cerraduraGW = giftWrapping(cuadrado, 1000);
     std::cout << "\n[GiftWrapping] Cerradura cuadrado perfecto 1x1 con 1000 puntos" << std::endl;
     cerraduraGW.first.print();
     assert(cerraduraGW.second == 4);
+
+    // Calcula la cerradura
+    // std::pair<Poligono<float>, int> cerraduraGS = grahamScan(cuadrado, 1000);
+    // std::cout << "\n[Graham Scan] Cerradura cuadrado perfecto 1x1 con 1000 puntos" << std::endl;
+    // cerraduraGS.first.print();
+    // assert(cerraduraGS.second == 4);
 }
 
 /**
@@ -87,13 +93,15 @@ void testCuadrado() {
  */
 void testRectangulo() {
     Punto<float> *rectangulo = new Punto<float>[10000]; // NOLINT
-    rectangulo[0] = Punto<float>(0, 0);
-    rectangulo[1] = Punto<float>(10, 0);
-    rectangulo[2] = Punto<float>(0, 1);
-    rectangulo[3] = Punto<float>(10, 1);
-    for (int i = 4; i < 10000; i++) {
+
+    // Añade los puntos aleatorios
+    for (int i = 0; i < 10000; i++) {
         rectangulo[i] = Punto<float>(randomFloat(0, 10), randomFloat(0, 1));
     }
+    rectangulo[1000] = Punto<float>(0, 0);
+    rectangulo[2000] = Punto<float>(10, 0);
+    rectangulo[3000] = Punto<float>(0, 1);
+    rectangulo[4000] = Punto<float>(10, 1);
 
     // Calcula la cerradura
     std::pair<Poligono<float>, int> cerraduraGW = giftWrapping(rectangulo, 10000);

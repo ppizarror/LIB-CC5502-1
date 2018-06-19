@@ -110,6 +110,31 @@ Punto<T> nextToTop(std::stack<Punto<T>> &S) {
     return res;
 }
 
+/**
+ * Guarda el puntero al pivote
+ * @tparam T
+ * @param cloud
+ * @param cloud_size
+ * @return
+ */
+const void *pv;
+
+template<class T>
+bool comp(Punto<T> a, Punto<T> b) {
+    Punto<T> *pivote = (Punto<T> *) pv;
+    a.print();
+    b.print();
+    pivote->print();
+    int order = pivote->ccw(a, b);
+    if (order == 0) {
+        // Si los puntos son colineales ordena por distancia al pivote
+        return (pivote->dist(a) < pivote->dist(b));
+    } else {
+        // Retorna true si los puntos no están en ccw, así genera una lista con los primeros puntos en ccw
+        return (order == -1);
+    }
+}
+
 template<class T>
 /**
  * Algoritmo de Graham Scan, algoritmo sólo valido para 2D
@@ -154,27 +179,23 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
     /**
      * Intercambio el menor con el primero en la lista
      */
-    Punto<T> temp = new_cloud[0].clonar();
-    new_cloud[0] = new_cloud[min];
-    new_cloud[min] = temp;
+    if (min != 0) {
+        Punto<T> temp = new_cloud[0].clonar();
+        new_cloud[0] = new_cloud[min];
+        new_cloud[min] = temp;
+    }
 
-    Punto<T> pivote = new_cloud[0]; // Punto pivote desde el cual se ordenan los demás puntos de acuerdo a su orientación
-    std::sort(new_cloud + 1, new_cloud + cloud_size - 1, [&pivote](Punto<T> a, Punto<T> b) {
-        int order = pivote.ccw(a, b);
-        if (order == 0) {
-            // Si los puntos son colineales ordena por distancia al pivote
-            return pivote.dist(a) < pivote.dist(b);
-        } else {
-            // Retorna true si los puntos no están en ccw, así genera una lista con los primeros puntos en ccw
-            return order == -1;
-        }
-    });
+    // Punto pivote desde el cual se ordenan los demás puntos de acuerdo a su orientación
+    Poligono<T> *cerradura1 = new Poligono<T>(new_cloud, cloud_size);
+    cerradura1->print();
+    pv = &new_cloud[0];
+    std::sort(new_cloud + 1, new_cloud + cloud_size, comp<T>);
+    Poligono<T> *cerradura2 = new Poligono<T>(new_cloud, cloud_size);
+    cerradura2->print();
 
     /**
      * Se crea un stack para facilitar la creación de la cerradura
      */
-    Poligono<T> *cerradura1 = new Poligono<T>(new_cloud, cloud_size);
-    cerradura1->print();
     std::stack<Punto<T>> hull;
     hull.push(new_cloud[0]);
     hull.push(new_cloud[1]);
