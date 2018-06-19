@@ -26,32 +26,42 @@ float randomFloat(float a, float b) {
 }
 
 /**
- * [GiftWrapping] Testeo básico, genera figuras simples de pocos puntos.
+ * Testeo básico, genera figuras simples de pocos puntos.
  */
-void testBasicoGiftWrapping() {
+void testBasico() {
     Punto<float> plist[] = {Punto<float>(5, 0), Punto<float>(6, 4), Punto<float>(4, 5), Punto<float>(1, 5),
                             Punto<float>(1, 0)}; // 5
-    std::pair<Poligono<float>, int> cerradura = giftWrapping(plist, 5);
 
-    // El poligono es el mismo
-    assert(cerradura.second == 5);
+    // [GiftWrapping]
+    std::pair<Poligono<float>, int> cerraduraGW = giftWrapping(plist, 5);
+    assert(cerraduraGW.second == 5);
+
+    // [Graham scan]
+    std::pair<Poligono<float>, int> cerraduraGS = grahamScan(plist, 5);
+    assert(cerraduraGS.second == 5);
 }
 
 /**
- * [GiftWrapping] Testeo duplicados
+ * Testeo duplicados
  */
-void testDuplicadosGiftWrapping() {
+void testDuplicados() {
     Punto<int> plist[] = {Punto<int>(0, 0), Punto<int>(0, 0), Punto<int>(0, 0), Punto<int>(1, 1), Punto<int>(1, 0),
                           Punto<int>(1, 0)}; // 6
-    std::pair<Poligono<int>, int> cerradura = giftWrapping(plist, 6);
-    assert(cerradura.second == 3);
+
+    // [GiftWrapping]
+    std::pair<Poligono<int>, int> cerraduraGW = giftWrapping(plist, 6);
+    assert(cerraduraGW.second == 3);
+
+    // [Graham scan]
+    std::pair<Poligono<int>, int> cerraduraGS = grahamScan(plist, 6);
+    assert(cerraduraGS.second == 3);
 }
 
 /**
- * [GiftWrapping] Genera un cuadrado de 1x1 en flotante con 1000 puntos dentro,
+ * Genera un cuadrado de 1x1 en flotante con 1000 puntos dentro,
  * la cerradura debe ser (0,0),(0,1),(1,1),(1,0)
  */
-void testCuadradoGiftWrapping() {
+void testCuadrado() {
     Punto<float> *cuadrado = new Punto<float>[1000]; // NOLINT
 
     // Añade las aristas
@@ -66,16 +76,16 @@ void testCuadradoGiftWrapping() {
     }
 
     // Calcula la cerradura
-    std::pair<Poligono<float>, int> cerradura = giftWrapping(cuadrado, 1000);
+    std::pair<Poligono<float>, int> cerraduraGW = giftWrapping(cuadrado, 1000);
     std::cout << "\n[GiftWrapping] Cerradura cuadrado perfecto 1x1 con 1000 puntos" << std::endl;
-    cerradura.first.print();
-    assert(cerradura.second == 4);
+    cerraduraGW.first.print();
+    assert(cerraduraGW.second == 4);
 }
 
 /**
- * [GiftWrapping] Genera un rectángulo de 10000 puntos completamente aleatorio, altura 1 y ancho 10.
+ * Genera un rectángulo de 10000 puntos completamente aleatorio, altura 1 y ancho 10.
  */
-void testRectanguloGiftWrapping() {
+void testRectangulo() {
     Punto<float> *rectangulo = new Punto<float>[10000]; // NOLINT
     rectangulo[0] = Punto<float>(0, 0);
     rectangulo[1] = Punto<float>(10, 0);
@@ -86,19 +96,10 @@ void testRectanguloGiftWrapping() {
     }
 
     // Calcula la cerradura
-    std::pair<Poligono<float>, int> cerradura = giftWrapping(rectangulo, 10000);
+    std::pair<Poligono<float>, int> cerraduraGW = giftWrapping(rectangulo, 10000);
     std::cout << "\n[GiftWrapping] Cerradura rectangulo 10x1 con 10000 puntos" << std::endl;
-    cerradura.first.print();
-    assert(cerradura.second == 4);
-}
-
-/**
- * Test básico que verifica validez de Graham en casos de prueba sencillos.
- */
-void testBasicoGraham() {
-    Punto<float> plist[] = {Punto<float>(5, 0), Punto<float>(6, 4), Punto<float>(4, 5), Punto<float>(1, 5),
-                            Punto<float>(1, 0)}; // 5
-    std::pair<Poligono<float>, int> cerradura = grahamScan(plist, 5);
+    cerraduraGW.first.print();
+    assert(cerraduraGW.second == 4);
 }
 
 /**
@@ -107,12 +108,11 @@ void testBasicoGraham() {
 int main() {
     std::cout << "Testeando cerradura convexa" << std::endl;
 
-    // Carga los tests, GiftWrapping
-    // testDuplicadosGiftWrapping();
-    // testBasicoGiftWrapping();
-    // testCuadradoGiftWrapping();
-    // testRectanguloGiftWrapping();
-    testBasicoGraham();
+    // Carga los tests
+    testBasico();
+    testDuplicados();
+    testCuadrado();
+    testRectangulo();
 
     // Retorna
     return 0;

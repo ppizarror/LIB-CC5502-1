@@ -6,6 +6,8 @@
  */
 
 // Importación de librerías
+#include <algorithm>
+#include <stack>
 #include <vector>
 #include "../elem/poligono.h"
 
@@ -92,6 +94,24 @@ std::pair<Poligono<T>, int> giftWrapping(Punto<T> *cloud, int cloud_size) {
 
 template<class T>
 /**
+ * Retorna el punto al lado del top del stack de puntos
+ * @tparam T Template
+ * @param S Stack de puntos
+ * @return
+ */
+Punto<T> nextToTop(std::stack<Punto<T>> &S) {
+    if (S.size() == 1) {
+        return S.top();
+    }
+    Punto<T> p = S.top();
+    S.pop();
+    Punto<T> res = S.top();
+    S.push(p);
+    return res;
+}
+
+template<class T>
+/**
  * Algoritmo de Graham Scan, algoritmo sólo valido para 2D
  * @tparam T - Tipo de datos
  * @param cloud - Nube de puntos a realizar la cerradura convexa
@@ -138,8 +158,60 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
     new_cloud[0] = new_cloud[min];
     new_cloud[min] = temp;
 
-    Poligono<T> *cerradura = new Poligono<T>(new_cloud, cloud_size);
-    cerradura->print();
+    Punto<T> pivote = new_cloud[0]; // Punto pivote desde el cual se ordenan los demás puntos de acuerdo a su orientación
+    std::sort(new_cloud + 1, new_cloud + cloud_size - 1, [&pivote](Punto<T> a, Punto<T> b) {
+        int order = pivote.ccw(a, b);
+        if (order == 0) {
+            // Si los puntos son colineales ordena por distancia al pivote
+            return pivote.dist(a) < pivote.dist(b);
+        } else {
+            // Retorna true si los puntos no están en ccw, así genera una lista con los primeros puntos en ccw
+            return order == -1;
+        }
+    });
+
+    /**
+     * Se crea un stack para facilitar la creación de la cerradura
+     */
+    Poligono<T> *cerradura1 = new Poligono<T>(new_cloud, cloud_size);
+    cerradura1->print();
+    std::stack<Punto<T>> hull;
+    hull.push(new_cloud[0]);
+    hull.push(new_cloud[1]);
+    hull.push(new_cloud[2]);
+
+    for (int i = 3; i < cloud_size; i++) {
+        while (nextToTop(hull).ccw(hull.top(), new_cloud[i]) != -1) {
+            hull.pop();
+        }
+        hull.push(new_cloud[i]);
+    }
+
+    /**
+     * Se crea lista de puntos a partir del stack
+     */
+    int total_cerradura = hull.size();
+    Punto<T> *P = new Punto<T>[total_cerradura];
+    for (int i = total_cerradura - 1; i >= 0; i--) {
+        P[i] = hull.top();
+        hull.pop();
+    }
+
+    /**
+     * Crea el polígono
+     */
+    Poligono<T> *cerradura = new Poligono<T>(P, total_cerradura);
+
+    /**
+     * Elimina variables
+     */
+    delete[] new_cloud;
+    delete[] P;
+
+    /**
+     * Retorna el par
+     */
+    return std::make_pair(*cerradura, total_cerradura);
 
 };
 
