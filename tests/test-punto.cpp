@@ -42,7 +42,7 @@ void testIntCreation() {
 
     // Calcula distancia de un punto al eje
     Punto<int> porigin = Punto<int>(0, 0);
-    assert(p2.dist(porigin) == 425);
+    assert(p2.dist(porigin) == 3 * sqrt(20129));
 
     // Divide por un valor
     p2.setCoordX(5);
@@ -85,6 +85,17 @@ void testEqNot() {
 }
 
 /**
+ * Testea distancia y ángulo, usados por Graham-Scan.
+ */
+void testDistanciaAngulo() {
+    Punto<int> p1 = Punto<int>(0, 0);
+    Punto<int> p2 = Punto<int>(3, 4);
+
+    assert(p1.dist(p2) == 5);
+    assert(p1.cos(p2) == acos(0.6));
+}
+
+/**
  * Corre los test.
  */
 int main() {
@@ -94,6 +105,7 @@ int main() {
     testIntCreation();
     testFloatCreation();
     testEqNot();
+    testDistanciaAngulo();
 
     // Retorna
     return 0;

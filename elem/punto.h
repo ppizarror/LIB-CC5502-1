@@ -104,10 +104,10 @@ public:
     Punto<T> abs() const;
 
     // Calcula la distancia entre dos puntos
-    T dist(Punto<T> &p) const;
+    double dist(Punto<T> &p) const;
 
     // Retorna distancia punto al origen
-    T distOrigin() const;
+    double distOrigin() const;
 
     // Retorna la dimensión del punto
     int getDimension() const;
@@ -124,6 +124,9 @@ public:
 
     // Clona el punto
     Punto<T> clonar();
+
+    // Obtiene el coseno del ángulo entre un punto y otro
+    double cos(Punto<T> &a);
 };
 
 template<class T>
@@ -363,8 +366,8 @@ template<class T>
  * @tparam T Template
  * @return
  */
-T Punto<T>::distOrigin() const {
-    T d;
+double Punto<T>::distOrigin() const {
+    double d;
     if (this->dim == 2) {
         d = sqrt(pow(this->getCoordX(), 2) + pow(this->getCoordY(), 2));
     } else {
@@ -380,7 +383,7 @@ template<class T>
  * @param p Punto
  * @return
  */
-T Punto<T>::dist(Punto<T> &p) const {
+double Punto<T>::dist(Punto<T> &p) const {
     if (this->dim == 2) {
         return sqrt(pow(this->getCoordX() - p.getCoordX(), 2) + pow(this->getCoordY() - p.getCoordY(), 2));
     } else {
@@ -550,10 +553,8 @@ int Punto<T>::ccw(Punto<T> &a, Punto<T> &b) {
              (a.getCoordY() - this->getCoordY()) * (b.getCoordX() - this->getCoordX());
     if (area > 0.0f)
         return -1; // No son ccw
-    else if (area < 0.0f)
-        return 1; // ccw
     else
-        return 0; // Colineales
+        return 1; // ccw
 }
 
 template<class T>
@@ -567,6 +568,19 @@ Punto<T> Punto<T>::clonar() {
         return Punto<T>(this->getCoordX(), this->getCoordY());
     else
         return Punto<T>(this->getCoordZ(), this->getCoordY(), this->getCoordZ());
+}
+
+template<class T>
+/**
+ * Obtiene el coseno del ángulo entre el punto y otro
+ * @tparam T Template
+ * @param a Punto
+ * @return
+ */
+double Punto<T>::cos(Punto<T> &a) {
+    if (this->dist(a) == 0)
+        return 0;
+    return acos((a.getCoordX() - this->getCoordX()) / (this->dist(a)));
 }
 
 #pragma clang diagnostic pop

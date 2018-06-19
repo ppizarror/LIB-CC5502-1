@@ -111,29 +111,91 @@ Punto<T> nextToTop(std::stack<Punto<T>> &S) {
 }
 
 /**
- * Guarda el puntero al pivote
- * @tparam T
- * @param cloud
- * @param cloud_size
- * @return
+ * Puntero al pivote
  */
 const void *pv;
 
 template<class T>
-bool comp(Punto<T> a, Punto<T> b) {
-    Punto<T> *pivote = (Punto<T> *) pv;
+/**
+ * Ordena dos puntos de acuerdo a su ángulo con el pivote
+ * @param a Punto
+ * @param b Punto
+ * @return
+ */
+bool ordenarAngulo(Punto<T> &a, Punto<T> &b) {
+    Punto<T> *p = (Punto<T> *) pv;
     a.print();
     b.print();
-    pivote->print();
-    int order = pivote->ccw(a, b);
-    if (order == 0) {
-        // Si los puntos son colineales ordena por distancia al pivote
-        return (pivote->dist(a) < pivote->dist(b));
-    } else {
-        // Retorna true si los puntos no están en ccw, así genera una lista con los primeros puntos en ccw
-        return (order == -1);
-    }
+    std::cout << p->cos(a) << std::endl;
+    std::cout << p->cos(b) << std::endl;
+    std::cout << (p->cos(a) < p->cos(b)) << std::endl;
+    std::cout << "....." << std::endl;
+    return p->cos(a) < p->cos(b);
 }
+
+template<class T>
+void _imprimeListaPuntos(Punto<T> *P, int n) {
+    Poligono<T> poly = Poligono<T>(P, n);
+    poly.print();
+}
+
+template<class T>
+class QuickSort {
+public:
+    // Función que compara dos puntos con el pivote
+    bool comparar(Punto<T> &a, Punto<T> &b) {
+        Punto<T> *p = (Punto<T> *) pv;
+        return p->cos(a) < p->cos(b);
+    }
+
+    // Función para dividir el array y hacer los intercambios
+    int dividir(Punto<T> *array, int start, int end) {
+        int left;
+        int right;
+        Punto<T> pivot;
+        Punto<T> temp;
+
+        pivot = array[start];
+        left = start;
+        right = end;
+
+        // Mientras no se cruzen los índices
+        while (left < right) {
+            while (comparar(array[right], pivot)) {
+                right--;
+            }
+
+            while ((left < right) && (!comparar(array[right], pivot))) {
+                left++;
+            }
+
+            // Si todavía no se cruzan los indices seguimos intercambiando
+            if (left < right) {
+                temp = array[left];
+                array[left] = array[right];
+                array[right] = temp;
+            }
+        }
+
+        // Los índices ya se han cruzado, ponemos el pivot en el lugar que le corresponde
+        temp = array[right];
+        array[right] = array[start];
+        array[start] = temp;
+
+        // La nueva posición del pivot
+        return right;
+    }
+
+    // Función recursiva para hacer el ordenamiento
+    void quicksort(Punto<T> *array, int start, int end) {
+        int pivot;
+        if (start < end) {
+            pivot = dividir(array, start, end);
+            quicksort(array, start, pivot - 1);
+            quicksort(array, pivot + 1, end);
+        }
+    }
+};
 
 template<class T>
 /**
@@ -185,38 +247,34 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
         new_cloud[min] = temp;
     }
 
-    // Punto pivote desde el cual se ordenan los demás puntos de acuerdo a su orientación
-    Poligono<T> *cerradura1 = new Poligono<T>(new_cloud, cloud_size);
-    cerradura1->print();
-    pv = &new_cloud[0];
-    std::sort(new_cloud + 1, new_cloud + cloud_size, comp<T>);
-    Poligono<T> *cerradura2 = new Poligono<T>(new_cloud, cloud_size);
-    cerradura2->print();
+    /**
+     * Se genera el pivote
+     */
+    Punto<T> pivote = new_cloud[0].clonar();
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreturn-stack-address"
+    pv = &pivote;
+#pragma clang diagnostic pop
 
     /**
-     * Se crea un stack para facilitar la creación de la cerradura
+     * Se ordenan los puntos por su ángulo con el pivote
      */
-    std::stack<Punto<T>> hull;
-    hull.push(new_cloud[0]);
-    hull.push(new_cloud[1]);
-    hull.push(new_cloud[2]);
-
-    for (int i = 3; i < cloud_size; i++) {
-        while (nextToTop(hull).ccw(hull.top(), new_cloud[i]) != -1) {
-            hull.pop();
-        }
-        hull.push(new_cloud[i]);
-    }
+    QuickSort<T> qsort = QuickSort<T>();
+    _imprimeListaPuntos(new_cloud, cloud_size);
+    qsort.quicksort(new_cloud, 1, cloud_size - 1);
+    // std::sort(new_cloud + 1, new_cloud + cloud_size, ordenarAngulo<T>);
+    _imprimeListaPuntos(new_cloud, cloud_size);
 
     /**
-     * Se crea lista de puntos a partir del stack
+     * Crea una nueva lista con la cerradura
      */
-    int total_cerradura = hull.size();
+     Punto<T> *hull
+
+    /**
+     * Crea el polígono cerradura convexa
+     */
+    int total_cerradura = 0;
     Punto<T> *P = new Punto<T>[total_cerradura];
-    for (int i = total_cerradura - 1; i >= 0; i--) {
-        P[i] = hull.top();
-        hull.pop();
-    }
 
     /**
      * Crea el polígono

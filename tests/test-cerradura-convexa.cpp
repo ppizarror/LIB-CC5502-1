@@ -37,8 +37,8 @@ void testBasico() {
     assert(cerraduraGW.second == 5);
 
     // [Graham scan]
-    //std::pair<Poligono<float>, int> cerraduraGS = grahamScan(plist, 5);
-    //assert(cerraduraGS.second == 5);
+    // std::pair<Poligono<float>, int> cerraduraGS = grahamScan(plist, 5);
+    // assert(cerraduraGS.second == 5);
 }
 
 /**
@@ -53,7 +53,7 @@ void testDuplicados() {
     assert(cerraduraGW.second == 3);
 
     // [Graham scan]
-    // std::pair<Poligono<int>, int> cerraduraGS = grahamScan(plist, 6);
+    std::pair<Poligono<int>, int> cerraduraGS = grahamScan(plist, 6);
     // assert(cerraduraGS.second == 3);
 }
 
