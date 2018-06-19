@@ -64,24 +64,20 @@ void testDuplicados() {
 void testCuadrado() {
     Punto<float> *cuadrado = new Punto<float>[1000]; // NOLINT
 
-    // Añade puntos aleatorios
+    // Añade los puntos
     for (int i = 0; i < 1000; i++) {
         cuadrado[i] = Punto<float>(randomFloat(0, 1), randomFloat(0, 1));
     }
-
-    // Añade las aristas
     cuadrado[100] = Punto<float>(0, 0);
     cuadrado[200] = Punto<float>(0, 1);
     cuadrado[300] = Punto<float>(1, 1);
     cuadrado[400] = Punto<float>(1, 0);
 
-    // Calcula la cerradura
     std::pair<Poligono<float>, int> cerraduraGW = giftWrapping(cuadrado, 1000);
     std::cout << "\n[GiftWrapping] Cerradura cuadrado perfecto 1x1 con 1000 puntos" << std::endl;
     cerraduraGW.first.print();
     assert(cerraduraGW.second == 4);
 
-    // Calcula la cerradura
     // std::pair<Poligono<float>, int> cerraduraGS = grahamScan(cuadrado, 1000);
     // std::cout << "\n[Graham Scan] Cerradura cuadrado perfecto 1x1 con 1000 puntos" << std::endl;
     // cerraduraGS.first.print();
@@ -94,7 +90,7 @@ void testCuadrado() {
 void testRectangulo() {
     Punto<float> *rectangulo = new Punto<float>[10000]; // NOLINT
 
-    // Añade los puntos aleatorios
+    // Añade los puntos
     for (int i = 0; i < 10000; i++) {
         rectangulo[i] = Punto<float>(randomFloat(0, 10), randomFloat(0, 1));
     }
