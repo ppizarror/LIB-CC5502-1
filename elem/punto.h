@@ -121,6 +121,9 @@ public:
     // 0    colineal
     // -1   no ccw
     int ccw(Punto<T> &a, Punto<T> &b);
+
+    // Clona el punto
+    Punto<T> clonar();
 };
 
 template<class T>
@@ -551,6 +554,19 @@ int Punto<T>::ccw(Punto<T> &a, Punto<T> &b) {
         return 1; // ccw
     else
         return 0; // Colineales
+}
+
+template<class T>
+/**
+ * Clona el punto
+ * @tparam T Template
+ * @return
+ */
+Punto<T> Punto<T>::clonar() {
+    if (this->dim == 2)
+        return Punto<T>(this->getCoordX(), this->getCoordY());
+    else
+        return Punto<T>(this->getCoordZ(), this->getCoordY(), this->getCoordZ());
 }
 
 #pragma clang diagnostic pop

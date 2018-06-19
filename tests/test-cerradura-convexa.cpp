@@ -93,16 +93,26 @@ void testRectanguloGiftWrapping() {
 }
 
 /**
+ * Test básico que verifica validez de Graham en casos de prueba sencillos.
+ */
+void testBasicoGraham() {
+    Punto<float> plist[] = {Punto<float>(5, 0), Punto<float>(6, 4), Punto<float>(4, 5), Punto<float>(1, 5),
+                            Punto<float>(1, 0)}; // 5
+    std::pair<Poligono<float>, int> cerradura = grahamScan(plist, 5);
+}
+
+/**
 * Corre los test.
 */
 int main() {
     std::cout << "Testeando cerradura convexa" << std::endl;
 
     // Carga los tests, GiftWrapping
-    testDuplicadosGiftWrapping();
-    testBasicoGiftWrapping();
-    testCuadradoGiftWrapping();
-    testRectanguloGiftWrapping();
+    // testDuplicadosGiftWrapping();
+    // testBasicoGiftWrapping();
+    // testCuadradoGiftWrapping();
+    // testRectanguloGiftWrapping();
+    testBasicoGraham();
 
     // Retorna
     return 0;

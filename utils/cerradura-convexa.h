@@ -24,6 +24,14 @@ template<class T>
 std::pair<Poligono<T>, int> giftWrapping(Punto<T> *cloud, int cloud_size) {
 
     /**
+     * Caso de borde
+     */
+    if (cloud_size <= 3) {
+        Poligono<T> *cerradura = new Poligono<T>(cloud, cloud_size);
+        return std::make_pair(*cerradura, cloud_size);
+    }
+
+    /**
      * Busca el punto de más a la izquierda
      */
     Punto<T> pointOnHull;
@@ -84,13 +92,55 @@ std::pair<Poligono<T>, int> giftWrapping(Punto<T> *cloud, int cloud_size) {
 
 template<class T>
 /**
- * Algoritmo de Graham Scan
+ * Algoritmo de Graham Scan, algoritmo sólo valido para 2D
  * @tparam T - Tipo de datos
  * @param cloud - Nube de puntos a realizar la cerradura convexa
  * @param cloud_size - Número de puntos
  * @return Poligono - Polínono con puntos que representa la cerradura convexa
  */
 std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
+
+    /**
+     * Caso de borde
+     */
+    if (cloud_size <= 3) {
+        Poligono<T> *cerradura = new Poligono<T>(cloud, cloud_size);
+        return std::make_pair(*cerradura, cloud_size);
+    }
+
+    /**
+     * Se elige el punto con la menor coordenada ordenada, si hay varios iguales
+     * se elige aquel con el menor x
+     */
+    T ymin = cloud[0].getCoordY(); // Valor más chico de y
+    int min = 0; // Posición en la nube con el punto ganador
+    for (int i = 1; i < cloud_size; i++) {
+        T y = cloud[i].getCoordY();
+        // Se encontró un punto con menor coordenada y, o uno que tiene igual y pero menor x
+        if ((y < ymin) or (y == ymin and cloud[i].getCoordX() < cloud[min].getCoordX())) {
+            ymin = y;
+            min = i;
+        }
+    }
+
+    /**
+     * Se crea una nueva lista de puntos para evitar modificar la original
+     */
+    Punto<T> *new_cloud = new Punto<T>[cloud_size];
+    for (int i = 0; i < cloud_size; i++) {
+        new_cloud[i] = Punto<T>(cloud[i].getCoordX(), cloud[i].getCoordY());
+    }
+
+    /**
+     * Intercambio el menor con el primero en la lista
+     */
+    Punto<T> temp = new_cloud[0].clonar();
+    new_cloud[0] = new_cloud[min];
+    new_cloud[min] = temp;
+
+    Poligono<T> *cerradura = new Poligono<T>(new_cloud, cloud_size);
+    cerradura->print();
+
 };
 
 #endif //LIB_CC5502_1_CERRADURA_CONVEXA_H
