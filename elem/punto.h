@@ -115,6 +115,12 @@ public:
     // Operación concatenación con string
     template<class U>
     friend std::ostream &operator<<(std::ostream &out, const Punto<U> &p);
+
+    // Verifica si el punto y los puntos a, b forman una vuelta en ccw
+    // +1   ccw
+    // 0    colineal
+    // -1   no ccw
+    int ccw(Punto<T> &a, Punto<T> &b);
 };
 
 template<class T>
@@ -526,6 +532,25 @@ template<class T>
  */
 bool Punto<T>::operator!=(const Punto<T> &p) const {
     return !(*this == p);
+}
+
+template<class T>
+/**
+ * Comprueba el orden ccw entre el punto y a, b
+ * @tparam T Template
+ * @param a Punto a
+ * @param b Punto b
+ * @return
+ */
+int Punto<T>::ccw(Punto<T> &a, Punto<T> &b) {
+    T area = (a.getCoordX() - this->getCoordX()) * (b.getCoordY() - this->getCoordY()) -
+             (a.getCoordY() - this->getCoordY()) * (b.getCoordX() - this->getCoordX());
+    if (area > 0)
+        return -1; // No son ccw
+    else if (area < 0)
+        return 1; // ccw
+    else
+        return 0; // Colineales
 }
 
 #pragma clang diagnostic pop
