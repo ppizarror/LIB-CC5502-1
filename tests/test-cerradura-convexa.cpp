@@ -157,10 +157,19 @@ void testRectangulo() {
 }
 
 /**
+ * Mide el tiempo pasado un tiempo inicial tinit.
+ * @param tinit - Tiempo inicial
+ */
+void medirTiempo(int tinit) {
+    std::cout << "Tiempo: " << (clock() - tinit) / double(CLOCKS_PER_SEC) * 1000 << "ms" << std::endl;
+}
+
+/**
  * Testea una figura sin anclajes predefinidos.
  */
 void testFiguraDeforme(int n) {
     Punto<float> *figura = new Punto<float>[n]; // NOLINT
+    int tinit;
 
     // Añade los puntos
     for (int i = 0; i < n; i++) {
@@ -172,12 +181,15 @@ void testFiguraDeforme(int n) {
     std::pair<Poligono<float>, int> cerraduraGW = giftWrapping(figura, n);
 
     // Vuelve a ejecutar GiftWrapping para comprobar errores en el cambio de los datos
-    std::cout << "\n[GiftWrapping]x2 Cerradura figura deforme 10x1 con " << n << " puntos" << std::endl;
+    tinit = clock();
     std::pair<Poligono<float>, int> cerraduraGW2 = giftWrapping(figura, n);
+    medirTiempo(tinit);
 
     // Calcula cerradura con Graham Scan
     std::cout << "\n[GrahamScan] Cerradura figura deforme 10x1 con " << n << " puntos" << std::endl;
+    tinit = clock();
     std::pair<Poligono<float>, int> cerraduraGS = grahamScan(figura, n);
+    medirTiempo(tinit);
 
     // Verifica que ambos polígonos tengan iguales puntos
     assert(cerraduraGW2.first.mismosPuntos(cerraduraGS.first));
@@ -196,7 +208,7 @@ int main() {
     testCuadradoChico();
     testCuadradoMediano();
     testRectangulo();
-    testFiguraDeforme(static_cast<int>(1e5));
+    testFiguraDeforme(static_cast<int>(1e4));
 
     // Retorna
     return 0;

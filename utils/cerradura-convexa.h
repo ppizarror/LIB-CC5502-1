@@ -7,6 +7,7 @@
 
 // Importación de librerías
 #include <algorithm>
+#include <ctime>
 #include <stack>
 #include <vector>
 #include "../elem/poligono.h"
@@ -159,11 +160,6 @@ std::pair<Poligono<T>, int> giftWrapping(Punto<T> *cloud, int cloud_size) {
 
 }
 
-/**
- * Puntero al pivote
- */
-const void *pv;
-
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCUnusedStructInspection"
 
@@ -174,15 +170,12 @@ template<class T>
  */
 class MergeSort {
 private:
-    static bool comp(Punto<T> &a, Punto<T> &b) {
-        Punto<T> *p = (Punto<T> *) pv;
-        if (fabs(p->cos(a) - p->cos(b)) < 1e-10)
-            return p->dist(a) >= p->dist(b);
-        else
-            return p->cos(a) >= p->cos(b);
+    Punto<T> *p; // Pivote
+    bool comp(Punto<T> &a, Punto<T> &b) {
+        return this->p->cos(a) > this->p->cos(b);
     }
 
-    static void merge(Punto<T> arr[], int l, int m, int r) {
+    void merge(Punto<T> arr[], int l, int m, int r) {
         int i, j, k;
         int n1 = m - l + 1;
         int n2 = r - m;
@@ -201,7 +194,7 @@ private:
         j = 0;
         k = l;
         while (i < n1 && j < n2) {
-            if (comp(L[i], R[j])) {
+            if (this->comp(L[i], R[j])) {
                 arr[k] = L[i];
                 i++;
             } else {
@@ -225,17 +218,31 @@ private:
     }
 
 public:
+
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+
+    // Constructor
+    MergeSort(Punto<T> &pivote) { // NOLINT
+        this->p = &pivote;
+    }
+
+#pragma clang diagnostic pop
+
     void mergeSort(Punto<T> arr[], int l, int r) {
         if (l < r) {
             int m = l + (r - l) / 2;
             mergeSort(arr, l, m);
             mergeSort(arr, m + 1, r);
-            merge(arr, l, m, r);
+            this->merge(arr, l, m, r);
         }
     }
 };
 
 #pragma clang diagnostic pop
+
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedStructInspection"
 
 template<class T>
 /**
@@ -245,18 +252,16 @@ template<class T>
  */
 class QuickSort {
 private:
-    static bool comp(Punto<T> &a, Punto<T> &b) {
-        Punto<T> *p = (Punto<T> *) pv;
-        return p->cos(a) > p->cos(b);
+    Punto<T> *p; // Pivote
+    bool comp(Punto<T> &a, Punto<T> &b) {
+        return this->p->cos(a) > this->p->cos(b);
     }
 
-    static int partition(Punto<T> a[], int m, int n) {
+    int partition(Punto<T> a[], int m, int n) {
         int i, j, pindex;
-        Punto<T> pivot;
         pindex = m;
-        pivot = a[n];
         for (i = m; i < n; i++) {
-            if (comp(a[i], pivot)) {
+            if (comp(a[i], a[n])) {
                 swap(a, pindex, i);
                 pindex++;
             }
@@ -266,6 +271,15 @@ private:
     }
 
 public:
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+
+    QuickSort(Punto<T> &pivote) { // NOLINT
+        this->p = &pivote;
+    }
+
+#pragma clang diagnostic pop
+
     int quicksort(Punto<T> a[], int m, int n) {
         int index;
         if (m >= n)
@@ -277,6 +291,8 @@ public:
         }
     }
 };
+
+#pragma clang diagnostic pop
 
 template<class T>
 /**
@@ -345,20 +361,14 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
      * Se genera el pivote
      */
     Punto<T> pivote = new_cloud[0].clonar();
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wreturn-stack-address"
-    pv = &pivote;
-#pragma clang diagnostic pop
 
     /**
      * Se ordenan los puntos por su ángulo con el pivote
      */
-    // MergeSort<T> msort = MergeSort<T>();
-    // msort.mergeSort(new_cloud, 1, cloud_size - 1);
-    std::cout << "ordenando" << std::endl;
-    QuickSort<T> qsort = QuickSort<T>();
-    qsort.quicksort(new_cloud, 1, cloud_size - 1);
-    std::cout << "ok" << std::endl;
+    MergeSort<T> msort = MergeSort<T>(pivote);
+    msort.mergeSort(new_cloud, 1, cloud_size - 1);
+    //QuickSort<T> qsort = QuickSort<T>(pivote);
+    //qsort.quicksort(new_cloud, 1, cloud_size - 1);
 
     /**
      * Si hay dos puntos con igual ángulo se deja aquel con mayor distancia
@@ -434,5 +444,15 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
     return std::make_pair(*cerradura, total_cerradura);
 
 };
+
+template<class T>
+bool point_order_x(const Punto<T>& p1, const Punto<T>& p2){
+    if (p1.x < p2.x)
+        return true;
+    else if (p1.x == p2.x)
+        return p1.y < p2.y;
+    else
+        return false;
+}
 
 #endif //LIB_CC5502_1_CERRADURA_CONVEXA_H
