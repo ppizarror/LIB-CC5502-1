@@ -172,7 +172,7 @@ class MergeSort {
 private:
     Punto<T> *p; // Pivote
     bool comp(Punto<T> &a, Punto<T> &b) {
-        return this->p->cos(a) > this->p->cos(b);
+        return this->p->cos(a) < this->p->cos(b);
     }
 
     void merge(Punto<T> arr[], int l, int m, int r) {
@@ -254,7 +254,7 @@ class QuickSort {
 private:
     Punto<T> *p; // Pivote
     bool comp(Punto<T> &a, Punto<T> &b) {
-        return this->p->cos(a) > this->p->cos(b);
+        return this->p->cos(a) < this->p->cos(b);
     }
 
     int partition(Punto<T> a[], int m, int n) {

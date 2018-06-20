@@ -203,13 +203,13 @@ int main() {
     std::cout << "Testeando cerradura convexa" << std::endl;
 
     // Carga los tests
-    testTriangulo();
     testBasico();
     testDuplicados();
+    testTriangulo();
     testCuadradoChico();
     testCuadradoMediano();
     testRectangulo();
-    testFiguraDeforme(static_cast<int>(1e3));
+    testFiguraDeforme(static_cast<int>(1e4));
 
     // Retorna
     return 0;
