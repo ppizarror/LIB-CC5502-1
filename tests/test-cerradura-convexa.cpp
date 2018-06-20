@@ -26,6 +26,16 @@ float randomFloat(float a, float b) {
 }
 
 /**
+ * Genera un número aleatorio entero entre dos valores
+ * @param a - Número mayor
+ * @param b - Número menor
+ * @return
+ */
+int randomInt(int a, int b) {
+    return (int) randomFloat(a, b);
+}
+
+/**
  * Testeo básico, genera figuras simples de pocos puntos.
  */
 void testBasico() {
@@ -167,14 +177,26 @@ void medirTiempo(int tinit) {
 
 /**
  * Testea una figura sin anclajes predefinidos.
+ * @param n - Número de puntos
+ * @param r - Porcentaje de repetidos en vértices
  */
-void testFiguraDeforme(int n) {
+void testFiguraDeforme(int n, int r) {
     Punto<float> *figura = new Punto<float>[n]; // NOLINT
     int tinit;
 
-    // Añade los puntos
-    for (int i = 0; i < n; i++) {
+    // Total de aleatorios
+    auto alt = (int) ((((float) 100 - r) / 100) * (float) n);
+
+    // Añade los puntos aleatorios
+    for (int i = 0; i < alt; i++) {
         figura[i] = Punto<float>(randomFloat(-1, 1), randomFloat(-1, 1));
+    }
+
+    // Añade los puntos repetidos
+    int rindex;
+    for (int i = 0; i < (n - alt); i++) {
+        rindex = randomInt(0, alt - 1);
+        figura[i] = Punto<float>(figura[rindex].getCoordX(), figura[rindex].getCoordY());
     }
 
     // Calcula la cerradura
@@ -209,7 +231,7 @@ int main() {
     testCuadradoChico();
     testCuadradoMediano();
     testRectangulo();
-    testFiguraDeforme(static_cast<int>(1e4));
+    testFiguraDeforme(static_cast<int>(1e5), 0);
 
     // Retorna
     return 0;

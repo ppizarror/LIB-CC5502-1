@@ -17,10 +17,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1167c18a-b373-49c4-8453-44ee0b23e1c0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elem/punto.h" beforeDir="false" afterPath="$PROJECT_DIR$/elem/punto.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test-cerradura-convexa.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test-cerradura-convexa.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/cerradura-convexa.h" beforeDir="false" afterPath="$PROJECT_DIR$/utils/cerradura-convexa.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,20 +30,20 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="test-cerradura-convexa.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="test-cerradura-convexa.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/test-cerradura-convexa.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="211" column="42" selection-start-line="211" selection-start-column="42" selection-end-line="211" selection-end-column="42" />
+            <state relative-caret-position="-417">
+              <caret line="187" column="61" selection-start-line="187" selection-start-column="61" selection-end-line="187" selection-end-column="61" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cerradura-convexa.h" pinned="false" current-in-tab="true">
+      <file leaf-file-name="cerradura-convexa.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/cerradura-convexa.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-260">
-              <caret line="256" column="32" selection-start-line="256" selection-start-column="32" selection-end-line="256" selection-end-column="32" />
+            <state>
+              <caret line="332" column="4" selection-start-line="332" selection-start-column="4" selection-end-line="332" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -234,12 +231,12 @@
       <workItem from="1524138567757" duration="32697000" />
       <workItem from="1524226000078" duration="116000" />
       <workItem from="1524668305905" duration="39000" />
-      <workItem from="1529290319443" duration="70799000" />
+      <workItem from="1529290319443" duration="71955000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122583000" />
+    <option name="totallyTimeSpent" value="123739000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -479,13 +476,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/elem/poligono.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="110" column="26" selection-start-line="110" selection-start-column="26" selection-end-line="110" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/heap/heap_v2.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -514,17 +504,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test-cerradura-convexa.cpp">
+    <entry file="file://$PROJECT_DIR$/elem/poligono.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="211" column="42" selection-start-line="211" selection-start-column="42" selection-end-line="211" selection-end-column="42" />
+        <state relative-caret-position="203">
+          <caret line="110" column="26" selection-start-line="110" selection-start-column="26" selection-end-line="110" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/cerradura-convexa.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-260">
-          <caret line="256" column="32" selection-start-line="256" selection-start-column="32" selection-end-line="256" selection-end-column="32" />
+        <state>
+          <caret line="332" column="4" selection-start-line="332" selection-start-column="4" selection-end-line="332" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test-cerradura-convexa.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-417">
+          <caret line="187" column="61" selection-start-line="187" selection-start-column="61" selection-end-line="187" selection-end-column="61" />
         </state>
       </provider>
     </entry>
