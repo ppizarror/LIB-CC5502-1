@@ -38,6 +38,7 @@ void testBasico() {
 
     // [Graham scan]
     std::pair<Poligono<float>, int> cerraduraGS = grahamScan(plist, 5);
+    cerraduraGS.first.print();
     assert(cerraduraGS.second == 5);
 }
 
@@ -202,9 +203,9 @@ int main() {
     std::cout << "Testeando cerradura convexa" << std::endl;
 
     // Carga los tests
+    testTriangulo();
     testBasico();
     testDuplicados();
-    testTriangulo();
     testCuadradoChico();
     testCuadradoMediano();
     testRectangulo();

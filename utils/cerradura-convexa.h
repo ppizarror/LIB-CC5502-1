@@ -367,8 +367,8 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
      */
     MergeSort<T> msort = MergeSort<T>(pivote);
     msort.mergeSort(new_cloud, 1, cloud_size - 1);
-    //QuickSort<T> qsort = QuickSort<T>(pivote);
-    //qsort.quicksort(new_cloud, 1, cloud_size - 1);
+    // QuickSort<T> qsort = QuickSort<T>(pivote);
+    // qsort.quicksort(new_cloud, 1, cloud_size - 1);
 
     /**
      * Si hay dos puntos con igual ángulo se deja aquel con mayor distancia
