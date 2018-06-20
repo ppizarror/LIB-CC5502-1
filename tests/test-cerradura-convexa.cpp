@@ -164,7 +164,7 @@ void testFiguraDeforme(int n) {
 
     // Añade los puntos
     for (int i = 0; i < n; i++) {
-        figura[i] = Punto<float>(randomFloat(0, 1), randomFloat(0, 1));
+        figura[i] = Punto<float>(randomFloat(-1, 1), randomFloat(-1, 1));
     }
 
     // Calcula la cerradura
@@ -196,7 +196,7 @@ int main() {
     testCuadradoChico();
     testCuadradoMediano();
     testRectangulo();
-    testFiguraDeforme(static_cast<int>(1e4));
+    testFiguraDeforme(static_cast<int>(1e5));
 
     // Retorna
     return 0;

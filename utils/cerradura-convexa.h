@@ -44,9 +44,9 @@ template<class T>
  */
 void swap(Punto<T> arr[], int i, int j) {
     if (i == j) return;
-    Punto<T> *t = new Punto<T>(arr[i].getCoordX(), arr[i].getCoordY());
+    Punto<T> t = arr[i].clonar();
     arr[i] = arr[j];
-    arr[j] = *t;
+    arr[j] = t;
 }
 
 template<class T>
@@ -164,6 +164,9 @@ std::pair<Poligono<T>, int> giftWrapping(Punto<T> *cloud, int cloud_size) {
  */
 const void *pv;
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedStructInspection"
+
 template<class T>
 /**
  * Clase mergesort - Ordena la lista de puntos aplicando MergeSort orden nlogn peor caso
@@ -232,48 +235,46 @@ public:
     }
 };
 
+#pragma clang diagnostic pop
+
 template<class T>
 /**
  * Clase Quicksort de ordenación
- * @tparam T
+ * @tparam T - Template
+ * Adaptado de https://gist.github.com/harish-r/10025689
  */
 class QuickSort {
 private:
     static bool comp(Punto<T> &a, Punto<T> &b) {
         Punto<T> *p = (Punto<T> *) pv;
-        if (fabs(p->cos(a) - p->cos(b)) < 1e-10)
-            return p->dist(a) >= p->dist(b);
-        else
-            return p->cos(a) >= p->cos(b);
+        return p->cos(a) > p->cos(b);
+    }
+
+    static int partition(Punto<T> a[], int m, int n) {
+        int i, j, pindex;
+        Punto<T> pivot;
+        pindex = m;
+        pivot = a[n];
+        for (i = m; i < n; i++) {
+            if (comp(a[i], pivot)) {
+                swap(a, pindex, i);
+                pindex++;
+            }
+        }
+        swap(a, pindex, n);
+        return pindex;
     }
 
 public:
-    static void quicksort(Punto<T> A[], int izq, int der) {
-        int i, j;
-        Punto<T> aux, x;
-        i = izq;
-        j = der;
-        x = A[(izq + der) / 2];
-        do {
-            while (!comp(A[i], x) && (j <= der)) {
-                i++;
-            }
-            while (comp(A[j], x) && (j > izq)) {
-                j--;
-            }
-            if (i <= j) {
-                aux = A[i];
-                A[i] = A[j];
-                A[j] = aux;
-                i++;
-                j--;
-            }
-
-        } while (i <= j);
-        if (izq < j)
-            quicksort(A, izq, j);
-        if (i < der)
-            quicksort(A, i, der);
+    int quicksort(Punto<T> a[], int m, int n) {
+        int index;
+        if (m >= n)
+            return 0;
+        {
+            index = partition(a, m, n);
+            quicksort(a, m, index - 1);
+            quicksort(a, index + 1, n);
+        }
     }
 };
 
@@ -352,10 +353,12 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
     /**
      * Se ordenan los puntos por su ángulo con el pivote
      */
-    MergeSort<T> msort = MergeSort<T>();
-    msort.mergeSort(new_cloud, 1, cloud_size - 1);
-    // QuickSort<T> qsort = QuickSort<T>();
-    // qsort.quicksort(new_cloud, 1, cloud_size - 1);
+    // MergeSort<T> msort = MergeSort<T>();
+    // msort.mergeSort(new_cloud, 1, cloud_size - 1);
+    std::cout << "ordenando" << std::endl;
+    QuickSort<T> qsort = QuickSort<T>();
+    qsort.quicksort(new_cloud, 1, cloud_size - 1);
+    std::cout << "ok" << std::endl;
 
     /**
      * Si hay dos puntos con igual ángulo se deja aquel con mayor distancia
