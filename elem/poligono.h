@@ -109,7 +109,6 @@ template<class T>
  * @tparam T
  */
 Poligono<T>::~Poligono() {
-    delete[] this->puntos;
 }
 
 template<class T>

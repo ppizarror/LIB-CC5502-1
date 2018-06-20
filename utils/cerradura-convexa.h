@@ -445,14 +445,4 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
 
 };
 
-template<class T>
-bool point_order_x(const Punto<T>& p1, const Punto<T>& p2){
-    if (p1.x < p2.x)
-        return true;
-    else if (p1.x == p2.x)
-        return p1.y < p2.y;
-    else
-        return false;
-}
-
 #endif //LIB_CC5502_1_CERRADURA_CONVEXA_H

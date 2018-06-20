@@ -208,7 +208,7 @@ int main() {
     testCuadradoChico();
     testCuadradoMediano();
     testRectangulo();
-    testFiguraDeforme(static_cast<int>(1e4));
+    testFiguraDeforme(static_cast<int>(1e3));
 
     // Retorna
     return 0;
