@@ -172,7 +172,6 @@ template<class T>
  * @tparam T Template
  */
 Punto<T>::~Punto() {
-    delete[] this->coord;
 }
 
 template<class T>

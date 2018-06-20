@@ -72,6 +72,11 @@ void testInPoly() {
     p = Punto<float>(0.2, 0.5);
     assert(poly.inPoly(p));
 
+    // Verifica que cada punto de la lista exista en el polígono
+    for (auto &i : plist) {
+        assert(poly.isVertex(i));
+    }
+
     // Deben estar fuera
     p = Punto<float>(0, 1.1);
     assert(!poly.inPoly(p));

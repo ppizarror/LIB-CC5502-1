@@ -69,6 +69,12 @@ public:
 
     // Comprueba que un punto está dentro del polígono
     bool inPoly(Punto<T> &p) const;
+
+    // Comprueba que un punto sea vértice del polígono
+    bool isVertex(Punto<T> &p) const;
+
+    // Comprueba que el polígono tiene los mismos puntos que otro
+    bool mismosPuntos(const Poligono<T> &poly);
 };
 
 template<class T>
@@ -292,6 +298,41 @@ T Poligono<T>::perimetro() const {
         sum += s.norm();
     }
     return sum;
+}
+
+template<class T>
+/**
+ * Verifica que el polígono tiene iguales puntos que otro
+ * @tparam T - Template
+ * @param poly - Polígono a comparar
+ * @return
+ */
+bool Poligono<T>::mismosPuntos(const Poligono<T> &poly) {
+    // Recorre cada punto del polígono y verifica que exista en el arreglo de puntos del otro
+    for (int i = 0; i < this->totalp; i++) {
+        if (!poly.isVertex(this->puntos[i])) {
+            std::cout << "hax" << std::endl;
+            this->puntos[i].print();
+            return false;
+        }
+    }
+    return true;
+}
+
+template<class T>
+/**
+ * Verifica que un punto es vértice del polígono
+ * @tparam T - Template
+ * @param p - Punto
+ * @return
+ */
+bool Poligono<T>::isVertex(Punto<T> &p) const {
+    for (int i = 0; i < this->totalp; i++) {
+        if (fabs(this->puntos[i].getCoordX() - p.getCoordX()) < 1e-5 &&
+            fabs(this->puntos[i].getCoordY() - p.getCoordY()) < 1e-5)
+            return true;
+    }
+    return false;
 }
 
 #pragma clang diagnostic pop

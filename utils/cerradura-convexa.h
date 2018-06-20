@@ -25,7 +25,7 @@ template<class T>
  * @param P - Lista de puntos
  * @param n - Largo de la lista
  */
-static void _imprimeListaPuntos(Punto<T> *P, int n) {
+static void imprimeListaPuntos(Punto<T> *P, int n) {
     for (int i = 0; i < n; i++) {
         std::cout << P[i] << "->";
     }
@@ -170,7 +170,7 @@ template<class T>
  * @tparam T
  */
 class MergeSort {
-public:
+private:
     static bool comp(Punto<T> &a, Punto<T> &b) {
         Punto<T> *p = (Punto<T> *) pv;
         if (fabs(p->cos(a) - p->cos(b)) < 1e-10)
@@ -185,7 +185,8 @@ public:
         int n2 = r - m;
 
         // Listas temporales
-        Punto<T> L[n1], R[n2];
+        Punto<T> *L = new Punto<T>[n1];
+        Punto<T> *R = new Punto<T>[n2];
 
         // Copia los datos
         for (i = 0; i < n1; i++)
@@ -216,8 +217,11 @@ public:
             j++;
             k++;
         }
+        delete[] L;
+        delete[] R;
     }
 
+public:
     void mergeSort(Punto<T> arr[], int l, int r) {
         if (l < r) {
             int m = l + (r - l) / 2;
@@ -230,12 +234,58 @@ public:
 
 template<class T>
 /**
+ * Clase Quicksort de ordenación
+ * @tparam T
+ */
+class QuickSort {
+private:
+    static bool comp(Punto<T> &a, Punto<T> &b) {
+        Punto<T> *p = (Punto<T> *) pv;
+        if (fabs(p->cos(a) - p->cos(b)) < 1e-10)
+            return p->dist(a) >= p->dist(b);
+        else
+            return p->cos(a) >= p->cos(b);
+    }
+
+public:
+    static void quicksort(Punto<T> A[], int izq, int der) {
+        int i, j;
+        Punto<T> aux, x;
+        i = izq;
+        j = der;
+        x = A[(izq + der) / 2];
+        do {
+            while (!comp(A[i], x) && (j <= der)) {
+                i++;
+            }
+            while (comp(A[j], x) && (j > izq)) {
+                j--;
+            }
+            if (i <= j) {
+                aux = A[i];
+                A[i] = A[j];
+                A[j] = aux;
+                i++;
+                j--;
+            }
+
+        } while (i <= j);
+        if (izq < j)
+            quicksort(A, izq, j);
+        if (i < der)
+            quicksort(A, i, der);
+    }
+};
+
+template<class T>
+/**
  * Retorna el punto al lado del top del stack de puntos
  * @tparam T Template
  * @param S Stack de puntos
  * @return
  */
 Punto<T> nextToTop(std::stack<Punto<T>> &S) {
+    if (S.size() == 1) return S.top();
     Punto<T> p = S.top();
     S.pop();
     Punto<T> res = S.top();
@@ -276,15 +326,13 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
         }
     }
     Punto<T> p = cloud[min];
-    T lx = p.getCoordX();
-    T ly = p.getCoordY();
 
     /**
      * Se crea una nueva lista de puntos para evitar modificar la original, se pasa al plano +X+Y
      */
     Punto<T> *new_cloud = new Punto<T>[cloud_size];
     for (int i = 0; i < cloud_size; i++) {
-        new_cloud[i] = Punto<T>(cloud[i].getCoordX() - lx, cloud[i].getCoordY() - ly);
+        new_cloud[i] = Punto<T>(cloud[i].getCoordX(), cloud[i].getCoordY());
     }
 
     /**
@@ -306,6 +354,8 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
      */
     MergeSort<T> msort = MergeSort<T>();
     msort.mergeSort(new_cloud, 1, cloud_size - 1);
+    // QuickSort<T> qsort = QuickSort<T>();
+    // qsort.quicksort(new_cloud, 1, cloud_size - 1);
 
     /**
      * Si hay dos puntos con igual ángulo se deja aquel con mayor distancia
@@ -358,10 +408,9 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
      * Crea la lista de la cerradura
      */
     int total_cerradura = hull.size();
-    Punto<T> lrest = Punto<T>(lx, ly);
     Punto<T> *P = new Punto<T>[total_cerradura];
     for (int i = total_cerradura - 1; i >= 0; i--) {
-        P[i] = hull.top() + lrest;
+        P[i] = hull.top();
         hull.pop();
     }
 
