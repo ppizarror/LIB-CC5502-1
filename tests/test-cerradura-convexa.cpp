@@ -200,7 +200,7 @@ void testFiguraDeforme(int n, int r) {
     }
 
     // Calcula la cerradura
-    std::cout << "\n[GiftWrapping] Cerradura figura deforme 10x1 con " << n << " puntos" << std::endl;
+    std::cout << "\n[GiftWrapping] Cerradura figura deforme 10x1 con " << n << " puntos, r=" << r << "%" << std::endl;
     std::pair<Poligono<float>, int> cerraduraGW = giftWrapping(figura, n);
 
     // Vuelve a ejecutar GiftWrapping para comprobar errores en el cambio de los datos
@@ -209,9 +209,9 @@ void testFiguraDeforme(int n, int r) {
     medirTiempo(tinit);
 
     // Calcula cerradura con Graham Scan
-    std::cout << "\n[GrahamScan] Cerradura figura deforme 10x1 con " << n << " puntos" << std::endl;
+    std::cout << "\n[GrahamScan] Cerradura figura deforme 10x1 con " << n << " puntos, r=" << r << "%" << std::endl;
     tinit = clock();
-    std::pair<Poligono<float>, int> cerraduraGS = grahamScan(figura, n);
+    std::pair<Poligono<float>, int> cerraduraGS = grahamScanv2(figura, n);
     medirTiempo(tinit);
 
     // Verifica que ambos polígonos tengan iguales puntos
@@ -231,7 +231,7 @@ int main() {
     testCuadradoChico();
     testCuadradoMediano();
     testRectangulo();
-    testFiguraDeforme(static_cast<int>(1e5), 0);
+    testFiguraDeforme(static_cast<int>(100000), 80);
 
     // Retorna
     return 0;
