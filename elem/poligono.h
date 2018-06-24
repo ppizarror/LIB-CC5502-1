@@ -310,7 +310,7 @@ bool Poligono<T>::mismosPuntos(const Poligono<T> &poly) {
     // Recorre cada punto del polígono y verifica que exista en el arreglo de puntos del otro
     for (int i = 0; i < this->totalp; i++) {
         if (!poly.isVertex(this->puntos[i])) {
-            std::cout << "hax" << std::endl;
+            std::cout << "El siguiente punto no pertenece a ambas cerraduras:\t" << std::endl;
             this->puntos[i].print();
             return false;
         }

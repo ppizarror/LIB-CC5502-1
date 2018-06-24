@@ -106,6 +106,9 @@ public:
     // Calcula la distancia entre dos puntos
     double dist(Punto<T> &p) const;
 
+    // Calcula la distancia al cuadrado entre dos puntos
+    double dist2(Punto<T> &p) const;
+
     // Retorna distancia punto al origen
     double distOrigin() const;
 
@@ -377,18 +380,29 @@ double Punto<T>::distOrigin() const {
 
 template<class T>
 /**
+ * Calcula la distancia al cuadrado entre dos puntos.
+ * @tparam Template
+ * @param p Punto
+ * @return
+ */
+double Punto<T>::dist2(Punto<T> &p) const {
+    if (this->dim == 2) {
+        return pow(this->getCoordX() - p.getCoordX(), 2) + pow(this->getCoordY() - p.getCoordY(), 2);
+    } else {
+        return pow(this->getCoordX() - p.getCoordX(), 2) + pow(this->getCoordY() - p.getCoordY(), 2) +
+               pow(this->getCoordZ() - p.getCoordZ(), 2);
+    }
+}
+
+template<class T>
+/**
  * Calcula la distancia entre dos puntos.
  * @tparam Template
  * @param p Punto
  * @return
  */
 double Punto<T>::dist(Punto<T> &p) const {
-    if (this->dim == 2) {
-        return sqrt(pow(this->getCoordX() - p.getCoordX(), 2) + pow(this->getCoordY() - p.getCoordY(), 2));
-    } else {
-        return sqrt(pow(this->getCoordX() - p.getCoordX(), 2) + pow(this->getCoordY() - p.getCoordY(), 2) +
-                    pow(this->getCoordZ() - p.getCoordZ(), 2));
-    }
+    return sqrt(this->dist2(p));
 }
 
 template<class T>
@@ -563,7 +577,7 @@ template<class T>
  * @return
  */
 Punto<T> Punto<T>::clonar() {
-    if (this->dim == 2)
+    if (this->dim < 3)
         return Punto<T>(this->getCoordX(), this->getCoordY());
     else
         return Punto<T>(this->getCoordZ(), this->getCoordY(), this->getCoordZ());
@@ -577,8 +591,8 @@ template<class T>
  * @return
  */
 double Punto<T>::cos(Punto<T> &a) {
-    if (this->dist(a) == 0)
-        return 0;
+    if (this->dist(a) == 0 || a.getCoordX() == this->getCoordX())
+        return 0.0f;
     return ((a.getCoordX() - this->getCoordX())) / (this->dist(a));
 }
 

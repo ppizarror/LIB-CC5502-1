@@ -13,9 +13,9 @@
 #include <random>
 
 /**
- * Genera un número aleatorio entre dos valores flotantes
- * @param a Número menor
- * @param b Número mayor
+ * Genera un número aleatorio entre dos valores flotantes.
+ * @param a - Número menor
+ * @param b - Número mayor
  * @return
  */
 float randomFloat(float a, float b) {
@@ -26,7 +26,7 @@ float randomFloat(float a, float b) {
 }
 
 /**
- * Genera un número aleatorio entero entre dos valores
+ * Genera un número aleatorio entero entre dos valores.
  * @param a - Número mayor
  * @param b - Número menor
  * @return
@@ -48,17 +48,18 @@ void testBasico() {
 
     // [Graham scan]
     std::pair<Poligono<float>, int> cerraduraGS = grahamScan(plist, 5);
-    cerraduraGS.first.print();
     assert(cerraduraGS.second == 5);
+
+    // Verifica que ambos polígonos tengan iguales puntos
+    assert(cerraduraGW.first.mismosPuntos(cerraduraGS.first));
 }
 
 /**
- * Testeo triangulo con puntos en hipotenusa
+ * Testeo triangulo con puntos en hipotenusa.
  */
 void testTriangulo() {
     Punto<int> triangulo[] = {Punto<int>(0, 0), Punto<int>(-1, -1), Punto<int>(2, 2), Punto<int>(3, 3),
-                              Punto<int>(4, 4),
-                              Punto<int>(5, 5), Punto<int>(0, 0), Punto<int>(5, 0)}; // 8
+                              Punto<int>(4, 4), Punto<int>(5, 5), Punto<int>(0, 0), Punto<int>(5, 0)}; // 8
 
     // [GiftWrapping]
     std::pair<Poligono<int>, int> cerraduraGW = giftWrapping(triangulo, 8);
@@ -67,6 +68,16 @@ void testTriangulo() {
     // [Graham scan]
     std::pair<Poligono<int>, int> cerraduraGS = grahamScan(triangulo, 8);
     assert(cerraduraGS.second == 3);
+
+    // Verifica que ambos polígonos tengan iguales puntos
+    assert(cerraduraGW.first.mismosPuntos(cerraduraGS.first));
+}
+
+/**
+ * Testea la cerradura con la posición del menor en distintos lugares
+ */
+void testRombo() {
+
 }
 
 /**
@@ -83,6 +94,9 @@ void testDuplicados() {
     // [Graham scan]
     std::pair<Poligono<int>, int> cerraduraGS = grahamScan(plist, 6);
     assert(cerraduraGS.second == 3);
+
+    // Verifica que ambos polígonos tengan iguales puntos
+    assert(cerraduraGW.first.mismosPuntos(cerraduraGS.first));
 }
 
 /**
@@ -109,7 +123,10 @@ void testCuadradoChico() {
     std::cout << "\n[Graham Scan] Cerradura cuadrado perfecto 1x1 con 10 puntos" << std::endl;
     std::pair<Poligono<float>, int> cerraduraGS = grahamScan(cuadrado, 10);
     cerraduraGS.first.print();
-    // assert(cerraduraGS.second == 4);
+    assert(cerraduraGS.second == 4);
+
+    // Verifica que ambos polígonos tengan iguales puntos
+    assert(cerraduraGW.first.mismosPuntos(cerraduraGS.first));
 }
 
 /**
@@ -136,7 +153,10 @@ void testCuadradoMediano() {
     std::cout << "\n[Graham Scan] Cerradura cuadrado perfecto 1x1 con 1000 puntos" << std::endl;
     std::pair<Poligono<float>, int> cerraduraGS = grahamScan(cuadrado, 1000);
     cerraduraGS.first.print();
-    // assert(cerraduraGS.second == 4);
+    assert(cerraduraGS.second == 4);
+
+    // Verifica que ambos polígonos tengan iguales puntos
+    assert(cerraduraGW.first.mismosPuntos(cerraduraGS.first));
 }
 
 /**
@@ -165,22 +185,18 @@ void testRectangulo() {
     std::pair<Poligono<float>, int> cerraduraGS = giftWrapping(rectangulo, 10000);
     cerraduraGS.first.print();
     assert(cerraduraGS.second == 4);
-}
 
-/**
- * Mide el tiempo pasado un tiempo inicial tinit.
- * @param tinit - Tiempo inicial
- */
-void medirTiempo(int tinit) {
-    std::cout << "Tiempo: " << (clock() - tinit) / double(CLOCKS_PER_SEC) * 1000 << "ms" << std::endl;
+    // Verifica que ambos polígonos tengan iguales puntos
+    assert(cerraduraGW.first.mismosPuntos(cerraduraGS.first));
 }
 
 /**
  * Testea una figura sin anclajes predefinidos.
- * @param n - Número de puntos
+ * @param sz - Número de puntos
  * @param r - Porcentaje de repetidos en vértices
  */
-void testFiguraDeforme(int n, int r) {
+void testFiguraDeforme(double sz, int r) {
+    auto n = static_cast<int>(sz);
     Punto<float> *figura = new Punto<float>[n]; // NOLINT
     int tinit;
 
@@ -196,26 +212,23 @@ void testFiguraDeforme(int n, int r) {
     int rindex;
     for (int i = 0; i < (n - alt); i++) {
         rindex = randomInt(0, alt - 1);
-        figura[i] = Punto<float>(figura[rindex].getCoordX(), figura[rindex].getCoordY());
+        figura[i + alt] = Punto<float>(figura[rindex].getCoordX(), figura[rindex].getCoordY());
     }
 
     // Calcula la cerradura
+    tinit = clock();
     std::cout << "\n[GiftWrapping] Cerradura figura deforme 10x1 con " << n << " puntos, r=" << r << "%" << std::endl;
     std::pair<Poligono<float>, int> cerraduraGW = giftWrapping(figura, n);
-
-    // Vuelve a ejecutar GiftWrapping para comprobar errores en el cambio de los datos
-    tinit = clock();
-    std::pair<Poligono<float>, int> cerraduraGW2 = giftWrapping(figura, n);
     medirTiempo(tinit);
 
     // Calcula cerradura con Graham Scan
     std::cout << "\n[GrahamScan] Cerradura figura deforme 10x1 con " << n << " puntos, r=" << r << "%" << std::endl;
     tinit = clock();
-    std::pair<Poligono<float>, int> cerraduraGS = grahamScanv2(figura, n);
+    std::pair<Poligono<float>, int> cerraduraGS = grahamScan(figura, n);
     medirTiempo(tinit);
 
     // Verifica que ambos polígonos tengan iguales puntos
-    assert(cerraduraGW2.first.mismosPuntos(cerraduraGS.first));
+    assert(cerraduraGW.first.mismosPuntos(cerraduraGS.first));
 }
 
 /**
@@ -225,13 +238,19 @@ int main() {
     std::cout << "Testeando cerradura convexa" << std::endl;
 
     // Carga los tests
-    testBasico();
-    testDuplicados();
-    testTriangulo();
-    testCuadradoChico();
-    testCuadradoMediano();
-    testRectangulo();
-    testFiguraDeforme(static_cast<int>(100000), 80);
+    testBasico(); // Test sencillo con puros puntos en la cerradura
+    testDuplicados(); // Testea varios puntos duplicados
+    testTriangulo(); // Testea puntos colineales en la hipotenusa
+    testCuadradoChico(); // Test cuadrado 1x1 con 10 puntos aleatorios
+    testCuadradoMediano(); // Test cuadrado 1x1 con 1e4 puntos aleatorios
+    testRectangulo(); // Test rectángulo 10x1 con 1e4 puntos aleatorios
+
+    // Inicia las pruebas
+    int r[] = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90};
+    double sz[] = {1e5, 1e4, 1e5};
+    for (int i : r) {
+        testFiguraDeforme(sz[0], i);
+    }
 
     // Retorna
     return 0;

@@ -35,6 +35,14 @@ static void imprimeListaPuntos(Punto<T> *P, int n) {
 
 #pragma clang diagnostic pop
 
+/**
+ * Mide el tiempo pasado un tiempo inicial tinit.
+ * @param tinit - Tiempo inicial
+ */
+void medirTiempo(int tinit) {
+    std::cout << "Tiempo: " << (clock() - tinit) / double(CLOCKS_PER_SEC) * 1000 << "ms" << std::endl;
+}
+
 template<class T>
 /**
  * Intercambia dos elementos en una lista de puntos
@@ -119,13 +127,13 @@ std::pair<Poligono<T>, int> giftWrapping(Punto<T> *cloud, int cloud_size) {
             if (endpoint == pointOnHull or arco.left(new_cloud[j])) {
                 arco = Segmento<T>(P[i], endpoint);
                 endpoint = new_cloud[j];
-                lastdist = P[i].dist(new_cloud[j]);
+                lastdist = P[i].dist2(new_cloud[j]);
             } else if (arco.on(new_cloud[j]) && lastdist != -1) { // Punto colineal
-                newdist = P[i].dist(new_cloud[j]);
+                newdist = P[i].dist2(new_cloud[j]);
                 if (newdist > lastdist) {
                     arco = Segmento<T>(P[i], endpoint);
                     endpoint = new_cloud[j];
-                    lastdist = P[i].dist(new_cloud[j]);
+                    lastdist = newdist;
                 }
             }
         }
@@ -160,140 +168,6 @@ std::pair<Poligono<T>, int> giftWrapping(Punto<T> *cloud, int cloud_size) {
 
 }
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCUnusedStructInspection"
-
-template<class T>
-/**
- * Clase mergesort - Ordena la lista de puntos aplicando MergeSort orden nlogn peor caso
- * @tparam T
- */
-class MergeSort {
-private:
-    Punto<T> *p; // Pivote
-    bool comp(Punto<T> &a, Punto<T> &b) {
-        return this->p->cos(a) < this->p->cos(b);
-    }
-
-    void merge(Punto<T> arr[], int l, int m, int r) {
-        int i, j, k;
-        int n1 = m - l + 1;
-        int n2 = r - m;
-
-        // Listas temporales
-        Punto<T> *L = new Punto<T>[n1];
-        Punto<T> *R = new Punto<T>[n2];
-
-        // Copia los datos
-        for (i = 0; i < n1; i++)
-            L[i] = arr[l + i];
-        for (j = 0; j < n2; j++)
-            R[j] = arr[m + 1 + j];
-
-        i = 0;
-        j = 0;
-        k = l;
-        while (i < n1 && j < n2) {
-            if (this->comp(L[i], R[j])) {
-                arr[k] = L[i];
-                i++;
-            } else {
-                arr[k] = R[j];
-                j++;
-            }
-            k++;
-        }
-        while (i < n1) {
-            arr[k] = L[i];
-            i++;
-            k++;
-        }
-        while (j < n2) {
-            arr[k] = R[j];
-            j++;
-            k++;
-        }
-        delete[] L;
-        delete[] R;
-    }
-
-public:
-
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
-
-    // Constructor
-    MergeSort(Punto<T> &pivote) { // NOLINT
-        this->p = &pivote;
-    }
-
-#pragma clang diagnostic pop
-
-    void mergeSort(Punto<T> arr[], int l, int r) {
-        if (l < r) {
-            int m = l + (r - l) / 2;
-            mergeSort(arr, l, m);
-            mergeSort(arr, m + 1, r);
-            this->merge(arr, l, m, r);
-        }
-    }
-};
-
-#pragma clang diagnostic pop
-
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCUnusedStructInspection"
-
-template<class T>
-/**
- * Clase Quicksort de ordenación
- * @tparam T - Template
- * Adaptado de https://gist.github.com/harish-r/10025689
- */
-class QuickSort {
-private:
-    Punto<T> *p; // Pivote
-    bool comp(Punto<T> &a, Punto<T> &b) {
-        return this->p->cos(a) < this->p->cos(b);
-    }
-
-    int partition(Punto<T> a[], int m, int n) {
-        int i, j, pindex;
-        pindex = m;
-        for (i = m; i < n; i++) {
-            if (comp(a[i], a[n])) {
-                swap(a, pindex, i);
-                pindex++;
-            }
-        }
-        swap(a, pindex, n);
-        return pindex;
-    }
-
-public:
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
-
-    QuickSort(Punto<T> &pivote) { // NOLINT
-        this->p = &pivote;
-    }
-
-#pragma clang diagnostic pop
-
-    int quicksort(Punto<T> a[], int m, int n) {
-        int index;
-        if (m >= n)
-            return 0;
-        {
-            index = partition(a, m, n);
-            quicksort(a, m, index - 1);
-            quicksort(a, index + 1, n);
-        }
-    }
-};
-
-#pragma clang diagnostic pop
-
 template<class T>
 /**
  * Retorna el punto al lado del top del stack de puntos
@@ -310,168 +184,66 @@ Punto<T> nextToTop(std::stack<Punto<T>> &S) {
     return res;
 }
 
-template<class T>
 /**
- * Algoritmo de Graham Scan, algoritmo sólo valido para 2D
- * @tparam T - Tipo de datos
- * @param cloud - Nube de puntos a realizar la cerradura convexa
- * @param cloud_size - Número de puntos
- * @return Poligono - Polínono con puntos que representa la cerradura convexa
- */
-std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
-
-    /**
-     * Caso de borde
-     */
-    if (cloud_size <= 3) {
-        Poligono<T> *cerradura = new Poligono<T>(cloud, cloud_size);
-        return std::make_pair(*cerradura, cloud_size);
-    }
-
-    /**
-     * Se elige el punto con la menor coordenada ordenada, si hay varios iguales
-     * se elige aquel con el menor x
-     */
-    T ymin = cloud[0].getCoordY(); // Valor más chico de y
-    int min = 0; // Posición en la nube con el punto ganador
-    for (int i = 1; i < cloud_size; i++) {
-        T y = cloud[i].getCoordY();
-        // Se encontró un punto con menor coordenada y, o uno que tiene igual y pero menor x
-        if ((y < ymin) or (y == ymin and cloud[i].getCoordX() < cloud[min].getCoordX())) {
-            ymin = y;
-            min = i;
-        }
-    }
-    Punto<T> p = cloud[min];
-
-    /**
-     * Se crea una nueva lista de puntos para evitar modificar la original, se pasa al plano +X+Y
-     */
-    Punto<T> *new_cloud = new Punto<T>[cloud_size];
-    for (int i = 0; i < cloud_size; i++) {
-        new_cloud[i] = Punto<T>(cloud[i].getCoordX(), cloud[i].getCoordY());
-    }
-
-    /**
-     * Intercambio el menor con el primero en la lista
-     */
-    swap(new_cloud, 0, min);
-
-    /**
-     * Se genera el pivote
-     */
-    Punto<T> pivote = new_cloud[0].clonar();
-
-    /**
-     * Se ordenan los puntos por su ángulo con el pivote
-     */
-    int tinit = clock();
-    MergeSort<T> msort = MergeSort<T>(pivote);
-    msort.mergeSort(new_cloud, 1, cloud_size - 1);
-    // QuickSort<T> qsort = QuickSort<T>(pivote);
-    // qsort.quicksort(new_cloud, 1, cloud_size - 1);
-    std::cout << "Tiempo msort: " << (clock() - tinit) / double(CLOCKS_PER_SEC) * 1000 << "ms" << std::endl;
-
-    /**
-     * Si hay dos puntos con igual ángulo se deja aquel con mayor distancia
-     */
-    int vp = 1; // Indica cuántos puntos válidos existen
-    double lang = 0;
-    double mxdist = 0;
-    int maxpos = -1;
-    Punto<T> *final_cloud = new Punto<T>[cloud_size];
-    final_cloud[0] = new_cloud[0];
-    for (int i = 1; i < cloud_size; i++) {
-        if (fabs(lang - new_cloud[0].cos(new_cloud[i])) > 1e-10) { // Si el ángulo cambia se actualiza la distancia
-            if (maxpos != -1) {
-                final_cloud[vp] = new_cloud[maxpos];
-                vp++;
-            }
-            mxdist = new_cloud[0].dist(new_cloud[i]);
-            lang = new_cloud[0].cos(new_cloud[i]);
-            maxpos = i;
-            if (i == cloud_size - 1) {
-                final_cloud[vp] = new_cloud[i];
-                vp++;
-            }
-        } else {
-            if (new_cloud[0].dist(new_cloud[i]) > mxdist) {
-                maxpos = i;
-            }
-            if (i == cloud_size - 1 && maxpos != -1) {
-                final_cloud[vp] = new_cloud[i];
-                vp++;
-            }
-        }
-    }
-
-    /**
-     * Genera la cerradura
-     */
-    std::stack<Punto<T>> hull;
-    hull.push(final_cloud[0]);
-    hull.push(final_cloud[1]);
-    hull.push(final_cloud[2]);
-    for (int i = 3; i < vp; i++) {
-        while (nextToTop(hull).ccw(hull.top(), final_cloud[i]) <= 0) {
-            hull.pop();
-        }
-        hull.push(final_cloud[i]);
-    }
-
-    /**
-     * Crea la lista de la cerradura
-     */
-    int total_cerradura = hull.size();
-    Punto<T> *P = new Punto<T>[total_cerradura];
-    for (int i = total_cerradura - 1; i >= 0; i--) {
-        P[i] = hull.top();
-        hull.pop();
-    }
-
-    /**
-     * Crea el polígono
-     */
-    Poligono<T> *cerradura = new Poligono<T>(P, total_cerradura);
-
-    /**
-     * Elimina variables
-     */
-    delete[] final_cloud;
-    delete[] new_cloud;
-
-    /**
-     * Retorna el par
-     */
-    return std::make_pair(*cerradura, total_cerradura);
-
-};
-
-/**
- * Intercambia dos valores de una lista de núeros enteros
+ * Intercambia dos valores i<->j de una lista de núeros enteros
  * @param arr - Arreglo
  * @param i - Posición i
  * @param j - Posición j
  */
 void swapInt(int *arr, int i, int j) {
+    if (i == j) return;
     int t = arr[i];
     arr[i] = arr[j];
     arr[j] = t;
 }
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedStructInspection"
+
 /**
- * Clase mergesort - Ordena la lista de puntos aplicando MergeSort orden nlogn peor caso
+ * Clase QuickSort - Ordena la lista de puntos aplicando quicksort orden nlogn peor caso
+ */
+class QuickSort {
+private:
+    int partition(const double *cosp, int *arrpos, int low, int high) {
+        double pivot = cosp[arrpos[high]];
+        int i = (low - 1);
+
+        for (int j = low; j <= high - 1; j++) {
+            if (cosp[arrpos[j]] < pivot) {
+                i++;
+                swapInt(arrpos, i, j);
+            }
+        }
+        swapInt(arrpos, i + 1, high);
+        return (i + 1);
+    }
+
+public:
+    void quickSort(double *cosp, int *arrpos, int low, int high) {
+        if (low < high) {
+            int pi = this->partition(cosp, arrpos, low, high);
+            quickSort(cosp, arrpos, low, pi - 1);
+            quickSort(cosp, arrpos, pi + 1, high);
+        }
+    }
+};
+
+#pragma clang diagnostic pop
+
+/**
+ * Clase MergeSort - Ordena la lista de puntos aplicando mergesort orden nlogn peor caso
  */
 class MergeSort {
 private:
-    void merge(double *cosp, int *arrpos, int l, int m, int r) {
+    void merge(const double *cosp, int *arrpos, int l, int m, int r) {
         int i, j, k;
         int n1 = m - l + 1;
         int n2 = r - m;
 
         // Listas temporales
-        int *L = new int[n1];
-        int *R = new int[n2];
+        auto *L = new int[n1];
+        auto *R = new int[n2];
 
         // Copia los datos
         for (i = 0; i < n1; i++)
@@ -502,8 +274,9 @@ private:
             j++;
             k++;
         }
-        delete[] L;
-        delete[] R;
+
+        // Elimina las listas
+        delete[] L, R;
     }
 
 public:
@@ -525,7 +298,7 @@ template<class T>
  * @param cloud_size - Número de puntos
  * @return Poligono - Polínono con puntos que representa la cerradura convexa
  */
-std::pair<Poligono<T>, int> grahamScanv2(Punto<T> *cloud, int cloud_size) {
+std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
 
     /**
      * Caso de borde
@@ -537,7 +310,7 @@ std::pair<Poligono<T>, int> grahamScanv2(Punto<T> *cloud, int cloud_size) {
 
     /**
      * Se elige el punto con la menor coordenada ordenada, si hay varios iguales
-     * se elige aquel con el menor x
+     * se elige aquel con el menor x, tiempo: (0.005%)
      */
     T ymin = cloud[0].getCoordY(); // Valor más chico de y
     int min = 0; // Posición en la nube con el punto ganador
@@ -551,9 +324,9 @@ std::pair<Poligono<T>, int> grahamScanv2(Punto<T> *cloud, int cloud_size) {
     }
 
     /**
-     * Se genera el pivote
+     * Intercambia 0<->min
      */
-    Punto<T> pivote = cloud[min].clonar();
+    // swapPunto(cloud, 0, min);
 
     /**
      * Crea una lista con las posiciones de cada objeto a ordenar
@@ -565,19 +338,26 @@ std::pair<Poligono<T>, int> grahamScanv2(Punto<T> *cloud, int cloud_size) {
     swapInt(ppos, 0, min);
 
     /**
+     * Se genera el pivote
+     */
+    Punto<T> pivote = cloud[min].clonar();
+
+    /**
      * Crea una lista con los cosenos de cada punto con respecto al pivote
      */
     double *cosp = new double[cloud_size];
-    cosp[0] = 0;
-    for (int i = 1; i < cloud_size; i++) {
+    for (int i = 0; i < cloud_size; i++) {
         cosp[i] = pivote.cos(cloud[i]);
     }
+    cosp[min] = 0;
 
     /**
-     * Se ordena la lista de acuerdo al ángulo coseno con respecto al pivote, sólo se ordenan las posiciones
+     * Se ordena la lista de acuerdo al ángulo coseno con respecto al pivote, sólo se ordenan las posiciones 22%
      */
-    MergeSort2 msort = MergeSort2();
+    MergeSort msort = MergeSort();
     msort.mergeSort(cosp, ppos, 1, cloud_size - 1);
+    // QuickSort qsort = QuickSort();
+    // qsort.quickSort(cosp, ppos, 1, cloud_size - 1);
 
     /**
      * Se crea una nueva lista de acuerdo a las posiciones
@@ -592,33 +372,38 @@ std::pair<Poligono<T>, int> grahamScanv2(Punto<T> *cloud, int cloud_size) {
      */
     int vp = 1; // Indica cuántos puntos válidos existen
     double lang = 0;
-    double mxdist = 0;
+    double mxdist = 0, actdist = 0;
     int maxpos = -1;
     Punto<T> *final_cloud = new Punto<T>[cloud_size];
     final_cloud[0] = new_cloud[0];
+    int h = 0;
     for (int i = 1; i < cloud_size; i++) {
-        if (fabs(lang - new_cloud[0].cos(new_cloud[i])) > 1e-10) { // Si el ángulo cambia se actualiza la distancia
+        if (fabs(new_cloud[0].cos(new_cloud[i]) - lang) > 1e-10) { // Si el ángulo cambia se actualiza la distancia
             if (maxpos != -1) {
                 final_cloud[vp] = new_cloud[maxpos];
-                vp++;
+                vp += 1;
             }
-            mxdist = new_cloud[0].dist(new_cloud[i]);
+            mxdist = new_cloud[0].dist2(new_cloud[i]);
             lang = new_cloud[0].cos(new_cloud[i]);
             maxpos = i;
-            if (i == cloud_size - 1) {
+            if (i == (cloud_size - 1)) {
                 final_cloud[vp] = new_cloud[i];
-                vp++;
+                vp += 1;
             }
         } else {
-            if (new_cloud[0].dist(new_cloud[i]) > mxdist) {
+            h++;
+            actdist = new_cloud[0].dist2(new_cloud[i]);
+            if (actdist > mxdist) {
                 maxpos = i;
+                mxdist = actdist;
             }
-            if (i == cloud_size - 1 && maxpos != -1) {
-                final_cloud[vp] = new_cloud[i];
-                vp++;
+            if (i == (cloud_size - 1) && maxpos != -1) {
+                final_cloud[vp] = new_cloud[maxpos];
+                vp += 1;
             }
         }
     }
+    if (vp < 3) throw std::logic_error("No es posible generar la cerradura");
 
     /**
      * Genera la cerradura
