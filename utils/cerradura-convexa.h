@@ -5,14 +5,24 @@
  * @date 18/06/18
  */
 
-// Importación de librerías
+/**
+ * Importación de librerías
+ */
 #include <algorithm>
 #include <ctime>
 #include <stack>
 #include <vector>
 #include "../elem/poligono.h"
 
-// Constantes
+/**
+ * Configuraciones de Graham-Scan
+ */
+static double GRAHAM_SCAN_PARTITION = 1e5; // Partición de los puntos
+static bool GRAHAM_SCAN_USE_QUICKSORT = true; // Usa Quicksort en vez de MergeSort
+
+/**
+ * Constantes
+ */
 #ifndef LIB_CC5502_1_CERRADURA_CONVEXA_H
 #define LIB_CC5502_1_CERRADURA_CONVEXA_H
 
@@ -45,13 +55,13 @@ void medirTiempo(int tinit) {
 
 template<class T>
 /**
- * Intercambia dos elementos en una lista de puntos
- * @tparam T Template
- * @param arr Arreglo
- * @param i
- * @param j
+ * Intercambia dos elementos i<->j en una lista de puntos
+ * @tparam T - Template
+ * @param arr - Arreglo
+ * @param i - Posición i
+ * @param j - Posición j
  */
-void swap(Punto<T> arr[], int i, int j) {
+void swapPunto(Punto<T> arr[], int i, int j) {
     if (i == j) return;
     Punto<T> t = arr[i].clonar();
     arr[i] = arr[j];
@@ -60,7 +70,7 @@ void swap(Punto<T> arr[], int i, int j) {
 
 template<class T>
 /**
- * Algoritmo de Gift Wrapping
+ * Algoritmo de Gift Wrapping.
  * @tparam T - Tipo de datos
  * @param cloud - Nube de puntos a realizar la cerradura convexa
  * @param cloud_size - Número de puntos
@@ -71,7 +81,10 @@ std::pair<Poligono<T>, int> giftWrapping(Punto<T> *cloud, int cloud_size) {
     /**
      * Caso de borde
      */
-    if (cloud_size <= 3) {
+    if (cloud_size < 3) {
+        throw std::logic_error("No es posible generar la cerradura");
+    }
+    if (cloud_size == 3) {
         Poligono<T> *cerradura = new Poligono<T>(cloud, cloud_size);
         return std::make_pair(*cerradura, cloud_size);
     }
@@ -102,7 +115,7 @@ std::pair<Poligono<T>, int> giftWrapping(Punto<T> *cloud, int cloud_size) {
     for (int i = 0; i < cloud_size; i++) {
         new_cloud[i] = Punto<T>(cloud[i].getCoordX() - lx, cloud[i].getCoordY() - ly);
     }
-    swap(new_cloud, j, 0);
+    swapPunto(new_cloud, j, 0);
     pointOnHull = new_cloud[0];
 
     /**
@@ -131,14 +144,14 @@ std::pair<Poligono<T>, int> giftWrapping(Punto<T> *cloud, int cloud_size) {
             } else if (arco.on(new_cloud[j]) && lastdist != -1) { // Punto colineal
                 newdist = P[i].dist2(new_cloud[j]);
                 if (newdist > lastdist) {
-                    arco = Segmento<T>(P[i], endpoint);
                     endpoint = new_cloud[j];
+                    arco = Segmento<T>(P[i], endpoint);
                     lastdist = newdist;
                 }
             }
         }
         delete &arco;
-        i++;
+        i += 1;
         pointOnHull = endpoint;
     } while (endpoint != P[0]);
 
@@ -171,8 +184,8 @@ std::pair<Poligono<T>, int> giftWrapping(Punto<T> *cloud, int cloud_size) {
 template<class T>
 /**
  * Retorna el punto al lado del top del stack de puntos
- * @tparam T Template
- * @param S Stack de puntos
+ * @tparam T - Template
+ * @param S - Stack de puntos
  * @return
  */
 Punto<T> nextToTop(std::stack<Punto<T>> &S) {
@@ -196,9 +209,6 @@ void swapInt(int *arr, int i, int j) {
     arr[i] = arr[j];
     arr[j] = t;
 }
-
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCUnusedStructInspection"
 
 /**
  * Clase QuickSort - Ordena la lista de puntos aplicando quicksort orden nlogn peor caso
@@ -228,8 +238,6 @@ public:
         }
     }
 };
-
-#pragma clang diagnostic pop
 
 /**
  * Clase MergeSort - Ordena la lista de puntos aplicando mergesort orden nlogn peor caso
@@ -292,25 +300,27 @@ public:
 
 template<class T>
 /**
- * Algoritmo de Graham Scan, algoritmo sólo valido para 2D
+ * Algoritmo de Graham Scan, algoritmo sólo valido para 2D.
  * @tparam T - Tipo de datos
  * @param cloud - Nube de puntos a realizar la cerradura convexa
  * @param cloud_size - Número de puntos
- * @return Poligono - Polínono con puntos que representa la cerradura convexa
+ * @return Lista de puntos
  */
-std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
+std::pair<Punto<T> *, int> __grahamScan(Punto<T> *cloud, int cloud_size) {
 
     /**
      * Caso de borde
      */
-    if (cloud_size <= 3) {
-        Poligono<T> *cerradura = new Poligono<T>(cloud, cloud_size);
-        return std::make_pair(*cerradura, cloud_size);
+    if (cloud_size < 3) {
+        throw std::logic_error("No es posible generar la cerradura");
+    }
+    if (cloud_size == 3) {
+        return std::make_pair(cloud, cloud_size);
     }
 
     /**
      * Se elige el punto con la menor coordenada ordenada, si hay varios iguales
-     * se elige aquel con el menor x, tiempo: (0.005%)
+     * se elige aquel con el menor x
      */
     T ymin = cloud[0].getCoordY(); // Valor más chico de y
     int min = 0; // Posición en la nube con el punto ganador
@@ -324,27 +334,23 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
     }
 
     /**
-     * Intercambia 0<->min
-     */
-    // swapPunto(cloud, 0, min);
-
-    /**
      * Crea una lista con las posiciones de cada objeto a ordenar
      */
     int *ppos = new int[cloud_size];
     for (int i = 0; i < cloud_size; i++) {
         ppos[i] = i;
     }
-    swapInt(ppos, 0, min);
+    swapInt(ppos, 0, min); // Deja el pivote al principio
 
     /**
      * Se genera el pivote
      */
-    Punto<T> pivote = cloud[min].clonar();
+    Punto<T> pivote = cloud[min];
 
     /**
      * Crea una lista con los cosenos de cada punto con respecto al pivote
      */
+
     double *cosp = new double[cloud_size];
     for (int i = 0; i < cloud_size; i++) {
         cosp[i] = pivote.cos(cloud[i]);
@@ -352,12 +358,18 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
     cosp[min] = 0;
 
     /**
-     * Se ordena la lista de acuerdo al ángulo coseno con respecto al pivote, sólo se ordenan las posiciones 22%
+     * Se ordena la lista de acuerdo al ángulo coseno con respecto al pivote, sólo se ordenan las posiciones
      */
-    MergeSort msort = MergeSort();
-    msort.mergeSort(cosp, ppos, 1, cloud_size - 1);
-    // QuickSort qsort = QuickSort();
-    // qsort.quickSort(cosp, ppos, 1, cloud_size - 1);
+    if (GRAHAM_SCAN_USE_QUICKSORT) {
+        QuickSort *qsort = new QuickSort();
+        qsort->quickSort(cosp, ppos, 1, cloud_size - 1);
+        delete[] qsort;
+    } else {
+        MergeSort *msort = new MergeSort();
+        msort->mergeSort(cosp, ppos, 1, cloud_size - 1);
+        delete[] msort;
+
+    }
 
     /**
      * Se crea una nueva lista de acuerdo a las posiciones
@@ -430,11 +442,6 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
     }
 
     /**
-     * Crea el polígono
-     */
-    Poligono<T> *cerradura = new Poligono<T>(P, total_cerradura);
-
-    /**
      * Elimina variables
      */
     delete[] new_cloud;
@@ -443,8 +450,91 @@ std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
     /**
      * Retorna el par
      */
-    return std::make_pair(*cerradura, total_cerradura);
+    return std::make_pair(P, total_cerradura);
 
 };
+
+template<class T>
+/**
+ * Algoritmo de Graham Scan, algoritmo sólo valido para 2D.
+ * @tparam T - Tipo de datos
+ * @param cloud - Nube de puntos a realizar la cerradura convexa
+ * @param cloud_size - Número de puntos
+ * @return Poligono - Polínono con puntos que representa la cerradura convexa
+ */
+std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
+
+    /**
+     * Divide un arreglo de a grupos de 1e5, y luego mezcla
+     */
+    if (cloud_size <= GRAHAM_SCAN_PARTITION) {
+        std::pair<Punto<T> *, int> cerraduraGS = __grahamScan(cloud, cloud_size);
+        Poligono<T> poly = Poligono<T>(cerraduraGS.first, cerraduraGS.second);
+        return std::make_pair(poly, cerraduraGS.second);
+    } else {
+
+        /**
+         * Calcula largos de particiones
+         */
+        int npart = static_cast<int>(cloud_size / GRAHAM_SCAN_PARTITION);
+        int partsize = static_cast<int>(GRAHAM_SCAN_PARTITION);
+
+        /**
+         * Arreglos con puntos y resultados de cada partición
+         */
+        Punto<T> *mixed_results = new Punto<T>[cloud_size]; // Almacena todos los puntos resultantes de cada partición
+
+        /**
+         * Itera sobre cada partición, calcula cerradura y mezcla resultados
+         */
+        int partdelta = 0; // Se usa para usar el antepenultimo con 3 puntos menos y el último con 3 más
+        int k = 0; // Última posición accedido
+        int r = 0; // Última posición añadida en mixed_results
+
+        for (int i = 0; i < npart; i++) {
+            if (i < npart - 2) { // Cualquier partición
+                partdelta = 0;
+            } else if (i == (npart - 2)) { // Antepenúltima partición
+                partdelta = -3;
+            } else if (i == (npart - 1)) { // Última partición
+                partdelta = 3;
+            }
+
+            // Particiona los puntos
+            Punto<T> *partial_cloud = new Punto<T>[partsize + 3]; // Nube parcial que se calcula
+            for (int j = 0; j < (partsize + partdelta); j++) {
+                partial_cloud[j] = cloud[k];
+                k += 1;
+            }
+
+            // Calcula la cerradura
+            std::pair<Punto<T> *, int> cerraduraGS = __grahamScan(partial_cloud, partsize + partdelta);
+
+            // Añade los puntos de la cerradura
+            for (int m = 0; m < cerraduraGS.second; m++) {
+                mixed_results[r] = cerraduraGS.first[m];
+                r += 1;
+            }
+            delete[] partial_cloud;
+        }
+
+        /**
+         * Calcula la cerradura final
+         */
+        std::pair<Punto<T> *, int> cerraduraGS = __grahamScan(mixed_results, r);
+        Poligono<T> poly = Poligono<T>(cerraduraGS.first, cerraduraGS.second);
+
+        /**
+         * Elimina variables
+         */
+        delete[] mixed_results;
+
+        /**
+         * Retorna el par
+         */
+        return std::make_pair(poly, cerraduraGS.second);
+    }
+
+}
 
 #endif //LIB_CC5502_1_CERRADURA_CONVEXA_H

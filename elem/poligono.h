@@ -21,7 +21,7 @@
 template<class T>
 /**
  * Clase Polígono, conformada por Puntos.
- * @tparam T Template
+ * @tparam T - Template
  */
 class Poligono {
 private:
@@ -80,7 +80,7 @@ public:
 template<class T>
 /**
  * Constructor sin parámetros.
- * @tparam T Template
+ * @tparam T - Template
  */
 Poligono<T>::Poligono() {
     this->puntos = new Punto<T>[this->MAX_POINTS];
@@ -89,9 +89,9 @@ Poligono<T>::Poligono() {
 template<class T>
 /**
  * Crea polígono usando lista de puntos.
- * @tparam T
- * @param size Largo de la lista de puntos
- * @param plist Lista de puntos
+ * @tparam T - Template
+ * @param size - Largo de la lista de puntos
+ * @param plist - Lista de puntos
  */
 Poligono<T>::Poligono(Punto<T> *plist, int size) {
     this->MAX_POINTS = std::max(this->MAX_POINTS, size);
@@ -106,7 +106,7 @@ Poligono<T>::Poligono(Punto<T> *plist, int size) {
 template<class T>
 /**
  * Destructor.
- * @tparam T
+ * @tparam T - Template
  */
 Poligono<T>::~Poligono() {
 }
@@ -114,8 +114,8 @@ Poligono<T>::~Poligono() {
 template<class T>
 /**
  * Añade punto al polígono.
- * @tparam T Template
- * @param p Punto
+ * @tparam T - Template
+ * @param p - Punto
  */
 void Poligono<T>::addPoint(const Punto<T> &p) {
     // Si se pasa del límite se aumenta límite de la lista
@@ -145,7 +145,7 @@ void Poligono<T>::addPoint(const Punto<T> &p) {
 template<class T>
 /**
  * Crea string del polígono.
- * @tparam T Template
+ * @tparam T - Template
  * @return
  */
 std::string Poligono<T>::toString() const {
@@ -162,7 +162,7 @@ std::string Poligono<T>::toString() const {
 template<class T>
 /**
  * Chequea que el polígono esté en CCW.
- * @tparam T
+ * @tparam T - Template
  * @return
  */
 bool Poligono<T>::inCCW() const {
@@ -195,7 +195,7 @@ std::ostream &operator<<(std::ostream &out, const Poligono<T> &p) {
 template<class T>
 /**
  * Imprime el punto en la consola.
- * @tparam T Template
+ * @tparam T - Template
  */
 void Poligono<T>::print() const {
     std::cout << this->toString() << std::endl;
@@ -204,8 +204,8 @@ void Poligono<T>::print() const {
 template<class T>
 /**
  * Operador asignación a otro polígono, clona lista de puntos.
- * @tparam T Template
- * @param poly Polígono
+ * @tparam T - Template
+ * @param poly - Polígono
  * @return
  */
 Poligono<T> &Poligono<T>::operator=(const Poligono<T> &poly) {
@@ -225,8 +225,8 @@ Poligono<T> &Poligono<T>::operator=(const Poligono<T> &poly) {
 template<class T>
 /**
  * Calcula el área del polígono.
- * @tparam T Template
- * @return El área del polígono
+ * @tparam T - Template
+ * @return
  */
 T Poligono<T>::area() const {
     if (this->inCCW() or true) {
@@ -248,8 +248,8 @@ T Poligono<T>::area() const {
 template<class T>
 /**
  * Chequea si un punto está dentro de un polígono.
- * @tparam T Template
- * @param p Punto
+ * @tparam T - Template
+ * @param p - Punto
  * @return
  */
 bool Poligono<T>::inPoly(Punto<T> &p) const {
@@ -269,10 +269,10 @@ bool Poligono<T>::inPoly(Punto<T> &p) const {
 template<class T>
 /**
  * Calcula el área entre tres puntos.
- * @tparam T
- * @param a Punto A
- * @param b Punto B
- * @param c Punto C
+ * @tparam T - Template
+ * @param a - Punto A
+ * @param b - Punto B
+ * @param c - Punto C
  * @return
  */
 T Poligono<T>::area2(Punto<T> &a, Punto<T> &b, Punto<T> &c) const {

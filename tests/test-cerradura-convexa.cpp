@@ -6,11 +6,11 @@
  */
 
 // Importación de librerías
-#include <iostream>
-#include <cassert>
 #include "../utils/cerradura-convexa.h"
-#include <vector>
+#include <cassert>
+#include <iostream>
 #include <random>
+#include <ctime>
 
 /**
  * Genera un número aleatorio entre dos valores flotantes.
@@ -33,6 +33,24 @@ float randomFloat(float a, float b) {
  */
 int randomInt(int a, int b) {
     return (int) randomFloat(a, b);
+}
+
+/**
+ * Detiene la ejecución del programa por un determinado número de milisegundos
+ * @param miliseconds - Milisegundos
+ * @return
+ */
+int nsleep(long miliseconds) {
+    if (miliseconds == 0) return 0;
+    struct timespec req, rem; // NOLINT
+    if (miliseconds > 999) {
+        req.tv_sec = (int) (miliseconds / 1000);
+        req.tv_nsec = (miliseconds - ((long) req.tv_sec * 1000)) * 1000000;
+    } else {
+        req.tv_sec = 0;
+        req.tv_nsec = miliseconds * 1000000;
+    }
+    return nanosleep(&req, &rem);
 }
 
 /**
@@ -71,17 +89,44 @@ void testTriangulo() {
 
     // Verifica que ambos polígonos tengan iguales puntos
     assert(cerraduraGW.first.mismosPuntos(cerraduraGS.first));
+
+}
+
+template<class T>
+/**
+ * Testea un rombo con distintas rotaciones.
+ */
+void _testRombo(Punto<T> *rombo) {
+    // [GiftWrapping]
+    std::pair<Poligono<int>, int> cerraduraGW = giftWrapping(rombo, 4);
+    assert(cerraduraGW.second == 4);
+
+    // [Graham scan]
+    std::pair<Poligono<int>, int> cerraduraGS = grahamScan(rombo, 4);
+    assert(cerraduraGS.second == 4);
+
+    // Verifica que ambos polígonos tengan iguales puntos
+    assert(cerraduraGW.first.mismosPuntos(cerraduraGS.first));
 }
 
 /**
- * Testea la cerradura con la posición del menor en distintos lugares
+ * Testea la cerradura con la posición del menor en distintos lugares.
  */
 void testRombo() {
-
+    Punto<int> rombo[] = {Punto<int>(-1, 0), Punto<int>(0, 1), Punto<int>(1, 0), Punto<int>(0, -1)}; // 4
+    _testRombo(rombo);
+    swapPunto(rombo, 0, 1);
+    _testRombo(rombo);
+    swapPunto(rombo, 1, 2);
+    _testRombo(rombo);
+    swapPunto(rombo, 2, 3);
+    _testRombo(rombo);
+    swapPunto(rombo, 3, 0);
+    _testRombo(rombo);
 }
 
 /**
- * Testeo duplicados
+ * Testeo duplicados.
  */
 void testDuplicados() {
     Punto<int> plist[] = {Punto<int>(0, 0), Punto<int>(0, 0), Punto<int>(0, 0), Punto<int>(1, 1), Punto<int>(1, 0),
@@ -127,6 +172,9 @@ void testCuadradoChico() {
 
     // Verifica que ambos polígonos tengan iguales puntos
     assert(cerraduraGW.first.mismosPuntos(cerraduraGS.first));
+
+    // Borra la memoria
+    delete[] cuadrado;
 }
 
 /**
@@ -157,6 +205,10 @@ void testCuadradoMediano() {
 
     // Verifica que ambos polígonos tengan iguales puntos
     assert(cerraduraGW.first.mismosPuntos(cerraduraGS.first));
+    assert(cerraduraGW.second == cerraduraGS.second);
+
+    // Borra la memoria
+    delete[] cuadrado;
 }
 
 /**
@@ -188,6 +240,9 @@ void testRectangulo() {
 
     // Verifica que ambos polígonos tengan iguales puntos
     assert(cerraduraGW.first.mismosPuntos(cerraduraGS.first));
+
+    // Borra la memoria
+    delete[] rectangulo;
 }
 
 /**
@@ -229,6 +284,29 @@ void testFiguraDeforme(double sz, int r) {
 
     // Verifica que ambos polígonos tengan iguales puntos
     assert(cerraduraGW.first.mismosPuntos(cerraduraGS.first));
+
+    // Borra la memoria
+    delete[] figura;
+}
+
+/**
+ * Test de la tarea, llama a testFiguraDeforme con distintos valores de r (%).
+ * @param n - Número de puntos
+ * @param inverse - Indica que se itera en el orden inverso
+ */
+void testeoTarea(double n, bool inverse) {
+    int r[] = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90};
+    if (inverse) {
+        for (int i = 0; i < 10; i++) {
+            testFiguraDeforme(n, r[9 - i]);
+            nsleep(0);
+        }
+    } else {
+        for (int i : r) {
+            testFiguraDeforme(n, i);
+            nsleep(0);
+        }
+    }
 }
 
 /**
@@ -241,16 +319,15 @@ int main() {
     testBasico(); // Test sencillo con puros puntos en la cerradura
     testDuplicados(); // Testea varios puntos duplicados
     testTriangulo(); // Testea puntos colineales en la hipotenusa
+    testRombo(); // Test que comprueba distintas posiciones para los pivotes
     testCuadradoChico(); // Test cuadrado 1x1 con 10 puntos aleatorios
     testCuadradoMediano(); // Test cuadrado 1x1 con 1e4 puntos aleatorios
     testRectangulo(); // Test rectángulo 10x1 con 1e4 puntos aleatorios
 
-    // Inicia las pruebas
-    int r[] = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90};
-    double sz[] = {1e5, 1e4, 1e5};
-    for (int i : r) {
-        testFiguraDeforme(sz[0], i);
-    }
+    // Testeo tarea
+    testeoTarea(1e4, false);
+    testeoTarea(1e5, false);
+    testeoTarea(2 * 1e5, false);
 
     // Retorna
     return 0;

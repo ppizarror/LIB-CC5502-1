@@ -64,10 +64,10 @@ public:
 
 template<class T>
 /**
- * Constructor
+ * Constructor.
  * @tparam T
- * @param p1 Punto 1
- * @param p2 Punto 2
+ * @param p1 - Punto 1
+ * @param p2 - Punto 2
  */
 Segmento<T>::Segmento(Punto<T> &p1, Punto<T> &p2) {
     this->a = &p1;
@@ -77,7 +77,7 @@ Segmento<T>::Segmento(Punto<T> &p1, Punto<T> &p2) {
 template<class T>
 /**
  * Retorna el largo del segmento.
- * @tparam T Template
+ * @tparam T - Template
  * @return
  */
 double Segmento<T>::getLength() const {
@@ -87,7 +87,7 @@ double Segmento<T>::getLength() const {
 template<class T>
 /**
  * Norma = getLength.
- * @tparam T
+ * @tparam T - Template
  * @return
  */
 double Segmento<T>::norm() const {
@@ -97,8 +97,8 @@ double Segmento<T>::norm() const {
 template<class T>
 /**
  * Retorna el área con otro punto.
- * @tparam T Template
- * @param c Punto a calcular área
+ * @tparam T - Template
+ * @param c - Punto a calcular área
  * @return
  */
 T Segmento<T>::area2(Punto<T> &c) {
@@ -109,9 +109,9 @@ T Segmento<T>::area2(Punto<T> &c) {
 
 template<class T>
 /**
- * Indica si un punto está estrictamente a la izquierda del segmento
- * @tparam T Template
- * @param p Punto
+ * Indica si un punto está estrictamente a la izquierda del segmento.
+ * @tparam T - Template
+ * @param p - Punto
  * @return
  */
 bool Segmento<T>::left(Punto<T> &p) {
@@ -121,8 +121,8 @@ bool Segmento<T>::left(Punto<T> &p) {
 template<class T>
 /**
  * Indica si un punto está estrictamente a la derecha del segmento
- * @tparam T Template
- * @param p Punto
+ * @tparam T - Template
+ * @param p - Punto
  * @return
  */
 bool Segmento<T>::right(Punto<T> &p) {
@@ -132,8 +132,8 @@ bool Segmento<T>::right(Punto<T> &p) {
 template<class T>
 /**
  * Indica si un punto está encima del segmento
- * @tparam T Template
- * @param p Punto
+ * @tparam T - Template
+ * @param p - Punto
  * @return
  */
 bool Segmento<T>::on(Punto<T> &p) {
@@ -143,8 +143,8 @@ bool Segmento<T>::on(Punto<T> &p) {
 template<class T>
 /**
  * Indica si un punto está encima o a la izquierda del segmento
- * @tparam T Template
- * @param p Punto
+ * @tparam T - Template
+ * @param p - Punto
  * @return
  */
 bool Segmento<T>::leftOn(Punto<T> &p) {
@@ -154,8 +154,8 @@ bool Segmento<T>::leftOn(Punto<T> &p) {
 template<class T>
 /**
  * Indica si un punto está encima o a la derecha del segmento
- * @tparam T Template
- * @param p Punto
+ * @tparam T - Template
+ * @param p - Punto
  * @return
  */
 bool Segmento<T>::rightOn(Punto<T> &p) {
@@ -165,14 +165,14 @@ bool Segmento<T>::rightOn(Punto<T> &p) {
 template<class T>
 /**
  * Constructor vacío
- * @tparam T Template
+ * @tparam T - Template
  */
 Segmento<T>::Segmento() {}
 
 template<class T>
 /**
  * Imprime el segmento en la consola
- * @tparam T
+ * @tparam T - Template
  */
 void Segmento<T>::print() const {
     std::cout << this->a->toString() << "->" << this->b->toString() << std::endl;
