@@ -49,8 +49,8 @@ static void imprimeListaPuntos(Punto<T> *P, int n) {
  * Mide el tiempo pasado un tiempo inicial tinit.
  * @param tinit - Tiempo inicial
  */
-void medirTiempo(int tinit) {
-    std::cout << "Tiempo: " << (clock() - tinit) / double(CLOCKS_PER_SEC) * 1000 << "ms" << std::endl;
+int medirTiempo(int tinit) {
+    return static_cast<int>((clock() - tinit) / double(CLOCKS_PER_SEC) * 1000);
 }
 
 template<class T>

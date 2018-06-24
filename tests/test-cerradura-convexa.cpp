@@ -272,15 +272,16 @@ void testFiguraDeforme(double sz, int r) {
 
     // Calcula la cerradura
     tinit = clock();
-    std::cout << "\n[GiftWrapping] Cerradura figura deforme 10x1 con " << n << " puntos, r=" << r << "%" << std::endl;
+
     std::pair<Poligono<float>, int> cerraduraGW = giftWrapping(figura, n);
-    medirTiempo(tinit);
+    int t1 = medirTiempo(tinit);
 
     // Calcula cerradura con Graham Scan
-    std::cout << "\n[GrahamScan] Cerradura figura deforme 10x1 con " << n << " puntos, r=" << r << "%" << std::endl;
     tinit = clock();
     std::pair<Poligono<float>, int> cerraduraGS = grahamScan(figura, n);
-    medirTiempo(tinit);
+    int t2 = medirTiempo(tinit);
+
+    std::cout << r << "\t" << t1 << "\t" << t2 << std::endl;
 
     // Verifica que ambos polígonos tengan iguales puntos
     assert(cerraduraGW.first.mismosPuntos(cerraduraGS.first));
@@ -296,6 +297,7 @@ void testFiguraDeforme(double sz, int r) {
  */
 void testeoTarea(double n, bool inverse) {
     int r[] = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90};
+    std::cout << "Cerradura figura deforme 10x1 con " << n << " puntos" << std::endl;
     if (inverse) {
         for (int i = 0; i < 10; i++) {
             testFiguraDeforme(n, r[9 - i]);
@@ -307,6 +309,7 @@ void testeoTarea(double n, bool inverse) {
             nsleep(0);
         }
     }
+    std::cout << "============================================================" << std::endl;
 }
 
 /**
@@ -325,9 +328,10 @@ int main() {
     testRectangulo(); // Test rectángulo 10x1 con 1e4 puntos aleatorios
 
     // Testeo tarea
-    testeoTarea(1e4, false);
-    testeoTarea(1e5, false);
+    testeoTarea(3 * 1e5, false);
     testeoTarea(2 * 1e5, false);
+    testeoTarea(1e5, false);
+    testeoTarea(1e4, false);
 
     // Retorna
     return 0;
