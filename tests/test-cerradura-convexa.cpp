@@ -250,7 +250,7 @@ void testRectangulo() {
  * @param sz - Número de puntos
  * @param r - Porcentaje de repetidos en vértices
  */
-void testFiguraDeforme(double sz, int r) {
+void __testFiguraDeforme(double sz, int r) {
     auto n = static_cast<int>(sz);
     Punto<float> *figura = new Punto<float>[n]; // NOLINT
     int tinit;
@@ -291,26 +291,83 @@ void testFiguraDeforme(double sz, int r) {
 }
 
 /**
- * Test de la tarea, llama a testFiguraDeforme con distintos valores de r (%).
+ * Test figura deforme, llama a testFiguraDeforme con distintos valores de r (%) porcentaje de puntos repetidos.
  * @param n - Número de puntos
- * @param inverse - Indica que se itera en el orden inverso
  */
-void testeoTarea(double n, bool inverse) {
+void testeoDeforme(double n) {
     int r[] = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90};
-    std::cout << "Cerradura figura deforme 10x1 con " << n << " puntos" << std::endl;
-    if (inverse) {
-        for (int i = 0; i < 10; i++) {
-            testFiguraDeforme(n, r[9 - i]);
-            nsleep(0);
-        }
-    } else {
-        for (int i : r) {
-            testFiguraDeforme(n, i);
-            nsleep(0);
-        }
+    std::cout << "[Puntos repetidos r%] Cerradura figura deforme con " << n << " puntos" << std::endl;
+    for (int i : r) {
+        __testFiguraDeforme(n, i);
+        nsleep(0);
     }
     std::cout << "============================================================" << std::endl;
 }
+
+/**
+ * Revisa los algoritmos con un porcentaje de ellos en la cerradura, genera un cuadrado de 1x1
+ * @param sz - Tamaño de la nube de puntos dentro del cuadrado
+ * @param s - Porcentaje de la nube en la cerradura
+ */
+void __testPuntosEnCerradura(double sz, int s) {
+    auto n = static_cast<int>(sz);
+    Punto<float> *figura = new Punto<float>[n]; // NOLINT
+    int tinit;
+
+    // Total de puntos no aleatorios
+    auto alt = (int) ((((float) 100 - s) / 100) * (float) n);
+
+    // Añade los puntos dentro de la cerradura
+    for (int i = 0; i < n; i++) {
+        figura[i] = Punto<float>(randomFloat(0, 1), randomFloat(0, 1));
+    }
+
+    // Calcula la cerradura para añadir los puntos
+    std::pair<Punto<float> *, int> cerradura = __grahamScan(figura, n);
+
+    // Añade los puntos de la cerradura a la figura
+    int randomPosc = 0, randomPosFig = 0;
+    for (int i = 0; i < (n - alt); i++) {
+        randomPosc = randomInt(0, cerradura.second - 1); // Posición random dentro de la cerradura
+        randomPosFig = randomInt(0, n - 1); // Posición radom dentro de la figura
+        figura[randomPosFig] = cerradura.first[randomPosc];
+    }
+
+    // Calcula la cerradura con Gift Wrapping
+    tinit = clock();
+    std::pair<Poligono<float>, int> cerraduraGW = giftWrapping(figura, n);
+    int t1 = medirTiempo(tinit);
+
+    // Calcula cerradura con Graham Scan
+    tinit = clock();
+    std::pair<Poligono<float>, int> cerraduraGS = grahamScan(figura, n);
+    int t2 = medirTiempo(tinit);
+
+    std::cout << s << "\t" << t1 << "\t" << t2 << std::endl;
+
+    // Verifica que ambos polígonos tengan iguales puntos
+    assert(cerraduraGW.first.mismosPuntos(cerraduraGS.first));
+
+    // Borra la memoria
+    delete[] figura;
+}
+
+/**
+ * Testea puntos en cerradura con distintos porcentajes de s
+ * @param n - Número de puntos
+ */
+void testEnCerradura(double n) {
+    int s[] = {0, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90};
+    std::cout << "[Puntos en cerradura s%] Cerradura cuadrado 1x1 con " << n << " puntos" << std::endl;
+    for (int i : s) {
+        __testPuntosEnCerradura(n, i);
+        nsleep(0);
+    }
+    __testPuntosEnCerradura(n, 90);
+    std::cout << "============================================================" << std::endl;
+}
+
+bool TEST_TAREA = true; // Indica si hace el test de la tarea o el repetido
 
 /**
 * Corre los test.
@@ -327,11 +384,19 @@ int main() {
     testCuadradoMediano(); // Test cuadrado 1x1 con 1e4 puntos aleatorios
     testRectangulo(); // Test rectángulo 10x1 con 1e4 puntos aleatorios
 
-    // Testeo tarea
-    testeoTarea(3 * 1e5, false);
-    testeoTarea(2 * 1e5, false);
-    testeoTarea(1e5, false);
-    testeoTarea(1e4, false);
+    // Testeo puntos con porcentaje s (%) en cerradura
+    if (TEST_TAREA) {
+        testEnCerradura(3 * 1e5);
+        testEnCerradura(2 * 1e5);
+        testEnCerradura(1e5);
+        testEnCerradura(5 * 1e4);
+    } else {
+        testeoDeforme(3 * 1e5);
+        testeoDeforme(2 * 1e5);
+        testeoDeforme(1e5);
+        testeoDeforme(5 * 1e4);
+    }
+    nsleep(1000);
 
     // Retorna
     return 0;

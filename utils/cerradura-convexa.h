@@ -19,6 +19,7 @@
  */
 static double GRAHAM_SCAN_PARTITION = 1e5; // Partición de los puntos
 static bool GRAHAM_SCAN_USE_QUICKSORT = true; // Usa Quicksort en vez de MergeSort
+static bool GRAHAM_SCAN_USE_SORT = true; // Usa sort en vez de Quick-Merge sort
 
 /**
  * Constantes
@@ -348,28 +349,45 @@ std::pair<Punto<T> *, int> __grahamScan(Punto<T> *cloud, int cloud_size) {
     Punto<T> pivote = cloud[min];
 
     /**
+     * Crea una lista con las distancias de cada punto con respecto al pivote
+     */
+    double *distp = new double[cloud_size];
+    for (int i = 0; i < cloud_size; i++) {
+        distp[i] = pivote.dist(cloud[i]);
+    }
+    distp[min] = 0;
+
+    /**
      * Crea una lista con los cosenos de cada punto con respecto al pivote
      */
-
     double *cosp = new double[cloud_size];
     for (int i = 0; i < cloud_size; i++) {
-        cosp[i] = pivote.cos(cloud[i]);
+        cosp[i] = pivote.cos(cloud[i], distp[i]);
     }
     cosp[min] = 0;
 
     /**
      * Se ordena la lista de acuerdo al ángulo coseno con respecto al pivote, sólo se ordenan las posiciones
      */
-    if (GRAHAM_SCAN_USE_QUICKSORT) {
-        QuickSort *qsort = new QuickSort();
-        qsort->quickSort(cosp, ppos, 1, cloud_size - 1);
-        delete[] qsort;
+    if (GRAHAM_SCAN_USE_SORT) {
+        std::sort(ppos + 1, ppos + cloud_size, [&cosp, &distp](int i, int j) {
+            if (cosp[i] == cosp[j]) {
+                return distp[i] < distp[j];
+            } else {
+                return cosp[i] < cosp[j];
+            }
+        });
     } else {
-        MergeSort *msort = new MergeSort();
-        msort->mergeSort(cosp, ppos, 1, cloud_size - 1);
-        delete[] msort;
-
-    }
+        if (GRAHAM_SCAN_USE_QUICKSORT) {
+            QuickSort *qsort = new QuickSort();
+            qsort->quickSort(cosp, ppos, 1, cloud_size - 1);
+            delete[] qsort;
+        } else {
+            MergeSort *msort = new MergeSort();
+            msort->mergeSort(cosp, ppos, 1, cloud_size - 1);
+            delete[] msort;
+        }
+    };
 
     /**
      * Se crea una nueva lista de acuerdo a las posiciones
@@ -388,23 +406,21 @@ std::pair<Punto<T> *, int> __grahamScan(Punto<T> *cloud, int cloud_size) {
     int maxpos = -1;
     Punto<T> *final_cloud = new Punto<T>[cloud_size];
     final_cloud[0] = new_cloud[0];
-    int h = 0;
     for (int i = 1; i < cloud_size; i++) {
-        if (fabs(new_cloud[0].cos(new_cloud[i]) - lang) > 1e-10) { // Si el ángulo cambia se actualiza la distancia
+        if (fabs(cosp[ppos[i]] - lang) > 1e-10) { // Si el ángulo cambia se actualiza la distancia
             if (maxpos != -1) {
                 final_cloud[vp] = new_cloud[maxpos];
                 vp += 1;
             }
-            mxdist = new_cloud[0].dist2(new_cloud[i]);
-            lang = new_cloud[0].cos(new_cloud[i]);
+            mxdist = distp[ppos[i]];
+            lang = cosp[ppos[i]];
             maxpos = i;
             if (i == (cloud_size - 1)) {
                 final_cloud[vp] = new_cloud[i];
                 vp += 1;
             }
         } else {
-            h++;
-            actdist = new_cloud[0].dist2(new_cloud[i]);
+            actdist = distp[ppos[i]];
             if (actdist > mxdist) {
                 maxpos = i;
                 mxdist = actdist;
@@ -444,6 +460,9 @@ std::pair<Punto<T> *, int> __grahamScan(Punto<T> *cloud, int cloud_size) {
     /**
      * Elimina variables
      */
+    delete[] ppos;
+    delete[] cosp;
+    delete[] distp;
     delete[] new_cloud;
     delete[] final_cloud;
 

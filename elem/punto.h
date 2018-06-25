@@ -130,6 +130,9 @@ public:
 
     // Obtiene el coseno del ángulo entre un punto y otro
     double cos(Punto<T> &a);
+
+    // Obtiene el coseno del ángulo entre un punto y otro
+    double cos(Punto<T> &a, double dist);
 };
 
 template<class T>
@@ -586,14 +589,35 @@ Punto<T> Punto<T>::clonar() {
 template<class T>
 /**
  * Obtiene el coseno del ángulo entre el punto y otro
- * @tparam T Template
- * @param a Punto
+ * @tparam T - Template
+ * @param a - Punto
  * @return
  */
 double Punto<T>::cos(Punto<T> &a) {
-    if (this->dist(a) == 0 || a.getCoordX() == this->getCoordX())
+    if (a.getCoordX() == this->getCoordX())
         return 0.0f;
-    return ((a.getCoordX() - this->getCoordX())) / (this->dist(a));
+    if (a.getCoordY() == this->getCoordY()) {
+        if (a.getCoordX() > this->getCoordX()) return 1;
+        else return -1;
+    }
+    return ((a.getCoordX() - this->getCoordX())) / (this->dist2(a));
+}
+
+template<class T>
+/**
+ * Obtiene el coseno del ángulo entre el punto y otro
+ * @tparam T - Template
+ * @param a - Punto
+ * @return
+ */
+double Punto<T>::cos(Punto<T> &a, double dist) {
+    if (a.getCoordX() == this->getCoordX() || dist == 0)
+        return 0;
+    if (a.getCoordY() == this->getCoordY()) {
+        if (a.getCoordX() > this->getCoordX()) return 1;
+        else return -1;
+    }
+    return ((a.getCoordX() - this->getCoordX()) / dist);
 }
 
 #pragma clang diagnostic pop
