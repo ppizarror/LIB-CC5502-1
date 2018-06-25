@@ -124,6 +124,21 @@ Punto<double> *p = {Punto<double>(0,1)....}; // #n elementos
 Poligono<double> poly = Poligono<double>(p, n);    
 ```
 
+```cpp
+// Imprimir en consola
+poly.print();
+std::cout << poly << std::endl;
+
+// Operaciones geométricas
+bool c = poly.inCCW(); // Punto en CCW (Counter clockwise)
+poly.addPoint(p); // Añade un punto
+T area = poly.area(); // Calcula el área del polígono
+T perimetro = poly.perimetro(); // Calcula el perímetro del polígono
+bool c = poly.inPoly(p); // Verifica si un punto está dentro del polígono
+bool c = poly.isVertex(p); // p vértice del polígono
+bool c = poly.mismosPuntos(poly2); // poly y poly2 tienen iguales puntos
+```
+
 ## Calcular cerradura
 
 Existen dos implementaciones para calcular la cerradura convexa de un polígono: <a href="https://en.wikipedia.org/wiki/Gift_wrapping_algorithm">Gift Wrapping</a> y <a href="https://en.wikipedia.org/wiki/Graham_scan">Graham Scan</a>.
