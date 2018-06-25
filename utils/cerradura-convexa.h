@@ -17,7 +17,7 @@
 /**
  * Configuraciones de Graham-Scan
  */
-static double GRAHAM_SCAN_PARTITION = 1e5; // Partición de los puntos
+static double GRAHAM_SCAN_PARTITION = 1e6; // Partición de los puntos
 static bool GRAHAM_SCAN_USE_QUICKSORT = true; // Usa Quicksort en vez de MergeSort
 static bool GRAHAM_SCAN_USE_SORT = true; // Usa sort en vez de Quick-Merge sort
 
@@ -484,7 +484,7 @@ template<class T>
 std::pair<Poligono<T>, int> grahamScan(Punto<T> *cloud, int cloud_size) {
 
     /**
-     * Divide un arreglo de a grupos de 1e5, y luego mezcla
+     * Divide un arreglo de a grupos y luego mezcla
      */
     if (cloud_size <= GRAHAM_SCAN_PARTITION) {
         std::pair<Punto<T> *, int> cerraduraGS = __grahamScan(cloud, cloud_size);

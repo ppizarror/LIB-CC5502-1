@@ -465,7 +465,7 @@ void testEnCerraduraCuadrado(double n) {
  *  2:  Testeo puntos en cerradura para figura cualquiera
  *  3:  Testeo puntos en cerradura para un cuadrado 1x1 perfecto
  */
-int TIPO_TEST = 3;
+int TIPO_TEST = 2;
 
 /**
 * Corre los test.
@@ -483,6 +483,7 @@ int main() {
     testRectangulo(); // Test rectángulo 10x1 con 1e4 puntos aleatorios
 
     double sz[] = {3 * 1e5, 2 * 1e5, 1e5, 5 * 1e4};
+    std::cout << "============================================================" << std::endl;
     switch (TIPO_TEST) {
         case 1: // Testeo puntos con porcentaje r (%) repetidos, figura aleatoria
             for (double i:sz) testeoDeforme(i);
