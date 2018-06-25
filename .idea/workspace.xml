@@ -16,10 +16,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1167c18a-b373-49c4-8453-44ee0b23e1c0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/tests/test-cerradura-convexa.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test-cerradura-convexa.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/cerradura-convexa.h" beforeDir="false" afterPath="$PROJECT_DIR$/utils/cerradura-convexa.h" afterDir="false" />
-    </list>
+    <list default="true" id="1167c18a-b373-49c4-8453-44ee0b23e1c0" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,44 +31,8 @@
       <file leaf-file-name="test-cerradura-convexa.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/test-cerradura-convexa.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3658">
-              <caret line="301" column="93" selection-start-line="301" selection-start-column="93" selection-end-line="301" selection-end-column="93" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cerradura-convexa.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/cerradura-convexa.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="poligono.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/elem/poligono.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6220">
-              <caret line="311" selection-start-line="311" selection-end-line="311" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="segmento.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/elem/segmento.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-580">
-              <caret line="71" column="13" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="punto.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/elem/punto.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="523" column="89" lean-forward="true" selection-start-line="523" selection-start-column="8" selection-end-line="523" selection-end-column="89" />
+            <state relative-caret-position="80">
+              <caret line="483" lean-forward="true" selection-start-line="483" selection-end-line="483" />
             </state>
           </provider>
         </entry>
@@ -237,12 +198,12 @@
       <workItem from="1524668305905" duration="39000" />
       <workItem from="1529290319443" duration="72081000" />
       <workItem from="1529768018608" duration="32036000" />
-      <workItem from="1529878381058" duration="12193000" />
+      <workItem from="1529878381058" duration="12280000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="168094000" />
+    <option name="totallyTimeSpent" value="168181000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -255,6 +216,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18968935" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286517" />
@@ -263,7 +225,7 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286517" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3286517" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.48174158" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.48174158" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3286517" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -583,8 +545,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/test-cerradura-convexa.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3658">
-          <caret line="301" column="93" selection-start-line="301" selection-start-column="93" selection-end-line="301" selection-end-column="93" />
+        <state relative-caret-position="80">
+          <caret line="483" lean-forward="true" selection-start-line="483" selection-end-line="483" />
         </state>
       </provider>
     </entry>
