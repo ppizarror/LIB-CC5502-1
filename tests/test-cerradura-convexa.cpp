@@ -270,9 +270,8 @@ void __testFiguraDeforme(double sz, int r) {
         figura[i + alt] = Punto<float>(figura[rindex].getCoordX(), figura[rindex].getCoordY());
     }
 
-    // Calcula la cerradura
+    // Calcula la cerradura con Gift Wrapping
     tinit = clock();
-
     std::pair<Poligono<float>, int> cerraduraGW = giftWrapping(figura, n);
     int t1 = medirTiempo(tinit);
 
@@ -281,6 +280,7 @@ void __testFiguraDeforme(double sz, int r) {
     std::pair<Poligono<float>, int> cerraduraGS = grahamScan(figura, n);
     int t2 = medirTiempo(tinit);
 
+    // Imprime tiempos
     std::cout << r << "\t" << t1 << "\t" << t2 << std::endl;
 
     // Verifica que ambos polígonos tengan iguales puntos
@@ -329,7 +329,7 @@ void __testPuntosEnCerradura(double sz, int s) {
     int randomPosc = 0, randomPosFig = 0;
     for (int i = 0; i < (n - alt); i++) {
         randomPosc = randomInt(0, cerradura.second - 1); // Posición random dentro de la cerradura
-        randomPosFig = randomInt(0, n - 1); // Posición radom dentro de la figura
+        randomPosFig = randomInt(i, n - 1); // Posición radom dentro de la figura
         figura[randomPosFig] = cerradura.first[randomPosc];
     }
 
@@ -343,6 +343,7 @@ void __testPuntosEnCerradura(double sz, int s) {
     std::pair<Poligono<float>, int> cerraduraGS = grahamScan(figura, n);
     int t2 = medirTiempo(tinit);
 
+    // Imprime tiempos
     std::cout << s << "\t" << t1 << "\t" << t2 << std::endl;
 
     // Verifica que ambos polígonos tengan iguales puntos
