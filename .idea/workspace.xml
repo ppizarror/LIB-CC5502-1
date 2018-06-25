@@ -33,8 +33,8 @@
       <file leaf-file-name="test-cerradura-convexa.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/test-cerradura-convexa.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1283">
-              <caret line="282" column="22" selection-start-line="282" selection-start-column="22" selection-end-line="282" selection-end-column="22" />
+            <state relative-caret-position="81">
+              <caret line="373" column="30" selection-start-line="373" selection-start-column="30" selection-end-line="373" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -69,8 +69,8 @@
       <file leaf-file-name="punto.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/elem/punto.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-100">
-              <caret line="602" column="63" selection-start-line="602" selection-start-column="63" selection-end-line="602" selection-end-column="63" />
+            <state relative-caret-position="300">
+              <caret line="523" column="89" lean-forward="true" selection-start-line="523" selection-start-column="8" selection-end-line="523" selection-end-column="89" />
             </state>
           </provider>
         </entry>
@@ -236,12 +236,12 @@
       <workItem from="1524668305905" duration="39000" />
       <workItem from="1529290319443" duration="72081000" />
       <workItem from="1529768018608" duration="32036000" />
-      <workItem from="1529878381058" duration="7980000" />
+      <workItem from="1529878381058" duration="11120000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="163881000" />
+    <option name="totallyTimeSpent" value="167021000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -263,7 +263,7 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286517" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3286517" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.40308988" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.48174158" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3286517" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -567,13 +567,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/elem/punto.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-100">
-          <caret line="602" column="63" selection-start-line="602" selection-start-column="63" selection-end-line="602" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/cerradura-convexa.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -581,10 +574,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/elem/punto.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="523" column="89" lean-forward="true" selection-start-line="523" selection-start-column="8" selection-end-line="523" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test-cerradura-convexa.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1283">
-          <caret line="282" column="22" selection-start-line="282" selection-start-column="22" selection-end-line="282" selection-end-column="22" />
+        <state relative-caret-position="81">
+          <caret line="373" column="30" selection-start-line="373" selection-start-column="30" selection-end-line="373" selection-end-column="30" />
         </state>
       </provider>
     </entry>

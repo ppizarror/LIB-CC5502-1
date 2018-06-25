@@ -236,6 +236,7 @@ void testRectangulo() {
     std::cout << "\n[Graham Scan] Cerradura rectangulo 10x1 con 10000 puntos" << std::endl;
     std::pair<Poligono<float>, int> cerraduraGS = giftWrapping(rectangulo, 10000);
     cerraduraGS.first.print();
+    std::cout << "" << std::endl;
     assert(cerraduraGS.second == 4);
 
     // Verifica que ambos polígonos tengan iguales puntos
@@ -256,18 +257,20 @@ void __testFiguraDeforme(double sz, int r) {
     int tinit;
 
     // Total de aleatorios
-    auto alt = (int) ((((float) 100 - r) / 100) * (float) n);
+    auto alt = (int) ((((float) r) / 100) * (float) n);
 
     // Añade los puntos aleatorios
-    for (int i = 0; i < alt; i++) {
+    for (int i = 0; i < n; i++) {
         figura[i] = Punto<float>(randomFloat(-1, 1), randomFloat(-1, 1));
     }
 
     // Añade los puntos repetidos
     int rindex;
-    for (int i = 0; i < (n - alt); i++) {
+    int rpos;
+    for (int i = 0; i < alt; i++) {
         rindex = randomInt(0, alt - 1);
-        figura[i + alt] = Punto<float>(figura[rindex].getCoordX(), figura[rindex].getCoordY());
+        rpos = randomInt(i, n - 1);
+        figura[rpos] = Punto<float>(figura[rindex].getCoordX(), figura[rindex].getCoordY());
     }
 
     // Calcula la cerradura con Gift Wrapping
@@ -296,7 +299,7 @@ void __testFiguraDeforme(double sz, int r) {
  */
 void testeoDeforme(double n) {
     int r[] = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90};
-    std::cout << "[Puntos repetidos r%] Cerradura figura deforme con " << n << " puntos" << std::endl;
+    std::cout << "[Puntos repetidos r%] Cerradura figura aleatoria con " << n << " puntos" << std::endl;
     for (int i : r) {
         __testFiguraDeforme(n, i);
         nsleep(0);
@@ -305,8 +308,8 @@ void testeoDeforme(double n) {
 }
 
 /**
- * Revisa los algoritmos con un porcentaje de ellos en la cerradura, genera un cuadrado de 1x1
- * @param sz - Tamaño de la nube de puntos dentro del cuadrado
+ * Revisa los algoritmos con un porcentaje de ellos en la cerradura, figura aleatoria.
+ * @param sz - Tamaño de la nube de puntos
  * @param s - Porcentaje de la nube en la cerradura
  */
 void __testPuntosEnCerradura(double sz, int s) {
@@ -314,8 +317,8 @@ void __testPuntosEnCerradura(double sz, int s) {
     Punto<float> *figura = new Punto<float>[n]; // NOLINT
     int tinit;
 
-    // Total de puntos no aleatorios
-    auto alt = (int) ((((float) 100 - s) / 100) * (float) n);
+    // Total de puntos aleatorios
+    auto alt = (int) ((((float) s) / 100) * (float) n);
 
     // Añade los puntos dentro de la cerradura
     for (int i = 0; i < n; i++) {
@@ -327,7 +330,7 @@ void __testPuntosEnCerradura(double sz, int s) {
 
     // Añade los puntos de la cerradura a la figura
     int randomPosc = 0, randomPosFig = 0;
-    for (int i = 0; i < (n - alt); i++) {
+    for (int i = 0; i < alt; i++) {
         randomPosc = randomInt(0, cerradura.second - 1); // Posición random dentro de la cerradura
         randomPosFig = randomInt(i, n - 1); // Posición radom dentro de la figura
         figura[randomPosFig] = cerradura.first[randomPosc];
@@ -354,21 +357,115 @@ void __testPuntosEnCerradura(double sz, int s) {
 }
 
 /**
- * Testea puntos en cerradura con distintos porcentajes de s
+ * Testea puntos en cerradura con distintos porcentajes de s, figura cualquiera.
  * @param n - Número de puntos
  */
 void testEnCerradura(double n) {
     int s[] = {0, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90};
-    std::cout << "[Puntos en cerradura s%] Cerradura cuadrado 1x1 con " << n << " puntos" << std::endl;
+    std::cout << "[Puntos en cerradura s%] Cerradura figura aleatoria con " << n << " puntos" << std::endl;
     for (int i : s) {
         __testPuntosEnCerradura(n, i);
         nsleep(0);
     }
-    __testPuntosEnCerradura(n, 90);
     std::cout << "============================================================" << std::endl;
 }
 
-bool TEST_TAREA = true; // Indica si hace el test de la tarea o el repetido
+/**
+ * Forza un cuadrado perfecto.
+ */
+bool CUADRADO_PERFECTO = false;
+
+/**
+ * Revisa los algoritmos con un porcentaje de ellos en la cerradura, cuadrado 1x1.
+ * @param sz - Tamaño de la nube de puntos dentro del cuadrado
+ * @param s - Porcentaje de la nube en la cerradura
+ */
+void __testPuntosEnCerraduraCuadrado(double sz, int s) {
+    auto n = static_cast<int>(sz);
+    Punto<float> *figura = new Punto<float>[n]; // NOLINT
+    int tinit;
+
+    // Total de puntos aleatorios
+    auto alt = (int) ((((float) s) / 100) * (float) n);
+
+    // Añade los puntos dentro de la cerradura
+    for (int i = 0; i < n; i++) {
+        figura[i] = Punto<float>(randomFloat(0, 1), randomFloat(0, 1));
+    }
+
+    // Añade los puntos aleatorios
+    int ladoCuadrado = 0, posAleatoria = 0;
+    for (int i = 0; i < alt; i++) {
+        ladoCuadrado = randomInt(1, 4);
+        posAleatoria = randomInt(i, n - 1);
+        switch (ladoCuadrado) {
+            case 1: // Lado izquierdo
+                figura[posAleatoria] = Punto<float>(0, randomFloat(0, 1));
+                break;
+            case 2: // Lado derecho
+                figura[posAleatoria] = Punto<float>(1, randomFloat(0, 1));
+                break;
+            case 3: // Lado superior
+                figura[posAleatoria] = Punto<float>(randomFloat(0, 1), 0);
+                break;
+            case 4: // Lado inferior
+                figura[posAleatoria] = Punto<float>(randomFloat(0, 1), 1);
+                break;
+            default:
+                break;
+        }
+    }
+
+    // Añade aristas para hacer un cuadrado perfecto
+    if (CUADRADO_PERFECTO) {
+        auto nstart = static_cast<int>(n * 0.1);
+        figura[2 * nstart] = Punto<float>(0, 0); // 20%
+        figura[4 * nstart] = Punto<float>(1, 1); // 40%
+        figura[6 * nstart] = Punto<float>(0, 1); // 60%
+        figura[8 * nstart] = Punto<float>(1, 0); // 80%
+    }
+
+    // Calcula la cerradura con Gift Wrapping
+    tinit = clock();
+    std::pair<Poligono<float>, int> cerraduraGW = giftWrapping(figura, n);
+    int t1 = medirTiempo(tinit);
+
+    // Calcula cerradura con Graham Scan
+    tinit = clock();
+    std::pair<Poligono<float>, int> cerraduraGS = grahamScan(figura, n);
+    int t2 = medirTiempo(tinit);
+
+    // Imprime tiempos
+    std::cout << s << "\t" << t1 << "\t" << t2 << std::endl;
+
+    // Verifica que ambos polígonos tengan iguales puntos
+    assert(cerraduraGW.first.mismosPuntos(cerraduraGS.first));
+
+    // Borra la memoria
+    delete[] figura;
+}
+
+/**
+ * Testea puntos en cerradura con distintos porcentajes de s, cuadrado 1x1.
+ * @param n - Número de puntos
+ */
+void testEnCerraduraCuadrado(double n) {
+    int s[] = {0, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90};
+    std::cout << "[Puntos en cerradura s%] Cerradura cuadrado 1x1 con " << n << " puntos" << std::endl;
+    for (int i : s) {
+        __testPuntosEnCerraduraCuadrado(n, i);
+        nsleep(0);
+    }
+    std::cout << "============================================================" << std::endl;
+}
+
+/**
+ * Tipo de test experimento.
+ *  1:  Testeo puntos con porcentaje de repetidos
+ *  2:  Testeo puntos en cerradura para figura cualquiera
+ *  3:  Testeo puntos en cerradura para un cuadrado 1x1 perfecto
+ */
+int TIPO_TEST = 3;
 
 /**
 * Corre los test.
@@ -385,19 +482,20 @@ int main() {
     testCuadradoMediano(); // Test cuadrado 1x1 con 1e4 puntos aleatorios
     testRectangulo(); // Test rectángulo 10x1 con 1e4 puntos aleatorios
 
-    // Testeo puntos con porcentaje s (%) en cerradura
-    if (TEST_TAREA) {
-        testEnCerradura(3 * 1e5);
-        testEnCerradura(2 * 1e5);
-        testEnCerradura(1e5);
-        testEnCerradura(5 * 1e4);
-    } else {
-        testeoDeforme(3 * 1e5);
-        testeoDeforme(2 * 1e5);
-        testeoDeforme(1e5);
-        testeoDeforme(5 * 1e4);
+    double sz[] = {3 * 1e5, 2 * 1e5, 1e5, 5 * 1e4};
+    switch (TIPO_TEST) {
+        case 1: // Testeo puntos con porcentaje r (%) repetidos, figura aleatoria
+            for (double i:sz) testeoDeforme(i);
+            break;
+        case 2: // Testeo puntos con porcentaje s (%) en cerradura, figura aleatoria
+            for (double i:sz) testEnCerradura(i);
+            break;
+        case 3: // Testeo puntos con porcentaje s (%) en cerradura, cuadrado 1x1
+            for (double i:sz) testEnCerraduraCuadrado(i);
+            break;
+        default:
+            throw std::logic_error("Tipo test desconocido");
     }
-    nsleep(1000);
 
     // Retorna
     return 0;
