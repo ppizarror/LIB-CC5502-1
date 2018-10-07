@@ -1,6 +1,6 @@
 # LIB-CC5502
 
-Libreria funciones geomÈtricas curso Geometria computacional CI5502, uchile. Para ejecutar cargar el proyecto en CLion y ejecutar los distintos casos de prueba.
+Librer√≠a funciones geom√©tricas curso Geometr√≠a computacional CI5502, uchile. Para ejecutar cargar el proyecto en CLion y ejecutar los distintos casos de prueba.
 
 1. **TEST-POLIGONO**: Testea la clase Poligono&lt;T>.
 2. **TEST-PUNTO**: Testea la clase Punto&lt;T>.
@@ -47,8 +47,8 @@ Punto<int> c = abs(a); // Valor absoluto
 double c = a.dist(b); // Distancia
 double c = a.dist2(b); // Distancia al cuadrado
 double c = a.distOrigin(); // Distancia al origen
-int c = a.getDimension(); // Obtiene la dimensiÛn del punto
-int c = a.ccw(c,d); // Ve si el punto y c,d est·n orientados en ccw
+int c = a.getDimension(); // Obtiene la dimensi√≥n del punto
+int c = a.ccw(c,d); // Ve si el punto y c,d est√°n orientados en ccw
 Punto<int> c = a.clonar(); // Clona el punto
 double c = a.cos(b); // Retorna el coseno vectorial   
 ```
@@ -107,14 +107,14 @@ vec.dot(v1); // Producto punto
 vec.abs(); // -> new Vector<T> valor absoluto
 
 // Otros
-int d = vec.getDimension(); // DimensiÛn del vector
+int d = vec.getDimension(); // Dimensi√≥n del vector
 T d = vec.norm(); // Norma del vector
 ```
 
 
 ## Poligono
 
-Permite crear un polÌgono a partir de una lista de puntos
+Permite crear un pol√≠gono a partir de una lista de puntos
 
 ```cpp
 #include "elem/poligono.h"
@@ -129,19 +129,19 @@ Poligono<double> poly = Poligono<double>(p, n);
 poly.print();
 std::cout << poly << std::endl;
 
-// Operaciones geomÈtricas
+// Operaciones geom√©tricas
 bool c = poly.inCCW(); // Punto en CCW (Counter clockwise)
-poly.addPoint(p); // AÒade un punto
-T area = poly.area(); // Calcula el ·rea del polÌgono
-T perimetro = poly.perimetro(); // Calcula el perÌmetro del polÌgono
-bool c = poly.inPoly(p); // Verifica si un punto est· dentro del polÌgono
-bool c = poly.isVertex(p); // p vÈrtice del polÌgono
+poly.addPoint(p); // A√±ade un punto
+T area = poly.area(); // Calcula el √°rea del pol√≠gono
+T perimetro = poly.perimetro(); // Calcula el per√≠metro del pol√≠gono
+bool c = poly.inPoly(p); // Verifica si un punto est√° dentro del pol√≠gono
+bool c = poly.isVertex(p); // p v√©rtice del pol√≠gono
 bool c = poly.mismosPuntos(poly2); // poly y poly2 tienen iguales puntos
 ```
 
 ## Calcular cerradura
 
-Existen dos implementaciones para calcular la cerradura convexa de un polÌgono: <a href="https://en.wikipedia.org/wiki/Gift_wrapping_algorithm">Gift Wrapping</a> y <a href="https://en.wikipedia.org/wiki/Graham_scan">Graham Scan</a>.
+Existen dos implementaciones para calcular la cerradura convexa de un pol√≠gono: <a href="https://en.wikipedia.org/wiki/Gift_wrapping_algorithm">Gift Wrapping</a> y <a href="https://en.wikipedia.org/wiki/Graham_scan">Graham Scan</a>.
 
 ```cpp
 #include "utils/cerradura-convexa.h"
@@ -150,16 +150,16 @@ Punto<double> *cloud = {Punto<double>(0,1)....}; // #n elementos
 
 // Calcula la cerradura con Gift Wrapping
 std::pair<Poligono<double>, int> cerradura = giftWrapping(cloud, n);
-Poligono<T> *hull = cerradura.first; // PolÌgono de la cerradura
+Poligono<T> *hull = cerradura.first; // Pol√≠gono de la cerradura
 int n = cerradura.second; // Total de puntos de la cerradura
 
 // Calcula la cerradura con Graham Scan
 std::pair<Poligono<double>, int> cerradura = grahamScan(cloud, n);
-Poligono<T> *hull = cerradura.first; // PolÌgono de la cerradura
+Poligono<T> *hull = cerradura.first; // Pol√≠gono de la cerradura
 int n = cerradura.second; // Total de puntos de la cerradura
 ```
 
-TambiÈn es posible obtener las listas de puntos en vez de polÌgonos haciendo uso de las funciones *privadas*:
+Tambi√©n es posible obtener las listas de puntos en vez de pol√≠gonos haciendo uso de las funciones *privadas*:
 
 ```cpp
 #include "utils/cerradura-convexa.h"
@@ -168,7 +168,7 @@ Punto<double> *cloud = {Punto<double>(0,1)....}; // #n elementos
 
 // Calcula la cerradura con Gift Wrapping
 std::pair<Punto<double>, int> cerradura = __giftWrapping(cloud, n);
-Punto<T> *hull = cerradura.first; // PolÌgono de la cerradura
+Punto<T> *hull = cerradura.first; // Pol√≠gono de la cerradura
 int n = cerradura.second; // Total de puntos de la cerradura
 
 // Calcula la cerradura con Graham Scan
