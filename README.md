@@ -82,7 +82,7 @@ bool c = s.rightOn(p);
 
 ## Vector
 
-Permite crear un vector entre (0,0,0) y un punto
+Permite crear un vector entre (0,0,0) y un punto:
 
 ```cpp
 #include "elem/vector.h"
@@ -114,7 +114,7 @@ T d = vec.norm(); // Norma del vector
 
 ## Poligono
 
-Permite crear un polígono a partir de una lista de puntos
+Permite crear un polígono a partir de una lista de puntos:
 
 ```cpp
 #include "elem/poligono.h"
